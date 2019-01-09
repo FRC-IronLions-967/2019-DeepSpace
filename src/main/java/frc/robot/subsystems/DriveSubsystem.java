@@ -20,16 +20,34 @@ public class DriveSubsystem extends Subsystem {
     
   }
 
-  public void tankDrive(double leftPower, double rightPower) {
-    leftPower = Deadband(leftPower);
-    rightPower = Deadband(rightPower);
+  public void tankDrive(double leftYAxis, double rightYAxis) {
+    leftYAxis = Deadband(leftYAxis);
+    rightYAxis = Deadband(rightYAxis);
 
-    leftPower = leftPower*Math.abs(leftPower);
-    rightPower = rightPower*Math.abs(rightPower);
+    leftYAxis = leftYAxis*Math.abs(leftYAxis);
+    rightYAxis = rightYAxis*Math.abs(rightYAxis);
 
-    move(leftPower, rightPower);
+    move(leftYAxis, rightYAxis);
   }
 
+  public void splitArcadeDrive(double yAxis, double xAxis) {
+    yAxis = Deadband(yAxis);
+    xAxis = Deadband(xAxis);
+
+    yAxis = yAxis*Math.abs(yAxis);
+    xAxis = xAxis*Math.abs(xAxis);
+
+    double L = yAxis + xAxis;
+    double R = yAxis - xAxis;
+    double max = Math.abs(L);
+    if(Math.abs(R) > max) {
+      max = Math.abs(R);
+    }
+    if((Math.abs(yAxis) <= 1) && (Math.abs(xAxis) <= 1) && (max < 1)) {
+      move(L,R);
+  } else
+    move(L/max, R/max);
+  }
   public double Deadband(double input) {
     // upper deadband
     if(input >= +Constraints.DriveSubsystem_deadband) {
