@@ -9,13 +9,27 @@ package frc.robot.subsystems;
 
 import java.text.DecimalFormat;
 
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Constraints;
+import frc.robot.RobotMap;
 
 /**
  * Add your docs here.
  */
 public class DriveSubsystem extends Subsystem {
+
+
+  private TalonSRX rightMaster;
+  private TalonSRX rightSlaveZero;
+  private TalonSRX rightSlaveOne;
+
+  private TalonSRX leftMaster;
+  private TalonSRX leftSlaveZero;
+  private TalonSRX leftSlaveOne;
+
+
   private DecimalFormat df = new DecimalFormat("#.##");
 	//follows (x*.9)^2
 	private double[] turnLookUp = new double[]{	 0
@@ -122,6 +136,14 @@ public class DriveSubsystem extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands
   public DriveSubsystem() {
+    rightMaster = new TalonSRX(RobotMap.rightMaster);
+    rightSlaveZero = new TalonSRX(RobotMap.rightSlaveZero);
+    rightSlaveOne = new TalonSRX(RobotMap.rightSlaveOne);
+
+    leftMaster = new TalonSRX(RobotMap.leftMaster);
+    leftSlaveZero = new TalonSRX(RobotMap.leftSlaveZero);
+    leftSlaveOne = new TalonSRX(RobotMap.leftSlaveOne);
+
     
   }
 
