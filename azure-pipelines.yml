@@ -14,7 +14,16 @@ jobs:
   - template: azure-steps.yml
     parameters:
       args: '-Pno-roborio'
-
+      
+- job: macOS
+  pool:
+    vmImage: 'macOS-10.13'
+  steps:
+  - template: azure-init.yml
+  - template: azure-steps.yml
+    parameters:
+      args: '-Pno-roborio'
+      
 - job: linux
   pool: 
     vmImage: 'Ubuntu-16.04'
