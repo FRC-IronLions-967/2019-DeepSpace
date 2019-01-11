@@ -13,6 +13,8 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.lib.util.SplitArcadeDrive;
+import frc.lib.util.TankDrive;
 import frc.robot.Constraints;
 import frc.robot.RobotMap;
 
@@ -157,32 +159,13 @@ public class DriveSubsystem extends Subsystem {
   }
 
   public void tankDrive(double leftYAxis, double rightYAxis) {
-    leftYAxis = Deadband(leftYAxis);
-    rightYAxis = Deadband(rightYAxis);
-
-    leftYAxis = leftYAxis*Math.abs(leftYAxis);
-    rightYAxis = rightYAxis*Math.abs(rightYAxis);
-
-    move(leftYAxis, rightYAxis);
+		TankDrive tankDrive = new TankDrive(leftYAxis, rightYAxis);
+		move(tankDrive.getLeftOutput(), tankDrive.getRightOutput());
   }
 
   public void arcadeDrive(double yAxis, double xAxis) {
-    yAxis = Deadband(yAxis);
-    xAxis = Deadband(xAxis);
-
-    yAxis = yAxis*Math.abs(yAxis);
-    xAxis = xAxis*Math.abs(xAxis);
-
-    double L = yAxis + xAxis;
-    double R = yAxis - xAxis;
-    double max = Math.abs(L);
-    if(Math.abs(R) > max) {
-      max = Math.abs(R);
-    }
-    if((Math.abs(yAxis) <= 1) && (Math.abs(xAxis) <= 1) && (max < 1)) {
-      move(L,R);
-  } else
-    move(L/max, R/max);
+		SplitArcadeDrive arcadeDrive = new SplitArcadeDrive(xAxis, yAxis);
+		move(arcadeDrive.getL(), arcadeDrive.getR());
   }
 
   public void arcadeDriveLookup(double yAxis, double xAxis) {
