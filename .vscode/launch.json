@@ -8,6 +8,13 @@
       "type": "java",
       "name": "CodeLens (Launch) - test",
       "request": "launch",
+      "mainClass": "test.test",
+      "projectName": "2019-DeepSpace"
+    },
+    {
+      "type": "java",
+      "name": "CodeLens (Launch) - test",
+      "request": "launch",
       "mainClass": "test",
       "projectName": "2019-DeepSpace"
     },
