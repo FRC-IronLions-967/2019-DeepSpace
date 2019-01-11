@@ -17,6 +17,7 @@ import frc.lib.util.SplitArcadeDrive;
 import frc.lib.util.TankDrive;
 import frc.robot.Constraints;
 import frc.robot.RobotMap;
+import frc.robot.commands.*;
 
 /**
  * Add your docs here.
@@ -206,7 +207,6 @@ public class DriveSubsystem extends Subsystem {
   }
   @Override
   public void initDefaultCommand() {
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
+    setDefaultCommand(new SplitArcadeCommand());
   }
 }
