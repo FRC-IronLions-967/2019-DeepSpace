@@ -9,10 +9,9 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.subsystems.*;
 
-public class TankDrive extends Command {
-  public TankDrive() {
+public class SplitArcade extends Command {
+  public SplitArcade() {
     requires(Robot.driveSubsystem);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -26,7 +25,7 @@ public class TankDrive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.driveSubsystem.tankDrive(Robot.m_oi.getJoystick0().getRawAxis(1), -Robot.m_oi.getJoystick0().getRawAxis(5));
+    Robot.driveSubsystem.tankDrive(Robot.m_oi.getJoystick0().getRawAxis(1), -Robot.m_oi.getJoystick0().getRawAxis(4));
   }
 
   // Make this return true when this Command no longer needs to run execute()
