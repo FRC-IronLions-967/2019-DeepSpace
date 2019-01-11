@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 import java.text.DecimalFormat;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -144,7 +145,15 @@ public class DriveSubsystem extends Subsystem {
     leftSlaveZero = new TalonSRX(RobotMap.leftSlaveZero);
     leftSlaveOne = new TalonSRX(RobotMap.leftSlaveOne);
 
-    
+		rightSlaveZero.follow(rightMaster);
+		rightSlaveOne.follow(rightMaster);
+
+		leftSlaveZero.follow(leftMaster);
+		leftSlaveOne.follow(leftMaster);
+
+		leftMaster.setInverted(true);
+		leftSlaveZero.setInverted(true);
+		leftSlaveOne.setInverted(true);
   }
 
   public void tankDrive(double leftYAxis, double rightYAxis) {
@@ -208,7 +217,9 @@ public class DriveSubsystem extends Subsystem {
   }
 
   public void move(double leftPower, double rightPower) {
-    System.out.println("Drive Powers(L,R): " + Double.toString(leftPower) + " : " + Double.toString(rightPower));
+		System.out.println("Drive Powers(L,R): " + Double.toString(leftPower) + " : " + Double.toString(rightPower));
+		rightMaster.set(ControlMode.PercentOutput, rightPower);
+		leftMaster.set(ControlMode.PercentOutput, leftPower);
   }
   @Override
   public void initDefaultCommand() {
