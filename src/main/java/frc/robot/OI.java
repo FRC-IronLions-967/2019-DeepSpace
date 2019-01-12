@@ -8,8 +8,10 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
-// import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.lib.util.POVButton;
+import frc.robot.commands.GyroPIDChangeState;
+import frc.robot.commands.GyroPIDTurnToAngle;
 
 
 /**
@@ -43,7 +45,7 @@ public class OI {
 
   public OI() {
     
-    // JoystickButton xbox0_a = new JoystickButton(xbox0, 1);
+    JoystickButton xbox0_a = new JoystickButton(xbox0, 1);
     // JoystickButton xbox0_b = new JoystickButton(xbox0, 2);
     // JoystickButton xbox0_x = new JoystickButton(xbox0, 3);
     // JoystickButton xbox0_y = new JoystickButton(xbox0, 4);
@@ -65,17 +67,17 @@ public class OI {
     // JoystickButton xbox1_leftStickButton = new JoystickButton(xbox1, 9);
     // JoystickButton xbox1_rightStickButton = new JoystickButton(xbox1, 10);
 
-    // xbox0povN.whenPressed(new ExampleCommand());
+    xbox0povN.whenPressed(new GyroPIDTurnToAngle(0));
     // xbox0povNE.whenPressed(new ExampleCommand());
-    // xbox0povE.whenPressed(new ExampleCommand());
+    xbox0povE.whenPressed(new GyroPIDTurnToAngle(90));
     // xbox0povSE.whenPressed(new ExampleCommand());
-    // xbox0povS.whenPressed(new ExampleCommand());
+    xbox0povS.whenPressed(new GyroPIDTurnToAngle(180));
     // xbox0povSW.whenPressed(new ExampleCommand());
-    // xbox0povW.whenPressed(new ExampleCommand());
+    xbox0povW.whenPressed(new GyroPIDTurnToAngle(-90));
     // xbox0povNW.whenPressed(new ExampleCommand());
     // xbox0_lT.whenPressed(new ExampleCommand());
     // xbox0_rT.whenPressed(new ExampleCommand());
-    // xbox0_a.whenPressed(new ExampleCommand());
+    xbox0_a.whenPressed(new GyroPIDChangeState("Disable"));
     // xbox0_b.whenPressed(new ArcadeDriveLookUp());
     // xbox0_x.whenPressed(new ExampleCommand());
     // xbox0_y.whenPressed(new ExampleCommand());

@@ -7,11 +7,16 @@
 
 package frc.robot;
 
+import java.net.NetworkInterface;
+import java.net.SocketException;
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 // import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import frc.lib.util.MACAddress;
+import frc.lib.util.MACConfigChooser;
 import frc.robot.properties.ConstraintsProperties;
 import frc.robot.properties.RobotMapProperties;
 // import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -26,9 +31,11 @@ import frc.robot.subsystems.DriveSubsystem;
  */
 public class Robot extends TimedRobot {
   //always declare properties objects before subsystems or else it will fail to instantiate
-  public static ConstraintsProperties m_constraintsProperties = new ConstraintsProperties();
-  public static RobotMapProperties m_robotMapProperties = new RobotMapProperties();
-  public static DriveSubsystem driveSubsystem = new DriveSubsystem(); 
+  public static MACAddress m_macaddress = new MACAddress();
+  public static MACConfigChooser m_macconfigchooser = new MACConfigChooser(m_macaddress.mac);
+  public static ConstraintsProperties m_constraintsProperties = new ConstraintsProperties(m_macconfigchooser.constraintsPath);
+  public static RobotMapProperties m_robotMapProperties = new RobotMapProperties(m_macconfigchooser.robotmapPath);
+  public static DriveSubsystem driveSubsystem = new DriveSubsystem();
   public static OI m_oi;
 
   Command m_autonomousCommand;

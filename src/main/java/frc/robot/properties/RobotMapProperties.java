@@ -25,9 +25,9 @@ public class RobotMapProperties {
 
     Properties properties = new Properties();
     InputStream input = null;
-    public RobotMapProperties() {
+    public RobotMapProperties(String path) {
         try {
-            input = new FileInputStream("/home/lvuser/deploy/greenBoxRobotmap.properties");
+            input = new FileInputStream(path);
             properties.load(input);
             right_master = Integer.parseInt(properties.getProperty("right_master"));
             right_slave_zero = Integer.parseInt(properties.getProperty("right_slave_zero"));

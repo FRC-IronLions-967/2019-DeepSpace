@@ -11,17 +11,25 @@ import java.text.DecimalFormat;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Robot;
 import frc.lib.util.SplitArcadeDrive;
 import frc.lib.util.TankDrive;
 import frc.robot.commands.*;
+import edu.wpi.first.wpilibj.SPI;
 /**
  * Add your docs here.
  */
-public class DriveSubsystem extends Subsystem {
+public class DriveSubsystem extends Subsystem implements PIDOutput {
+  private AHRS gyro;
+  private PIDController pidController;
 
+  public double PIDOutput;
 
   private TalonSRX rightMaster;
   private TalonSRX rightSlaveZero;
@@ -156,6 +164,26 @@ public class DriveSubsystem extends Subsystem {
 		leftMaster.setInverted(true);
 		leftSlaveZero.setInverted(true);
 		leftSlaveOne.setInverted(true);
+
+		try {
+			gyro = new AHRS(SPI.Port.kMXP);
+		} catch(RuntimeException ex) {
+			DriverStation.reportError("Error instantiating navX MXP: " + ex.getMessage(), true);
+		}
+
+		gyro.zeroYaw();
+
+		pidController = new PIDController(Robot.m_constraintsProperties.getkP(), 
+										  Robot.m_constraintsProperties.getkI(), 
+										  Robot.m_constraintsProperties.getkD(), 
+										  gyro, 
+										  this);
+		
+		pidController.disable();
+		pidController.setInputRange(-180.0f, 180.0f);
+		pidController.setOutputRange(-1.0, 1.0);
+		pidController.setAbsoluteTolerance(Robot.m_constraintsProperties.getPIDTolerance());
+		pidController.setContinuous(true);
   }
 
   public void tankDrive(double leftYAxis, double rightYAxis) {
@@ -204,6 +232,44 @@ public class DriveSubsystem extends Subsystem {
 		rightMaster.set(ControlMode.PercentOutput, rightPower);
 		leftMaster.set(ControlMode.PercentOutput, leftPower);
   }
+
+  public void pidSetState(String state) {
+	  if(state == "Enable") {
+		  pidController.enable();
+	  } else if(state == "Disable") {
+		  pidController.disable();
+	  }
+  }
+  
+  public void pidSetPoint(double input) {
+	  pidController.setSetpoint(input);
+  }
+
+  public void pidWrite(double output) {
+	  if(pidController.getDeltaSetpoint() < 0) {
+		  PIDOutput = output;
+	  } else {
+		  PIDOutput = -output;
+	  }
+  }
+
+  public boolean pidDone() {
+	  if(Math.abs(Math.abs(pidController.getSetpoint()) - Math.abs(gyro.getYaw())) < Robot.m_constraintsProperties.getPIDTolerance()) {
+		  return true;
+	  } else {
+		  return false;
+	  }
+  }
+
+  public boolean resetYaw() {
+	  gyro.zeroYaw();
+	  return true;
+  }
+
+  public double getYaw() {
+	  return gyro.getYaw();
+  }
+  
   @Override
   public void initDefaultCommand() {
 	setDefaultCommand(new SplitArcadeCommand());
