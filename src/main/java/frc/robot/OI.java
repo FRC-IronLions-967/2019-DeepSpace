@@ -18,8 +18,8 @@ import frc.lib.util.POVButton;
  */
 public class OI {
   
-  private Joystick xbox0 = new Joystick(0);
-  private Joystick xbox1 = new Joystick(1);
+  public Joystick xbox0 = new Joystick(0);
+  public Joystick xbox1 = new Joystick(1);
 
   public POVButton xbox0povC 	= new POVButton(xbox0, 0, -1);
   public POVButton xbox0povN 	= new POVButton(xbox0, 0, 0);
@@ -110,11 +110,11 @@ public class OI {
 
   }
 
-  public Joystick getJoystick0() {
+  public Joystick getXbox0() {
     return xbox0;
   }
 
-  public Joystick getJoystick1() {
+  public Joystick getXbox1() {
     return xbox1;
   }
 
