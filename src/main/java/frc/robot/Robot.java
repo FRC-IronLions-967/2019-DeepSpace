@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 // import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import frc.robot.properties.RobotMapProperties;
 // import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.DriveSubsystem;
 
@@ -23,6 +24,7 @@ import frc.robot.subsystems.DriveSubsystem;
  * project.
  */
 public class Robot extends TimedRobot {
+  public static RobotMapProperties m_robotMapProperties = new RobotMapProperties();
   public static DriveSubsystem driveSubsystem = new DriveSubsystem(); 
   public static OI m_oi;
 

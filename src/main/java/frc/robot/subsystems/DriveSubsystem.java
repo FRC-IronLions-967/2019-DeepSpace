@@ -13,12 +13,10 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.Robot;
 import frc.lib.util.SplitArcadeDrive;
 import frc.lib.util.TankDrive;
-import frc.robot.Constraints;
-import frc.robot.RobotMap;
 import frc.robot.commands.*;
-
 /**
  * Add your docs here.
  */
@@ -140,13 +138,14 @@ public class DriveSubsystem extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands
   public DriveSubsystem() {
-    rightMaster = new TalonSRX(RobotMap.rightMaster);
-    rightSlaveZero = new TalonSRX(RobotMap.rightSlaveZero);
-    rightSlaveOne = new TalonSRX(RobotMap.rightSlaveOne);
-
-    leftMaster = new TalonSRX(RobotMap.leftMaster);
-    leftSlaveZero = new TalonSRX(RobotMap.leftSlaveZero);
-    leftSlaveOne = new TalonSRX(RobotMap.leftSlaveOne);
+    	rightMaster = new TalonSRX(Robot.m_robotMapProperties.getDriveRightMaster());
+    	rightSlaveZero = new TalonSRX(Robot.m_robotMapProperties.getDriveRightSlaveZero());
+    	rightSlaveOne = new TalonSRX(Robot.m_robotMapProperties.getDriveRightSlaveOne());
+	
+    	leftMaster = new TalonSRX(Robot.m_robotMapProperties.getDriveLeftMaster());
+    	leftSlaveZero = new TalonSRX(Robot.m_robotMapProperties.getDriveLeftSlaveZero());
+		leftSlaveOne = new TalonSRX(Robot.m_robotMapProperties.getDriveLeftSlaveOne());
+		
 
 		rightSlaveZero.follow(rightMaster);
 		rightSlaveOne.follow(rightMaster);
@@ -189,11 +188,11 @@ public class DriveSubsystem extends Subsystem {
   }
   public double Deadband(double input) {
     // upper deadband
-    if(input >= +Constraints.DriveSubsystem_deadband) {
+    if(input >= +0.1) {
       return input;
     } 
     // lower deadband
-    else if(input <= -Constraints.DriveSubsystem_deadband) {
+    else if(input <= -0.1) {
       return input;
     }
     // outside deadband
