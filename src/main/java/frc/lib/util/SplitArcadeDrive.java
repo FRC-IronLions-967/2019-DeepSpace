@@ -20,6 +20,7 @@ public class SplitArcadeDrive {
     public SplitArcadeDrive(double xAxis, double yAxis) {
         this.xAxis = xAxis;
         this.yAxis = yAxis;
+        this.driveDeadband = 0.0;
         findMax();
     }
 
@@ -34,6 +35,7 @@ public class SplitArcadeDrive {
         this.xAxis = xAxis;
         this.yAxis = yAxis;
         this.lookupTable = lookupTable;
+        this.driveDeadband = 0.0;
         findMax();
     }
 
