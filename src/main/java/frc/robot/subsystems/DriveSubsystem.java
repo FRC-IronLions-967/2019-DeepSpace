@@ -165,7 +165,7 @@ public class DriveSubsystem extends Subsystem {
   }
 
   public void arcadeDrive(double yAxis, double xAxis) {
-		SplitArcadeDrive arcadeDrive = new SplitArcadeDrive(xAxis, yAxis);
+		SplitArcadeDrive arcadeDrive = new SplitArcadeDrive(xAxis, yAxis, 0.1);
 		move(arcadeDrive.getL(), arcadeDrive.getR());
   }
 
@@ -201,12 +201,12 @@ public class DriveSubsystem extends Subsystem {
   }
 
   public void move(double leftPower, double rightPower) {
-		System.out.println("Drive Powers(L,R): " + Double.toString(leftPower) + " : " + Double.toString(rightPower));
+		// System.out.println("Drive Powers(L,R): " + Double.toString(leftPower) + " : " + Double.toString(rightPower));
 		rightMaster.set(ControlMode.PercentOutput, rightPower);
 		leftMaster.set(ControlMode.PercentOutput, leftPower);
   }
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new SplitArcadeCommand());
+	setDefaultCommand(new SplitArcadeCommand());
   }
 }

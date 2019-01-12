@@ -21,7 +21,8 @@ public class test {
                 testArcadeDrive(Double.parseDouble(args[1]), Double.parseDouble(args[2]));
                 break;
             case "deadband":
-            testDeadband(Double.parseDouble(args[1]), Double.parseDouble(args[2]));
+                testDeadband(Double.parseDouble(args[1]), Double.parseDouble(args[2]));
+                break;
         }
     }
 

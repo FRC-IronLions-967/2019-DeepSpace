@@ -12,8 +12,8 @@ package frc.lib.util;
 public class SplitArcadeDrive {
     double xAxis;
     double yAxis;
-    double R = yAxis - xAxis;
-    double L = yAxis + xAxis;
+    double R;
+    double L;
     double max;
     double[] lookupTable;
     double driveDeadband;
@@ -31,7 +31,7 @@ public class SplitArcadeDrive {
         findMax();
     }
 
-    public SplitArcadeDrive(double xAxis, double yAxis, double[] lookupTable) {
+    /*public SplitArcadeDrive(double xAxis, double yAxis, double[] lookupTable) {
         this.xAxis = xAxis;
         this.yAxis = yAxis;
         this.lookupTable = lookupTable;
@@ -45,11 +45,13 @@ public class SplitArcadeDrive {
         this.driveDeadband = deadband;
         this.lookupTable = lookupTable;
         findMax();
-    }
+    }*/
 
     public void findMax() {
         xAxis = Utils.Deadband(xAxis, driveDeadband);
         yAxis = Utils.Deadband(yAxis, driveDeadband);
+        L = yAxis + xAxis;
+        R = yAxis - xAxis;
         max = Math.abs(L);
         if(Math.abs(R) > max) {
             max = Math.abs(R);
