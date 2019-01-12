@@ -141,7 +141,7 @@ public class DriveSubsystem extends Subsystem {
     	rightMaster = new TalonSRX(Robot.m_robotMapProperties.getDriveRightMaster());
     	rightSlaveZero = new TalonSRX(Robot.m_robotMapProperties.getDriveRightSlaveZero());
     	rightSlaveOne = new TalonSRX(Robot.m_robotMapProperties.getDriveRightSlaveOne());
-	
+
     	leftMaster = new TalonSRX(Robot.m_robotMapProperties.getDriveLeftMaster());
     	leftSlaveZero = new TalonSRX(Robot.m_robotMapProperties.getDriveLeftSlaveZero());
 		leftSlaveOne = new TalonSRX(Robot.m_robotMapProperties.getDriveLeftSlaveOne());
@@ -159,12 +159,12 @@ public class DriveSubsystem extends Subsystem {
   }
 
   public void tankDrive(double leftYAxis, double rightYAxis) {
-		TankDrive tankDrive = new TankDrive(leftYAxis, rightYAxis);
+		TankDrive tankDrive = new TankDrive(leftYAxis, rightYAxis, Robot.m_constraintsProperties.getDeadband());
 		move(tankDrive.getLeftOutput(), tankDrive.getRightOutput());
   }
 
   public void arcadeDrive(double yAxis, double xAxis) {
-		SplitArcadeDrive arcadeDrive = new SplitArcadeDrive(xAxis, yAxis, 0.1);
+		SplitArcadeDrive arcadeDrive = new SplitArcadeDrive(xAxis, yAxis, Robot.m_constraintsProperties.getDeadband());
 		move(arcadeDrive.getL(), arcadeDrive.getR());
   }
 
