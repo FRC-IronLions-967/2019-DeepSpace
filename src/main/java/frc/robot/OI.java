@@ -9,7 +9,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.lib.util.POVButton;
+import frc.lib.oi.POVButton;
 import frc.robot.commands.GyroPIDChangeState;
 import frc.robot.commands.GyroPIDTurnToAngle;
 
