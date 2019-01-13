@@ -18,7 +18,7 @@ import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Robot;
-import frc.lib.util.SplitArcadeDrive;
+import frc.lib.util.ArcadeDrive;
 import frc.lib.util.TankDrive;
 import frc.robot.commands.*;
 import edu.wpi.first.wpilibj.SPI;
@@ -192,7 +192,7 @@ public class DriveSubsystem extends Subsystem implements PIDOutput {
   }
 
   public void arcadeDrive(double yAxis, double xAxis) {
-		SplitArcadeDrive arcadeDrive = new SplitArcadeDrive(xAxis, yAxis, Robot.m_constraintsProperties.getDeadband());
+		ArcadeDrive arcadeDrive = new ArcadeDrive(xAxis, yAxis, Robot.m_constraintsProperties.getDeadband());
 		move(arcadeDrive.getL(), arcadeDrive.getR());
   }
 

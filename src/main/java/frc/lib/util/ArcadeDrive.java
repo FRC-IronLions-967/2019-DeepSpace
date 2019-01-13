@@ -10,7 +10,7 @@ package frc.lib.util;
 /**
  * Add your docs here.
  */
-public class SplitArcadeDrive {
+public class ArcadeDrive {
     double xAxis;
     double yAxis;
     double R;
@@ -18,21 +18,21 @@ public class SplitArcadeDrive {
     double max;
     double[] lookupTable;
     double driveDeadband;
-    public SplitArcadeDrive(double xAxis, double yAxis) {
+    public ArcadeDrive(double xAxis, double yAxis) {
         this.xAxis = xAxis;
         this.yAxis = yAxis;
         this.driveDeadband = 0.0;
         findMax();
     }
 
-    public SplitArcadeDrive(double xAxis, double yAxis, double deadband) {
+    public ArcadeDrive(double xAxis, double yAxis, double deadband) {
         this.xAxis = xAxis;
         this.yAxis = yAxis;
         this.driveDeadband = deadband;
         findMax();
     }
 
-    /*public SplitArcadeDrive(double xAxis, double yAxis, double[] lookupTable) {
+    /*public ArcadeDrive(double xAxis, double yAxis, double[] lookupTable) {
         this.xAxis = xAxis;
         this.yAxis = yAxis;
         this.lookupTable = lookupTable;
@@ -40,7 +40,7 @@ public class SplitArcadeDrive {
         findMax();
     }
 
-    public SplitArcadeDrive(double xAxis, double yAxis, double deadband, double[] lookupTable) {
+    public ArcadeDrive(double xAxis, double yAxis, double deadband, double[] lookupTable) {
         this.xAxis = xAxis;
         this.yAxis = yAxis;
         this.driveDeadband = deadband;
