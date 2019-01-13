@@ -16,17 +16,18 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
-import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.Robot;
-import frc.lib.util.ArcadeDrive;
-import frc.lib.util.TankDrive;
-import frc.robot.commands.*;
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.lib.drive.ArcadeDrive;
+import frc.lib.drive.TankDrive;
+import frc.robot.Robot;
+import frc.robot.commands.SplitArcadeCommand;
+
 /**
  * Add your docs here.
  */
 public class DriveSubsystem extends Subsystem implements PIDOutput {
-  private AHRS gyro;
+	private AHRS gyro;
   private PIDController pidController;
 
   public double PIDOutput;
