@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.lib.oi.POVButton;
 import frc.robot.commands.GyroPIDChangeState;
 import frc.robot.commands.GyroPIDTurnToAngle;
+import frc.robot.commands.ResetYaw;
 
 
 /**
@@ -46,7 +47,7 @@ public class OI {
   public OI() {
     
     JoystickButton xbox0_a = new JoystickButton(xbox0, 1);
-    // JoystickButton xbox0_b = new JoystickButton(xbox0, 2);
+    JoystickButton xbox0_b = new JoystickButton(xbox0, 2);
     // JoystickButton xbox0_x = new JoystickButton(xbox0, 3);
     // JoystickButton xbox0_y = new JoystickButton(xbox0, 4);
     // JoystickButton xbox0_lb = new JoystickButton(xbox0, 5);
@@ -78,7 +79,7 @@ public class OI {
     // xbox0_lT.whenPressed(new ExampleCommand());
     // xbox0_rT.whenPressed(new ExampleCommand());
     xbox0_a.whenPressed(new GyroPIDChangeState("Disable"));
-    // xbox0_b.whenPressed(new ArcadeDriveLookUp());
+    xbox0_b.whenPressed(new ResetYaw());
     // xbox0_x.whenPressed(new ExampleCommand());
     // xbox0_y.whenPressed(new ExampleCommand());
     // xbox0_lb.whenPressed(new ExampleCommand());
