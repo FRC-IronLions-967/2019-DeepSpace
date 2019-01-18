@@ -8,6 +8,9 @@
 package frc.robot.properties;
 
 import java.util.Properties;
+
+import edu.wpi.first.wpilibj.DriverStation;
+
 import java.io.InputStream;
 import java.io.FileInputStream;
 /**
@@ -34,6 +37,7 @@ public class ConstraintsProperties {
             PIDTolerance = Double.parseDouble(properties.getProperty("drive_subsystem_PIDTolerance"));
         } catch(Exception e) {
             e.printStackTrace();
+            DriverStation.reportError(e.getMessage(), true);
         }
     }
 
