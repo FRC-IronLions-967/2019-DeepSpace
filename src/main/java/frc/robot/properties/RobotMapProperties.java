@@ -8,6 +8,9 @@
 package frc.robot.properties;
 
 import java.util.Properties;
+
+import edu.wpi.first.wpilibj.DriverStation;
+
 import java.io.InputStream;
 import java.io.FileInputStream;
 
@@ -43,6 +46,7 @@ public class RobotMapProperties {
             // System.out.println(left_slave_one);
         } catch (Exception e) {
             e.printStackTrace();
+            DriverStation.reportError(e.getMessage(), true);
         }
         
     }

@@ -26,11 +26,11 @@ import frc.robot.subsystems.DriveSubsystem;
  */
 public class Robot extends TimedRobot {
   //always declare properties objects before subsystems or else it will fail to instantiate
-  public static MACAddress m_macaddress = new MACAddress();
-  public static MACConfigChooser m_macconfigchooser = new MACConfigChooser(m_macaddress.mac);
-  public static ConstraintsProperties m_constraintsProperties = new ConstraintsProperties(m_macconfigchooser.constraintsPath);
-  public static RobotMapProperties m_robotMapProperties = new RobotMapProperties(m_macconfigchooser.robotmapPath);
-  public static DriveSubsystem driveSubsystem = new DriveSubsystem();
+  public static MACAddress m_macaddress;
+  public static MACConfigChooser m_macconfigchooser;
+  public static ConstraintsProperties m_constraintsProperties;
+  public static RobotMapProperties m_robotMapProperties;
+  public static DriveSubsystem driveSubsystem;
   public static OI m_oi;
 
   Command m_autonomousCommand;
@@ -42,6 +42,17 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+    String macArray[] = {"00-80-2F-19-0C-F3", "00-80-2F-19-0C-F5", "00-80-2F-19-0C-F4"};
+    String constraintsPaths[] = {"/home/lvuser/deploy/greenBox/greenBoxConstraints.properties", "/home/lvuser/deploy/practiceBot/practiceBotConstraints.properties", "/home/lvuser/deploy/compBot/compBotConstraints.properties"};
+    String mapPaths[] = {"/home/lvuser/deploy/greenBox/greenBoxRobotmap.properties", "/home/lvuser/deploy/practiceBot/practiceBotRobotmap.properties", "/home/lvuser/deploy/compBot/compBotRobotmap.properties"};
+    
+    m_macaddress = new MACAddress();
+    m_macconfigchooser = new MACConfigChooser(m_macaddress.getMACAddress(), macArray, constraintsPaths, mapPaths);
+    
+    m_constraintsProperties = new ConstraintsProperties(m_macconfigchooser.getConstraintsPath());
+    m_robotMapProperties = new RobotMapProperties(m_macconfigchooser.getRobotmapPath());
+
+    driveSubsystem = new DriveSubsystem();
     m_oi = new OI();
     // m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // // chooser.addOption("My Auto", new MyAutoCommand());

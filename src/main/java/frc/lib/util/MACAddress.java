@@ -14,7 +14,7 @@ import java.net.NetworkInterface;
  * Add your docs here.
  */
 public class MACAddress {
-    public byte[] mac;
+    private byte[] mac;
     public MACAddress() {
         try {
             InetAddress address = InetAddress.getLocalHost();
