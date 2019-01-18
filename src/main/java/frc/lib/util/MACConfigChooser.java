@@ -13,19 +13,25 @@ package frc.lib.util;
 public class MACConfigChooser {
     public String constraintsPath;
     public String robotmapPath;
-    public MACConfigChooser(byte[] mac) {
+    public MACConfigChooser(byte[] mac, String[] macs, String[] constraintsPaths, String[] mapPaths) {
         StringBuilder builder = new StringBuilder();
         for(int i = 0; i < mac.length; i++) {
           builder.append(String.format("%02X%s", mac[i], (i < mac.length - 1) ? "-" : ""));
         }
         System.out.println("MAC: " + builder.toString());
-        if(builder.toString().equals("00-80-2F-19-0C-F3")) {
-          constraintsPath = "/home/lvuser/deploy/greenBox/greenBoxConstraints.properties";
-          robotmapPath = "/home/lvuser/deploy/greenBox/greenBoxRobotmap.properties";
-        } else {
-          System.out.println("Unrecognized MAC Address");
-          constraintsPath = null;
-          robotmapPath = null;
+        for(int i = 0; i < macs.length; i++) {
+            if(builder.toString() == macs[i]) {
+                this.constraintsPath = constraintsPaths[i];
+                this.robotmapPath = mapPaths[i];
+                break;
+            }
+        }
+        if(constraintsPath == null) {
+            constraintsPath = "/home/lvuser/deploy/greenBox/greenBoxConstraints.properties";
+        }
+
+        if(robotmapPath == null) {
+            robotmapPath = "/home/lvuser/deploy/greenBox/greenBoxConstraints.properties";
         }
     }
 

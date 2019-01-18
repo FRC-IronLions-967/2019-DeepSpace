@@ -10,9 +10,12 @@ package frc.robot;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 
+import edu.wpi.first.wpilibj.AnalogAccelerometer;
+import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.interfaces.Accelerometer;
 // import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import frc.lib.util.MACAddress;
@@ -30,9 +33,13 @@ import frc.robot.subsystems.DriveSubsystem;
  * project.
  */
 public class Robot extends TimedRobot {
+  // public AnalogAccelerometer m_accel;
+  public static String macArray[] = {"00-80-2F-19-0C-F3"};
+  public static String constraintsPaths[] = {"/home/lvuser/deploy/greenBox/greenBoxConstraints.properties", "/home/lvuser/deploy/practiceBot/practiceBotConstraints.properties", "/home/lvuser/deploy/compBot/compBotConstraints.properties"};
+  public static String mapPaths[] = {"/home/lvuser/deploy/greenBox/greenBoxRobotmap.properties", "/home/lvuser/deploy/practiceBot/practiceBotRobotmap.properties", "/home/lvuser/deploy/compBot/compBotRobotmap.properties"};
   //always declare properties objects before subsystems or else it will fail to instantiate
   public static MACAddress m_macaddress = new MACAddress();
-  public static MACConfigChooser m_macconfigchooser = new MACConfigChooser(m_macaddress.mac);
+  public static MACConfigChooser m_macconfigchooser = new MACConfigChooser(m_macaddress.mac, macArray, constraintsPaths, mapPaths);
   public static ConstraintsProperties m_constraintsProperties = new ConstraintsProperties(m_macconfigchooser.constraintsPath);
   public static RobotMapProperties m_robotMapProperties = new RobotMapProperties(m_macconfigchooser.robotmapPath);
   public static DriveSubsystem driveSubsystem = new DriveSubsystem();
@@ -48,6 +55,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     m_oi = new OI();
+    // m_accel = new AnalogAccelerometer(0);
     // m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // // chooser.addOption("My Auto", new MyAutoCommand());
     // SmartDashboard.putData("Auto mode", m_chooser);

@@ -33,7 +33,7 @@ public class test {
     }
 
     public static void testArcadeDrive(double xAxis, double yAxis) {
-        SplitArcadeDrive drive = new SplitArcadeDrive(xAxis, yAxis);
+        ArcadeDrive drive = new ArcadeDrive(xAxis, yAxis);
         System.out.println(drive.getL());
         System.out.println(drive.getR());
     }
