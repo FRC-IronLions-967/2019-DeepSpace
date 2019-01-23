@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import frc.lib.util.MACAddress;
 import frc.lib.util.MACConfigChooser;
+import frc.lib.util.TestVision;
 import frc.robot.properties.ConstraintsProperties;
 import frc.robot.properties.RobotMapProperties;
 import frc.robot.subsystems.DriveSubsystem;
@@ -52,6 +53,10 @@ public class Robot extends TimedRobot {
     m_constraintsProperties = new ConstraintsProperties(m_macconfigchooser.getConstraintsPath());
     m_robotMapProperties = new RobotMapProperties(m_macconfigchooser.getRobotmapPath());
 
+    TestVision vision = new TestVision();
+    System.out.println(vision.getTX());
+    System.out.println(vision.getTY());
+    System.out.println(vision.getTA());
     driveSubsystem = new DriveSubsystem();
     m_oi = new OI();
     // m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
