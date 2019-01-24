@@ -9,7 +9,8 @@ import frc.lib.util.MACConfigChooser;
 import frc.robot.properties.ConstraintsProperties;
 import frc.robot.properties.RobotMapProperties;
 import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.CargoSubsystem;
+import frc.robot.subsystems.HatchPanelSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -27,7 +28,8 @@ public class Robot extends TimedRobot {
   public static RobotMapProperties m_robotMapProperties;
 
   public static DriveSubsystem driveSubsystem;
-  public static IntakeSubsystem intakeSubsystem;
+  public static CargoSubsystem m_cargoSubsystem;
+  public static HatchPanelSubsystem m_hatchPanelSubsystem;
 
   public static OI m_oi;
 
@@ -55,7 +57,8 @@ public class Robot extends TimedRobot {
     m_robotMapProperties = new RobotMapProperties(m_macconfigchooser.getRobotmapPath());
 
     driveSubsystem = new DriveSubsystem();
-    intakeSubsystem = new IntakeSubsystem();
+    m_cargoSubsystem = new CargoSubsystem();
+    m_hatchPanelSubsystem = new HatchPanelSubsystem();
     
     m_oi = new OI();
     // m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
