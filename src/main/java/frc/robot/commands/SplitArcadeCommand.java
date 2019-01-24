@@ -5,7 +5,7 @@ import frc.robot.Robot;
 
 public class SplitArcadeCommand extends Command {
   public SplitArcadeCommand() {
-    requires(Robot.driveSubsystem);
+    requires(Robot.m_driveSubsystem);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
@@ -18,8 +18,7 @@ public class SplitArcadeCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.driveSubsystem.arcadeDrive(Robot.m_oi.xbox0.getRawAxis(1), Robot.m_oi.xbox0.getRawAxis(4));
-    // Robot.driveSubsystem.tankDrive(.5, .5);
+    Robot.m_driveSubsystem.arcadeDrive(Robot.m_oi.xbox0.getRawAxis(1), Robot.m_oi.xbox0.getRawAxis(4));
   }
 
   // Make this return true when this Command no longer needs to run execute()
