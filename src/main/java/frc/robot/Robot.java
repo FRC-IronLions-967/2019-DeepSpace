@@ -23,7 +23,7 @@ public class Robot extends TimedRobot {
   public static MACConfigChooser m_macconfigchooser;
   public static ConstraintsProperties m_constraintsProperties;
   public static RobotMapProperties m_robotMapProperties;
-  public static DriveSubsystem driveSubsystem;
+  public static DriveSubsystem m_driveSubsystem;
   public static OI m_oi;
 
   Command m_autonomousCommand;
@@ -45,7 +45,7 @@ public class Robot extends TimedRobot {
     m_constraintsProperties = new ConstraintsProperties(m_macconfigchooser.getConstraintsPath());
     m_robotMapProperties = new RobotMapProperties(m_macconfigchooser.getRobotmapPath());
 
-    driveSubsystem = new DriveSubsystem();
+    m_driveSubsystem = new DriveSubsystem();
     m_oi = new OI();
     // m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // // chooser.addOption("My Auto", new MyAutoCommand());
