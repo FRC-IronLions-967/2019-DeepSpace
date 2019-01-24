@@ -86,6 +86,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void disabledInit() {
+   m_cargoSubsystem.disabledInit();
+   m_hatchPanelSubsystem.disabledInit();
   }
 
   @Override
