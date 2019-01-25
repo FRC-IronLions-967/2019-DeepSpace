@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 // import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import frc.lib.util.MACAddress;
 import frc.lib.util.MACConfigChooser;
-import frc.lib.util.TestVision;
+import frc.robot.networktables.*;
 import frc.robot.properties.ConstraintsProperties;
 import frc.robot.properties.RobotMapProperties;
 import frc.robot.subsystems.DriveSubsystem;
