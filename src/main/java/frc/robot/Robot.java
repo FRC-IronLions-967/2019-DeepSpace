@@ -49,7 +49,7 @@ public class Robot extends TimedRobot {
     m_constraintsProperties = new ConstraintsProperties(m_macconfigchooser.getConstraintsPath());
     m_robotMapProperties = new RobotMapProperties(m_macconfigchooser.getRobotmapPath());
 
-    TestVision vision = new TestVision();
+    limelight vision = new limelight();
     System.out.println(vision.getTX());
     System.out.println(vision.getTY());
     System.out.println(vision.getTA());
