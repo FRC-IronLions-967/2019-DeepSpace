@@ -53,7 +53,6 @@ public class Robot extends TimedRobot {
     System.out.println(vision.getTX());
     System.out.println(vision.getTY());
     System.out.println(vision.getTA());
-    m_navagationSubsystem = new NavagationSubsystem();
     m_navigationSubsystem = new NavigationSubsystem();
     m_driveSubsystem = new DriveSubsystem();
     m_oi = new OI();
