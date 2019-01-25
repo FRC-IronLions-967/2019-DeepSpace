@@ -158,7 +158,7 @@ public class DriveSubsystem extends Subsystem implements PIDOutput {
 		pidController = new PIDController(Robot.m_constraintsProperties.getkP(), 
 										  Robot.m_constraintsProperties.getkI(), 
 										  Robot.m_constraintsProperties.getkD(), 
-										  Robot.m_navagationSubsystem.gyro, 
+										  Robot.m_navigationSubsystem.gyro, 
 										  this);
 		
 		pidController.disable();
@@ -236,7 +236,7 @@ public class DriveSubsystem extends Subsystem implements PIDOutput {
   }
 
   public boolean pidDone() {
-	  if(Math.abs(Math.abs(pidController.getSetpoint()) - Math.abs(Robot.m_navagationSubsystem.gyro.getYaw())) < Robot.m_constraintsProperties.getPIDTolerance()) {
+	  if(Math.abs(Math.abs(pidController.getSetpoint()) - Math.abs(Robot.m_navigationSubsystem.gyro.getYaw())) < Robot.m_constraintsProperties.getPIDTolerance()) {
 		  return true;
 	  } else {
 		  return false;

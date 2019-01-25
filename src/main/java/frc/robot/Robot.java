@@ -11,7 +11,7 @@ import frc.robot.properties.RobotMapProperties;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.CargoSubsystem;
 import frc.robot.subsystems.HatchPanelSubsystem;
-import frc.robot.subsystems.NavagationSubsystem;
+import frc.robot.subsystems.NavigationSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -27,8 +27,8 @@ public class Robot extends TimedRobot {
   public static MACConfigChooser m_macconfigchooser;
   public static ConstraintsProperties m_constraintsProperties;
   public static RobotMapProperties m_robotMapProperties;
-
-  public static NavagationSubsystem m_navagationSubsystem;
+  
+  public static NavigationSubsystem m_navigationSubsystem;
   public static DriveSubsystem m_driveSubsystem;
   public static CargoSubsystem m_cargoSubsystem;
   public static HatchPanelSubsystem m_hatchPanelSubsystem;
@@ -58,7 +58,7 @@ public class Robot extends TimedRobot {
     m_constraintsProperties = new ConstraintsProperties(m_macconfigchooser.getConstraintsPath());
     m_robotMapProperties = new RobotMapProperties(m_macconfigchooser.getRobotmapPath());
 
-    m_navagationSubsystem = new NavagationSubsystem();
+    m_navigationSubsystem = new NavigationSubsystem();
     m_driveSubsystem = new DriveSubsystem();
     m_cargoSubsystem = new CargoSubsystem();
     m_hatchPanelSubsystem = new HatchPanelSubsystem();
@@ -91,7 +91,7 @@ public class Robot extends TimedRobot {
   public void disabledInit() {
     m_cargoSubsystem.disabledInit();
     m_hatchPanelSubsystem.disabledInit();
-    m_navagationSubsystem.disabledinit();
+    m_navigationSubsystem.disabledinit();
   }
 
   @Override
