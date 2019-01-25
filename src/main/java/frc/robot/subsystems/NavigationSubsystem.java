@@ -7,12 +7,12 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- * This is the place for all navagation code to go 
+ * This is the place for all navigation code to go 
  */
-public class NavagationSubsystem extends Subsystem {
+public class NavigationSubsystem extends Subsystem {
   public  AHRS gyro;
 
-  public NavagationSubsystem() {
+  public NavigationSubsystem() {
 
     try {
       gyro = new AHRS(SPI.Port.kMXP);

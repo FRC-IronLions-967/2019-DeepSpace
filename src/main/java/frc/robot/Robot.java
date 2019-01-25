@@ -10,7 +10,7 @@ import frc.lib.util.TestVision;
 import frc.robot.properties.ConstraintsProperties;
 import frc.robot.properties.RobotMapProperties;
 import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.NavagationSubsystem;
+import frc.robot.subsystems.NavigationSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -26,7 +26,7 @@ public class Robot extends TimedRobot {
   public static ConstraintsProperties m_constraintsProperties;
   public static RobotMapProperties m_robotMapProperties;
   
-  public static NavagationSubsystem m_navagationSubsystem;
+  public static NavigationSubsystem m_navigationSubsystem;
   public static DriveSubsystem m_driveSubsystem;
   public static OI m_oi;
 
@@ -54,6 +54,7 @@ public class Robot extends TimedRobot {
     System.out.println(vision.getTY());
     System.out.println(vision.getTA());
     m_navagationSubsystem = new NavagationSubsystem();
+    m_navigationSubsystem = new NavigationSubsystem();
     m_driveSubsystem = new DriveSubsystem();
     m_oi = new OI();
     // m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
@@ -80,7 +81,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void disabledInit() {
-    m_navagationSubsystem.disabledinit();
+    m_navigationSubsystem.disabledinit();
   }
 
   @Override
