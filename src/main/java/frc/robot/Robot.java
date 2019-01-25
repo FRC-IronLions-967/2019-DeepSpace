@@ -11,6 +11,8 @@ import frc.robot.properties.RobotMapProperties;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.NavigationSubsystem;
 
+import frc.robot.Logger;
+
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the TimedRobot
@@ -51,6 +53,7 @@ public class Robot extends TimedRobot {
     m_navigationSubsystem = new NavigationSubsystem();
     m_driveSubsystem = new DriveSubsystem();
     m_oi = new OI();
+
     // m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // // chooser.addOption("My Auto", new MyAutoCommand());
     // SmartDashboard.putData("Auto mode", m_chooser);
@@ -66,6 +69,10 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+    if (!Logger.getInstance().wantToLog()) {
+      Logger.getInstance().turnLoggingOn();
+    }
+    Logger.getInstance().logAll();
   }
 
   /**
@@ -76,6 +83,9 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledInit() {
     m_navigationSubsystem.disabledinit();
+    Logger.getInstance().turnLoggingOff();
+
+    
   }
 
   @Override
