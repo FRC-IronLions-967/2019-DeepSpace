@@ -1,8 +1,18 @@
 package frc.robot;
 
+import org.opencv.core.Mat;
+import org.opencv.imgproc.Imgproc;
+
+import edu.wpi.cscore.CvSink;
+import edu.wpi.cscore.CvSource;
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 // import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+
+// import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 // import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import frc.lib.util.MACAddress;
 import frc.lib.util.MACConfigChooser;
@@ -21,18 +31,26 @@ import frc.robot.subsystems.NavigationSubsystem;
  * project.
  */
 public class Robot extends TimedRobot {
-  // always declare properties objects before subsystems or else it will fail to
-  // instantiate
-  public static MACAddress m_macaddress;
-  public static MACConfigChooser m_macconfigchooser;
-  public static ConstraintsProperties m_constraintsProperties;
-  public static RobotMapProperties m_robotMapProperties;
-  
   public static NavigationSubsystem m_navigationSubsystem;
-  public static DriveSubsystem m_driveSubsystem;
-  public static CargoSubsystem m_cargoSubsystem;
+  //  = new NavigationSubsystem();
   public static HatchPanelSubsystem m_hatchPanelSubsystem;
-
+  // = new HatchPanelSubsystem();
+  public static CargoSubsystem m_cargoSubsystem;
+  //  = new CargoSubsystem();
+  // public static String macArray[] = {"00-80-2F-19-0C-F3"};
+  // public static String constraintsPaths[] = {"/home/lvuser/deploy/greenBox/greenBoxConstraints.properties", "/home/lvuser/deploy/practiceBot/practiceBotConstraints.properties", "/home/lvuser/deploy/compBot/compBotConstraints.properties"};
+  // public static String mapPaths[] = {"/home/lvuser/deploy/greenBox/greenBoxRobotmap.properties", "/home/lvuser/deploy/practiceBot/practiceBotRobotmap.properties", "/home/lvuser/deploy/compBot/compBotRobotmap.properties"};
+  //always declare properties objects before subsystems or else it will fail to instantiate
+  public static MACAddress m_macaddress;
+  //  = new MACAddress();
+  public static MACConfigChooser m_macconfigchooser;
+  //  = new MACConfigChooser(m_macaddress.getMACAddress(), macArray, constraintsPaths, mapPaths);
+  public static ConstraintsProperties m_constraintsProperties;
+  //  = new ConstraintsProperties(m_macconfigchooser.getConstraintsPath());
+  public static RobotMapProperties m_robotMapProperties;
+  //  = new RobotMapProperties(m_macconfigchooser.getRobotmapPath());
+  public static DriveSubsystem m_driveSubsystem;
+  //  = new DriveSubsystem();
   public static OI m_oi;
 
   // Command m_autonomousCommand;
@@ -64,6 +82,23 @@ public class Robot extends TimedRobot {
     m_hatchPanelSubsystem = new HatchPanelSubsystem();
     
     m_oi = new OI();
+
+    new Thread(() -> {
+      UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+      camera.setResolution(192, 144);
+      
+      CvSink cvSink = CameraServer.getInstance().getVideo();
+      CvSource outputStream = CameraServer.getInstance().putVideo("Blur", 192, 144);
+      
+      Mat source = new Mat();
+      Mat output = new Mat();
+      
+      while(!Thread.interrupted()) {
+          cvSink.grabFrame(source);
+          Imgproc.cvtColor(source, output, Imgproc.COLOR_BGR2GRAY);
+          outputStream.putFrame(output);
+      }
+  }).start();
     // m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // // chooser.addOption("My Auto", new MyAutoCommand());
     // SmartDashboard.putData("Auto mode", m_chooser);
