@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * This is the place for all navigation code to go 
  */
 public class NavigationSubsystem extends Subsystem {
-  public  AHRS gyro;
+  public AHRS gyro;
 
   public NavigationSubsystem() {
 
@@ -33,16 +33,17 @@ public class NavigationSubsystem extends Subsystem {
 	  return gyro.getYaw();
   }
 
-  public double getAccelerationX() {
-    return gyro.getRawAccelX();
+  public double getVelocityX() {
+    System.out.println(gyro.getVelocityX());
+    return gyro.getVelocityX();
   }
 
-  public double getAccelerationY() {
-    return gyro.getRawAccelY();
+  public double getVelocityY() {
+    return gyro.getVelocityY();
   }
-
-  public double getAccelerationZ() {
-    return gyro.getRawAccelZ();
+  
+  public double getVelocityZ() {
+    return gyro.getVelocityZ();  
   }
 
   public void disabledinit() {
