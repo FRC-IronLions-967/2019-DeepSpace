@@ -34,12 +34,15 @@ public class Robot extends TimedRobot {
 
   public static Logging logger;
 
+  public static NavigationSubsystem m_navigationSubsystem;
+  public static CargoSubsystem m_cargoSubsystem;
+  public static HatchPanelSubsystem m_hatchPanelSubsystem;
   //always declare properties objects before subsystems or else it will fail to instantiate
   public static MACAddress m_macaddress = new MACAddress();
-  public static MACConfigChooser m_macconfigchooser = new MACConfigChooser(m_macaddress.getMACAddress(), macArray, constraintsPaths, mapPaths);
-  public static ConstraintsProperties m_constraintsProperties = new ConstraintsProperties(m_macconfigchooser.getConstraintsPath());
-  public static RobotMapProperties m_robotMapProperties = new RobotMapProperties(m_macconfigchooser.getRobotmapPath());
-  public static DriveSubsystem m_driveSubsystem = new DriveSubsystem();
+  public static MACConfigChooser m_macconfigchooser;
+  public static ConstraintsProperties m_constraintsProperties;
+  public static RobotMapProperties m_robotMapProperties;
+  public static DriveSubsystem m_driveSubsystem;
   public static OI m_oi;
 
   // Command m_autonomousCommand;
