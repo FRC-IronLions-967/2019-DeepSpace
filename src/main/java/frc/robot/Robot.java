@@ -1,17 +1,14 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-// import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-// import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import frc.lib.log.Logging;
 import frc.lib.util.MACAddress;
 import frc.lib.util.MACConfigChooser;
 import frc.robot.properties.ConstraintsProperties;
 import frc.robot.properties.RobotMapProperties;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.NavigationSubsystem;
-
-import frc.robot.Logger;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -21,6 +18,9 @@ import frc.robot.Logger;
  * project.
  */
 public class Robot extends TimedRobot {
+
+  public static Logging logger;
+
   //always declare properties objects before subsystems or else it will fail to instantiate
   public static MACAddress m_macaddress;
   public static MACConfigChooser m_macconfigchooser;
@@ -69,10 +69,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    if (!Logger.getInstance().wantToLog()) {
-      Logger.getInstance().turnLoggingOn();
-    }
-    Logger.getInstance().logAll();
   }
 
   /**
@@ -83,8 +79,13 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledInit() {
     m_navigationSubsystem.disabledinit();
-    Logger.getInstance().turnLoggingOff();
 
+    try {
+      logger.close();
+      System.out.println("logger closed");
+    } catch (Exception e) {
+      System.out.println("logger not started");
+    }
     
   }
 
@@ -119,6 +120,8 @@ public class Robot extends TimedRobot {
     // if (m_autonomousCommand != null) {
     //   m_autonomousCommand.start();
     // }
+    logger = Logging.getInstance("Autolog");
+    logger.log("Auto Init");
   }
 
   /**
@@ -138,6 +141,8 @@ public class Robot extends TimedRobot {
     // if (m_autonomousCommand != null) {
     //   m_autonomousCommand.cancel();
     // }
+    logger = Logging.getInstance("TeleopLog");
+
   }
 
   /**
