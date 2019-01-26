@@ -1,23 +1,16 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.command.Command;
+// import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
 // import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+// import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import frc.lib.util.MACAddress;
 import frc.lib.util.MACConfigChooser;
 import frc.robot.properties.ConstraintsProperties;
 import frc.robot.properties.RobotMapProperties;
-// import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.NavigationSubsystem;
 
@@ -29,7 +22,7 @@ import frc.robot.subsystems.NavigationSubsystem;
  * project.
  */
 public class Robot extends TimedRobot {
-  public static NavigationSubsystem m_navSubsystem = new NavigationSubsystem();
+  public static NavigationSubsystem m_navigationSubsystem = new NavigationSubsystem();
   public static String macArray[] = {"00-80-2F-19-0C-F3"};
   public static String constraintsPaths[] = {"/home/lvuser/deploy/greenBox/greenBoxConstraints.properties", "/home/lvuser/deploy/practiceBot/practiceBotConstraints.properties", "/home/lvuser/deploy/compBot/compBotConstraints.properties"};
   public static String mapPaths[] = {"/home/lvuser/deploy/greenBox/greenBoxRobotmap.properties", "/home/lvuser/deploy/practiceBot/practiceBotRobotmap.properties", "/home/lvuser/deploy/compBot/compBotRobotmap.properties"};
@@ -38,11 +31,11 @@ public class Robot extends TimedRobot {
   public static MACConfigChooser m_macconfigchooser = new MACConfigChooser(m_macaddress.mac, macArray, constraintsPaths, mapPaths);
   public static ConstraintsProperties m_constraintsProperties = new ConstraintsProperties(m_macconfigchooser.constraintsPath);
   public static RobotMapProperties m_robotMapProperties = new RobotMapProperties(m_macconfigchooser.robotmapPath);
-  public static DriveSubsystem driveSubsystem = new DriveSubsystem();
+  public static DriveSubsystem m_driveSubsystem = new DriveSubsystem();
   public static OI m_oi;
 
-  Command m_autonomousCommand;
-  SendableChooser<Command> m_chooser = new SendableChooser<>();
+  // Command m_autonomousCommand;
+  // SendableChooser<Command> m_chooser = new SendableChooser<>();
 
   /**
    * This function is run when the robot is first started up and should be
@@ -50,6 +43,18 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+    String macArray[] = {"00-80-2F-19-0C-F3", "00-80-2F-19-0C-F5", "00-80-2F-19-0C-F4"};
+    String constraintsPaths[] = {"/home/lvuser/deploy/greenBox/greenBoxConstraints.properties", "/home/lvuser/deploy/practiceBot/practiceBotConstraints.properties", "/home/lvuser/deploy/compBot/compBotConstraints.properties"};
+    String mapPaths[] = {"/home/lvuser/deploy/greenBox/greenBoxRobotmap.properties", "/home/lvuser/deploy/practiceBot/practiceBotRobotmap.properties", "/home/lvuser/deploy/compBot/compBotRobotmap.properties"};
+    
+    m_macaddress = new MACAddress();
+    m_macconfigchooser = new MACConfigChooser(m_macaddress.getMACAddress(), macArray, constraintsPaths, mapPaths);
+    
+    m_constraintsProperties = new ConstraintsProperties(m_macconfigchooser.getConstraintsPath());
+    m_robotMapProperties = new RobotMapProperties(m_macconfigchooser.getRobotmapPath());
+
+    m_navigationSubsystem = new NavigationSubsystem();
+    m_driveSubsystem = new DriveSubsystem();
     m_oi = new OI();
     // m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // // chooser.addOption("My Auto", new MyAutoCommand());
@@ -75,6 +80,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void disabledInit() {
+    m_navigationSubsystem.disabledinit();
   }
 
   @Override
@@ -95,7 +101,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_chooser.getSelected();
+    // m_autonomousCommand = m_chooser.getSelected();
 
     /*
      * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -105,9 +111,9 @@ public class Robot extends TimedRobot {
      */
 
     // schedule the autonomous command (example)
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.start();
-    }
+    // if (m_autonomousCommand != null) {
+    //   m_autonomousCommand.start();
+    // }
   }
 
   /**
@@ -124,9 +130,9 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.cancel();
-    }
+    // if (m_autonomousCommand != null) {
+    //   m_autonomousCommand.cancel();
+    // }
   }
 
   /**

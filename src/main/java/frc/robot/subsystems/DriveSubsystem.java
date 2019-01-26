@@ -1,32 +1,22 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot.subsystems;
 
 import java.text.DecimalFormat;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.kauailabs.navx.frc.AHRS;
 
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.lib.drive.ArcadeDrive;
+import frc.lib.drive.TankDrive;
 import frc.robot.Robot;
-import frc.lib.util.ArcadeDrive;
-import frc.lib.util.TankDrive;
-import frc.robot.commands.*;
-import edu.wpi.first.wpilibj.SPI;
+import frc.robot.commands.SplitArcadeCommand;
+
 /**
  * Add your docs here.
  */
 public class DriveSubsystem extends Subsystem implements PIDOutput {
-  private AHRS gyro;
   private PIDController pidController;
 
   public double PIDOutput;
@@ -165,18 +155,10 @@ public class DriveSubsystem extends Subsystem implements PIDOutput {
 		leftSlaveZero.setInverted(true);
 		leftSlaveOne.setInverted(true);
 
-		try {
-			gyro = new AHRS(SPI.Port.kMXP);
-		} catch(RuntimeException ex) {
-			DriverStation.reportError("Error instantiating navX MXP: " + ex.getMessage(), true);
-		}
-
-		gyro.zeroYaw();
-
 		pidController = new PIDController(Robot.m_constraintsProperties.getkP(), 
 										  Robot.m_constraintsProperties.getkI(), 
 										  Robot.m_constraintsProperties.getkD(), 
-										  gyro, 
+										  Robot.m_navigationSubsystem.gyro, 
 										  this);
 		
 		pidController.disable();
@@ -254,22 +236,13 @@ public class DriveSubsystem extends Subsystem implements PIDOutput {
   }
 
   public boolean pidDone() {
-	  if(Math.abs(Math.abs(pidController.getSetpoint()) - Math.abs(gyro.getYaw())) < Robot.m_constraintsProperties.getPIDTolerance()) {
+	  if(Math.abs(Math.abs(pidController.getSetpoint()) - Math.abs(Robot.m_navigationSubsystem.gyro.getYaw())) < Robot.m_constraintsProperties.getPIDTolerance()) {
 		  return true;
 	  } else {
 		  return false;
 	  }
   }
 
-  public boolean resetYaw() {
-	  gyro.zeroYaw();
-	  return true;
-  }
-
-  public double getYaw() {
-	  return gyro.getYaw();
-  }
-  
   @Override
   public void initDefaultCommand() {
 	setDefaultCommand(new SplitArcadeCommand());

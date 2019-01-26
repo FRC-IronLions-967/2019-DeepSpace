@@ -1,18 +1,11 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.lib.util;
 
 /**
  * Add your docs here.
  */
 public class MACConfigChooser {
-    public String constraintsPath;
-    public String robotmapPath;
+    private String constraintsPath;
+    private String robotmapPath;
     public MACConfigChooser(byte[] mac, String[] macs, String[] constraintsPaths, String[] mapPaths) {
         StringBuilder builder = new StringBuilder();
         for(int i = 0; i < mac.length; i++) {
@@ -20,7 +13,7 @@ public class MACConfigChooser {
         }
         System.out.println("MAC: " + builder.toString());
         for(int i = 0; i < macs.length; i++) {
-            if(builder.toString() == macs[i]) {
+            if(builder.toString().equals(macs[i])) {
                 this.constraintsPath = constraintsPaths[i];
                 this.robotmapPath = mapPaths[i];
                 break;
@@ -31,7 +24,7 @@ public class MACConfigChooser {
         }
 
         if(robotmapPath == null) {
-            robotmapPath = "/home/lvuser/deploy/greenBox/greenBoxConstraints.properties";
+            robotmapPath = "/home/lvuser/deploy/greenBox/greenBoxRobotmap.properties";
         }
     }
 

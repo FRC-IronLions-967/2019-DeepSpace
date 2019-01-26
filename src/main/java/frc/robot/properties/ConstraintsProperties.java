@@ -1,13 +1,9 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot.properties;
 
 import java.util.Properties;
+
+import edu.wpi.first.wpilibj.DriverStation;
+
 import java.io.InputStream;
 import java.io.FileInputStream;
 /**
@@ -34,6 +30,7 @@ public class ConstraintsProperties {
             PIDTolerance = Double.parseDouble(properties.getProperty("drive_subsystem_PIDTolerance"));
         } catch(Exception e) {
             e.printStackTrace();
+            DriverStation.reportError(e.getMessage(), true);
         }
     }
 
