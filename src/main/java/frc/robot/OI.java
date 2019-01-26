@@ -10,8 +10,10 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.lib.oi.POVButton;
+import frc.robot.commands.CloseGrabber;
 import frc.robot.commands.GyroPIDChangeState;
 import frc.robot.commands.GyroPIDTurnToAngle;
+import frc.robot.commands.OpenGrabber;
 import frc.robot.commands.ResetYaw;
 
 
@@ -48,8 +50,8 @@ public class OI {
     
     JoystickButton xbox0_a = new JoystickButton(xbox0, 1);
     JoystickButton xbox0_b = new JoystickButton(xbox0, 2);
-    // JoystickButton xbox0_x = new JoystickButton(xbox0, 3);
-    // JoystickButton xbox0_y = new JoystickButton(xbox0, 4);
+    JoystickButton xbox0_x = new JoystickButton(xbox0, 3);
+    JoystickButton xbox0_y = new JoystickButton(xbox0, 4);
     // JoystickButton xbox0_lb = new JoystickButton(xbox0, 5);
     // JoystickButton xbox0_rb = new JoystickButton(xbox0, 6);
     // JoystickButton xbox0_back = new JoystickButton(xbox0, 7);
@@ -80,8 +82,8 @@ public class OI {
     // xbox0_rT.whenPressed(new ExampleCommand());
     xbox0_a.whenPressed(new GyroPIDChangeState("Disable"));
     xbox0_b.whenPressed(new ResetYaw());
-    // xbox0_x.whenPressed(new ExampleCommand());
-    // xbox0_y.whenPressed(new ExampleCommand());
+    xbox0_x.whenPressed(new OpenGrabber());
+    xbox0_y.whenPressed(new CloseGrabber());
     // xbox0_lb.whenPressed(new ExampleCommand());
     // xbox0_rb.whenPressed(new ExampleCommand());
     // xbox0_back.whenPressed(new ExampleCommand());
