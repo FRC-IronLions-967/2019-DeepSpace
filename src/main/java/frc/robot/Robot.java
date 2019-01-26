@@ -8,14 +8,17 @@ import edu.wpi.cscore.CvSource;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
-// import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
 // import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import frc.lib.log.Logging;
+
+// import edu.wpi.first.wpilibj.command.Subsystem;
 // import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import frc.lib.util.MACAddress;
 import frc.lib.util.MACConfigChooser;
+import frc.robot.networktables.*;
 import frc.robot.properties.ConstraintsProperties;
 import frc.robot.properties.RobotMapProperties;
 import frc.robot.subsystems.DriveSubsystem;
@@ -43,6 +46,14 @@ public class Robot extends TimedRobot {
   //always declare properties objects before subsystems or else it will fail to instantiate
   public static MACAddress m_macaddress;
   //  = new MACAddress();
+
+  public static Logging logger;
+
+  public static NavigationSubsystem m_navigationSubsystem;
+  public static CargoSubsystem m_cargoSubsystem;
+  public static HatchPanelSubsystem m_hatchPanelSubsystem;
+  //always declare properties objects before subsystems or else it will fail to instantiate
+  public static MACAddress m_macaddress = new MACAddress();
   public static MACConfigChooser m_macconfigchooser;
   //  = new MACConfigChooser(m_macaddress.getMACAddress(), macArray, constraintsPaths, mapPaths);
   public static ConstraintsProperties m_constraintsProperties;
@@ -76,6 +87,10 @@ public class Robot extends TimedRobot {
     m_constraintsProperties = new ConstraintsProperties(m_macconfigchooser.getConstraintsPath());
     m_robotMapProperties = new RobotMapProperties(m_macconfigchooser.getRobotmapPath());
 
+    limelight vision = new limelight();
+    System.out.println(vision.getTX());
+    System.out.println(vision.getTY());
+    System.out.println(vision.getTA());
     m_navigationSubsystem = new NavigationSubsystem();
     m_driveSubsystem = new DriveSubsystem();
     m_cargoSubsystem = new CargoSubsystem();
@@ -127,6 +142,14 @@ public class Robot extends TimedRobot {
     m_cargoSubsystem.disabledInit();
     m_hatchPanelSubsystem.disabledInit();
     m_navigationSubsystem.disabledinit();
+
+    try {
+      logger.close();
+      System.out.println("logger closed");
+    } catch (Exception e) {
+      System.out.println("logger not started");
+    }
+    
   }
 
   @Override
@@ -161,6 +184,8 @@ public class Robot extends TimedRobot {
     // if (m_autonomousCommand != null) {
     //   m_autonomousCommand.start();
     // }
+    logger = Logging.getInstance("Autolog");
+    logger.log("Auto Init");
   }
 
   /**
@@ -180,6 +205,8 @@ public class Robot extends TimedRobot {
     // if (m_autonomousCommand != null) {
     //   m_autonomousCommand.cancel();
     // }
+    logger = Logging.getInstance("TeleopLog");
+
   }
 
   /**
