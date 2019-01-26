@@ -12,7 +12,7 @@ import frc.robot.Robot;
 
 public class OpenGrabber extends Command {
   public OpenGrabber() {
-    requires(Robot.m_hatchPanelSubsystem);
+    requires(Robot.m_hatchPanelIntakeSubsystem);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
@@ -20,7 +20,7 @@ public class OpenGrabber extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.m_hatchPanelSubsystem.grabberOpen();
+    Robot.m_hatchPanelIntakeSubsystem.grabberOpen();
   }
 
   // Called repeatedly when this Command is scheduled to run
