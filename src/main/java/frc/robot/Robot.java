@@ -22,8 +22,8 @@ import frc.robot.networktables.*;
 import frc.robot.properties.ConstraintsProperties;
 import frc.robot.properties.RobotMapProperties;
 import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.CargoSubsystem;
-import frc.robot.subsystems.HatchPanelSubsystem;
+import frc.robot.subsystems.CargoArmSubsystem;
+import frc.robot.subsystems.HatchPanelIntakeSubsystem;
 import frc.robot.subsystems.NavigationSubsystem;
 
 /**
@@ -34,24 +34,11 @@ import frc.robot.subsystems.NavigationSubsystem;
  * project.
  */
 public class Robot extends TimedRobot {
-  public static NavigationSubsystem m_navigationSubsystem;
-  //  = new NavigationSubsystem();
-  public static HatchPanelSubsystem m_hatchPanelSubsystem;
-  // = new HatchPanelSubsystem();
-  public static CargoSubsystem m_cargoSubsystem;
-  //  = new CargoSubsystem();
-  // public static String macArray[] = {"00-80-2F-19-0C-F3"};
-  // public static String constraintsPaths[] = {"/home/lvuser/deploy/greenBox/greenBoxConstraints.properties", "/home/lvuser/deploy/practiceBot/practiceBotConstraints.properties", "/home/lvuser/deploy/compBot/compBotConstraints.properties"};
-  // public static String mapPaths[] = {"/home/lvuser/deploy/greenBox/greenBoxRobotmap.properties", "/home/lvuser/deploy/practiceBot/practiceBotRobotmap.properties", "/home/lvuser/deploy/compBot/compBotRobotmap.properties"};
-  //always declare properties objects before subsystems or else it will fail to instantiate
-  public static MACAddress m_macaddress;
-  //  = new MACAddress();
-
   public static Logging logger;
 
   public static NavigationSubsystem m_navigationSubsystem;
-  public static CargoSubsystem m_cargoSubsystem;
-  public static HatchPanelSubsystem m_hatchPanelSubsystem;
+  public static CargoArmSubsystem m_cargoArmSubsystem;
+  public static HatchPanelIntakeSubsystem m_hatchPanelIntakeSubsystem;
   //always declare properties objects before subsystems or else it will fail to instantiate
   public static MACAddress m_macaddress = new MACAddress();
   public static MACConfigChooser m_macconfigchooser;
@@ -93,8 +80,8 @@ public class Robot extends TimedRobot {
     System.out.println(vision.getTA());
     m_navigationSubsystem = new NavigationSubsystem();
     m_driveSubsystem = new DriveSubsystem();
-    m_cargoSubsystem = new CargoSubsystem();
-    m_hatchPanelSubsystem = new HatchPanelSubsystem();
+    m_cargoArmSubsystem = new CargoArmSubsystem();
+    m_hatchPanelIntakeSubsystem = new HatchPanelIntakeSubsystem();
     
     m_oi = new OI();
 
@@ -139,8 +126,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void disabledInit() {
-    m_cargoSubsystem.disabledInit();
-    m_hatchPanelSubsystem.disabledInit();
+    m_cargoArmSubsystem.disabledInit();
+    m_hatchPanelIntakeSubsystem.disabledInit();
     m_navigationSubsystem.disabledinit();
 
     try {
