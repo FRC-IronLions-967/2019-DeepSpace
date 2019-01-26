@@ -4,6 +4,7 @@ import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -11,9 +12,12 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class NavigationSubsystem extends Subsystem {
   public AHRS gyro;
+  public Encoder rightEncoder;
+  public Encoder leftEncoder;
 
   public NavigationSubsystem() {
-
+    rightEncoder = new Encoder(0, 1, true);
+    rightEncoder.setDistancePerPulse(25.1327);
     try {
       gyro = new AHRS(SPI.Port.kMXP);
 		} catch(RuntimeException ex) {
