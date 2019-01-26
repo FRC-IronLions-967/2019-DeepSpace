@@ -44,7 +44,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    String macArray[] = { "00-80-2F-19-0C-F3", "00-80-2F-19-0C-F5", "00-80-2F-19-0C-F4" };
+    String macArray[] = { "00-80-2F-19-0C-F3", "00-80-2F-19-0C-F5", "00-80-2F-17-86-03" };
     String constraintsPaths[] = { "/home/lvuser/deploy/greenBox/greenBoxConstraints.properties",
         "/home/lvuser/deploy/practiceBot/practiceBotConstraints.properties",
         "/home/lvuser/deploy/compBot/compBotConstraints.properties" };

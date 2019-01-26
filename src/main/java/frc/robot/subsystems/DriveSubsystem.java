@@ -151,9 +151,9 @@ public class DriveSubsystem extends Subsystem implements PIDOutput {
 		leftSlaveZero.follow(leftMaster);
 		leftSlaveOne.follow(leftMaster);
 
-		leftMaster.setInverted(true);
-		leftSlaveZero.setInverted(true);
-		leftSlaveOne.setInverted(true);
+		rightMaster.setInverted(true);
+		rightSlaveZero.setInverted(true);
+		rightSlaveOne.setInverted(true);
 
 		pidController = new PIDController(Robot.m_constraintsProperties.getkP(), 
 										  Robot.m_constraintsProperties.getkI(), 
@@ -187,8 +187,8 @@ public class DriveSubsystem extends Subsystem implements PIDOutput {
     yAxis = Deadband(yAxis);
     xAxisConverted = Deadband(xAxisConverted);
 
-    double L = yAxis + xAxisConverted;
-    double R = yAxis - xAxisConverted;
+    double L = yAxis - xAxisConverted;
+    double R = yAxis + xAxisConverted;
     double max = Math.abs(L);
     if(Math.abs(R) > max) max = Math.abs(R);
     if((Math.abs(yAxis) <= 1) && (Math.abs(xAxis) <= 1) && (max < 1)){

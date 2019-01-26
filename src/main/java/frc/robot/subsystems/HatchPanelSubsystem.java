@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -9,11 +10,11 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class HatchPanelSubsystem extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-
+  private DoubleSolenoid grabber;
 
   // Constructor 
   public HatchPanelSubsystem() {
-    
+    grabber = new DoubleSolenoid(1, 7, 0);
   }
 
 
@@ -25,8 +26,17 @@ public class HatchPanelSubsystem extends Subsystem {
 
   }
 
+  public void grabberOpen() {
+    grabber.set(DoubleSolenoid.Value.kForward);
+  }
+
+  public void grabberClose() {
+    grabber.set(DoubleSolenoid.Value.kReverse);
+  }
+
   @Override
   public void initDefaultCommand() {
+    
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
   }
