@@ -10,6 +10,9 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 // import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+
+// import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 // import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import frc.lib.util.MACAddress;
 import frc.lib.util.MACConfigChooser;
@@ -28,18 +31,16 @@ import frc.robot.subsystems.NavigationSubsystem;
  * project.
  */
 public class Robot extends TimedRobot {
-  // always declare properties objects before subsystems or else it will fail to
-  // instantiate
-  public static MACAddress m_macaddress;
-  public static MACConfigChooser m_macconfigchooser;
-  public static ConstraintsProperties m_constraintsProperties;
-  public static RobotMapProperties m_robotMapProperties;
-  
-  public static NavigationSubsystem m_navigationSubsystem;
-  public static DriveSubsystem m_driveSubsystem;
-  public static CargoSubsystem m_cargoSubsystem;
-  public static HatchPanelSubsystem m_hatchPanelSubsystem;
-
+  public static NavigationSubsystem m_navigationSubsystem = new NavigationSubsystem();
+  public static String macArray[] = {"00-80-2F-19-0C-F3"};
+  public static String constraintsPaths[] = {"/home/lvuser/deploy/greenBox/greenBoxConstraints.properties", "/home/lvuser/deploy/practiceBot/practiceBotConstraints.properties", "/home/lvuser/deploy/compBot/compBotConstraints.properties"};
+  public static String mapPaths[] = {"/home/lvuser/deploy/greenBox/greenBoxRobotmap.properties", "/home/lvuser/deploy/practiceBot/practiceBotRobotmap.properties", "/home/lvuser/deploy/compBot/compBotRobotmap.properties"};
+  //always declare properties objects before subsystems or else it will fail to instantiate
+  public static MACAddress m_macaddress = new MACAddress();
+  public static MACConfigChooser m_macconfigchooser = new MACConfigChooser(m_macaddress.mac, macArray, constraintsPaths, mapPaths);
+  public static ConstraintsProperties m_constraintsProperties = new ConstraintsProperties(m_macconfigchooser.constraintsPath);
+  public static RobotMapProperties m_robotMapProperties = new RobotMapProperties(m_macconfigchooser.robotmapPath);
+  public static DriveSubsystem m_driveSubsystem = new DriveSubsystem();
   public static OI m_oi;
 
   // Command m_autonomousCommand;
