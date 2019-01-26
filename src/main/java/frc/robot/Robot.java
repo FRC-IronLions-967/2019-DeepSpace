@@ -33,14 +33,16 @@ import frc.robot.subsystems.NavigationSubsystem;
  */
 public class Robot extends TimedRobot {
   public static NavigationSubsystem m_navigationSubsystem = new NavigationSubsystem();
+  public static HatchPanelSubsystem m_hatchPanelSubsystem = new HatchPanelSubsystem();
+  public static CargoSubsystem m_cargoSubsystem = new CargoSubsystem();
   public static String macArray[] = {"00-80-2F-19-0C-F3"};
   public static String constraintsPaths[] = {"/home/lvuser/deploy/greenBox/greenBoxConstraints.properties", "/home/lvuser/deploy/practiceBot/practiceBotConstraints.properties", "/home/lvuser/deploy/compBot/compBotConstraints.properties"};
   public static String mapPaths[] = {"/home/lvuser/deploy/greenBox/greenBoxRobotmap.properties", "/home/lvuser/deploy/practiceBot/practiceBotRobotmap.properties", "/home/lvuser/deploy/compBot/compBotRobotmap.properties"};
   //always declare properties objects before subsystems or else it will fail to instantiate
   public static MACAddress m_macaddress = new MACAddress();
-  public static MACConfigChooser m_macconfigchooser = new MACConfigChooser(m_macaddress.mac, macArray, constraintsPaths, mapPaths);
-  public static ConstraintsProperties m_constraintsProperties = new ConstraintsProperties(m_macconfigchooser.constraintsPath);
-  public static RobotMapProperties m_robotMapProperties = new RobotMapProperties(m_macconfigchooser.robotmapPath);
+  public static MACConfigChooser m_macconfigchooser = new MACConfigChooser(m_macaddress.getMACAddress(), macArray, constraintsPaths, mapPaths);
+  public static ConstraintsProperties m_constraintsProperties = new ConstraintsProperties(m_macconfigchooser.getConstraintsPath());
+  public static RobotMapProperties m_robotMapProperties = new RobotMapProperties(m_macconfigchooser.getRobotmapPath());
   public static DriveSubsystem m_driveSubsystem = new DriveSubsystem();
   public static OI m_oi;
 
