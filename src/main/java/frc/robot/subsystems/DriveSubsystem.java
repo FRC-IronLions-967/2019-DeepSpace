@@ -23,11 +23,11 @@ public class DriveSubsystem extends Subsystem implements PIDOutput {
 
   private TalonSRX rightMaster;
   private TalonSRX rightSlaveZero;
-  private TalonSRX rightSlaveOne;
+//   private TalonSRX rightSlaveOne;
 
   private TalonSRX leftMaster;
   private TalonSRX leftSlaveZero;
-  private TalonSRX leftSlaveOne;
+//   private TalonSRX leftSlaveOne;
 
 
   private DecimalFormat df = new DecimalFormat("#.##");
@@ -138,22 +138,22 @@ public class DriveSubsystem extends Subsystem implements PIDOutput {
   public DriveSubsystem() {
     	rightMaster = new TalonSRX(Robot.m_robotMapProperties.getDriveRightMaster());
     	rightSlaveZero = new TalonSRX(Robot.m_robotMapProperties.getDriveRightSlaveZero());
-    	rightSlaveOne = new TalonSRX(Robot.m_robotMapProperties.getDriveRightSlaveOne());
+    	// rightSlaveOne = new TalonSRX(Robot.m_robotMapProperties.getDriveRightSlaveOne());
 
     	leftMaster = new TalonSRX(Robot.m_robotMapProperties.getDriveLeftMaster());
     	leftSlaveZero = new TalonSRX(Robot.m_robotMapProperties.getDriveLeftSlaveZero());
-		leftSlaveOne = new TalonSRX(Robot.m_robotMapProperties.getDriveLeftSlaveOne());
+		// leftSlaveOne = new TalonSRX(Robot.m_robotMapProperties.getDriveLeftSlaveOne());
 		
 
 		rightSlaveZero.follow(rightMaster);
-		rightSlaveOne.follow(rightMaster);
+		// rightSlaveOne.follow(rightMaster);
 
 		leftSlaveZero.follow(leftMaster);
-		leftSlaveOne.follow(leftMaster);
+		// leftSlaveOne.follow(leftMaster);
 
 		rightMaster.setInverted(true);
 		rightSlaveZero.setInverted(true);
-		rightSlaveOne.setInverted(true);
+		// rightSlaveOne.setInverted(true);
 
 		pidController = new PIDController(Robot.m_constraintsProperties.getkP(), 
 										  Robot.m_constraintsProperties.getkI(), 

@@ -13,12 +13,16 @@ import java.io.FileInputStream;
 public class RobotMapProperties {
     private int right_master;
     private int right_slave_zero;
-    private int right_slave_one;
+    // private int right_slave_one;
 
     private int left_master;
     private int left_slave_zero;
-    private int left_slave_one;
+    // private int left_slave_one;
 
+    private int left_side;
+    private int right_side;
+
+    private int intake_roller;
     Properties properties = new Properties();
     InputStream input = null;
     public RobotMapProperties(String path) {
@@ -27,10 +31,15 @@ public class RobotMapProperties {
             properties.load(input);
             right_master = Integer.parseInt(properties.getProperty("right_master"));
             right_slave_zero = Integer.parseInt(properties.getProperty("right_slave_zero"));
-            right_slave_one = Integer.parseInt(properties.getProperty("right_slave_one"));
+            // right_slave_one = Integer.parseInt(properties.getProperty("right_slave_one"));
             left_master = Integer.parseInt(properties.getProperty("left_master"));
             left_slave_zero = Integer.parseInt(properties.getProperty("left_slave_zero"));
-            left_slave_one = Integer.parseInt(properties.getProperty("left_slave_one"));
+            // left_slave_one = Integer.parseInt(properties.getProperty("left_slave_one"));
+
+            left_side = Integer.parseInt(properties.getProperty("left_side"));
+            right_side = Integer.parseInt(properties.getProperty("right_side"));
+
+            intake_roller = Integer.parseInt(properties.getProperty("intake_roller"));
             // System.out.println(right_master);
             // System.out.println(right_slave_zero);
             // System.out.println(right_slave_one);
@@ -52,9 +61,9 @@ public class RobotMapProperties {
         return right_slave_zero;
     }
 
-    public int getDriveRightSlaveOne() {
-        return right_slave_one;
-    }
+    // public int getDriveRightSlaveOne() {
+    //     return right_slave_one;
+    // }
 
     public int getDriveLeftMaster() {
         return left_master;
@@ -64,7 +73,19 @@ public class RobotMapProperties {
         return left_slave_zero;
     }
 
-    public int getDriveLeftSlaveOne() {
-        return left_slave_one;
+    // public int getDriveLeftSlaveOne() {
+    //     return left_slave_one;
+    // }
+
+    public int getLeftSide() {
+        return left_side;
+    }
+
+    public int getRightSide() {
+        return right_side;
+    }
+
+    public int getIntakeRoller() {
+        return intake_roller;
     }
 }

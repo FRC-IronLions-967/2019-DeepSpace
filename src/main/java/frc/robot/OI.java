@@ -10,12 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.lib.oi.POVButton;
-import frc.robot.commands.CloseGrabber;
-import frc.robot.commands.GyroPIDChangeState;
-import frc.robot.commands.GyroPIDTurnToAngle;
-import frc.robot.commands.OpenGrabber;
-import frc.robot.commands.ResetYaw;
-
+import frc.robot.commands.*;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -50,8 +45,8 @@ public class OI {
     
     JoystickButton xbox0_a = new JoystickButton(xbox0, 1);
     JoystickButton xbox0_b = new JoystickButton(xbox0, 2);
-    JoystickButton xbox0_x = new JoystickButton(xbox0, 3);
-    JoystickButton xbox0_y = new JoystickButton(xbox0, 4);
+    // JoystickButton xbox0_x = new JoystickButton(xbox0, 3);
+    // JoystickButton xbox0_y = new JoystickButton(xbox0, 4);
     // JoystickButton xbox0_lb = new JoystickButton(xbox0, 5);
     // JoystickButton xbox0_rb = new JoystickButton(xbox0, 6);
     // JoystickButton xbox0_back = new JoystickButton(xbox0, 7);
@@ -59,10 +54,10 @@ public class OI {
     // JoystickButton xbox0_leftStickButton = new JoystickButton(xbox0, 9);
     // JoystickButton xbox0_rightStickButton = new JoystickButton(xbox0, 10);
 
-    // JoystickButton xbox1_a = new JoystickButton(xbox1, 1);
-    // JoystickButton xbox1_b = new JoystickButton(xbox1, 2);
-    // JoystickButton xbox1_x = new JoystickButton(xbox1, 3);
-    // JoystickButton xbox1_y = new JoystickButton(xbox1, 4);
+    JoystickButton xbox1_a = new JoystickButton(xbox1, 1);
+    JoystickButton xbox1_b = new JoystickButton(xbox1, 2);
+    JoystickButton xbox1_x = new JoystickButton(xbox1, 3);
+    JoystickButton xbox1_y = new JoystickButton(xbox1, 4);
     // JoystickButton xbox1_lb = new JoystickButton(xbox1, 5);
     // JoystickButton xbox1_rb = new JoystickButton(xbox1, 6);
     // JoystickButton xbox1_back = new JoystickButton(xbox1, 7);
@@ -82,8 +77,8 @@ public class OI {
     // xbox0_rT.whenPressed(new ExampleCommand());
     xbox0_a.whenPressed(new GyroPIDChangeState("Disable"));
     xbox0_b.whenPressed(new ResetYaw());
-    xbox0_x.whenPressed(new OpenGrabber());
-    xbox0_y.whenPressed(new CloseGrabber());
+    // xbox0_x.whenPressed(new OpenGrabber());
+    // xbox0_y.whenPressed(new CloseGrabber());
     // xbox0_lb.whenPressed(new ExampleCommand());
     // xbox0_rb.whenPressed(new ExampleCommand());
     // xbox0_back.whenPressed(new ExampleCommand());
@@ -101,10 +96,10 @@ public class OI {
     // xbox1povNW.whenPressed(new ExampleCommand());
     // xbox1_lT.whenPressed(new ExampleCommand());
     // xbox1_rT.whenPressed(new ExampleCommand());
-    // xbox1_a.whenPressed(new ExampleCommand());
-    // xbox1_b.whenPressed(new ExampleCommand());
-    // xbox1_x.whenPressed(new ExampleCommand());
-    // xbox1_y.whenPressed(new ExampleCommand());
+    xbox1_a.whenPressed(new GrabberArmUp());
+    xbox1_b.whenPressed(new GrabberArmDown());
+    xbox1_x.whenPressed(new OpenGrabber());
+    xbox1_y.whenPressed(new CloseGrabber());
     // xbox1_lb.whenPressed(new ExampleCommand());
     // xbox1_rb.whenPressed(new ExampleCommand());
     // xbox1_back.whenPressed(new ExampleCommand());
