@@ -25,7 +25,7 @@ public class MoveBall extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_cargoSubsystem.moveBall(Robot.m_oi.xbox1.getRawAxis(5));
+    Robot.m_cargoIntakeSubsystem.moveBall(Robot.m_oi.xbox1.getRawAxis(5));
   }
 
   // Make this return true when this Command no longer needs to run execute()
