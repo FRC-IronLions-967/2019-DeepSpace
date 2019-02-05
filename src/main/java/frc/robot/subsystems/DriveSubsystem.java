@@ -28,6 +28,8 @@ public class DriveSubsystem extends Subsystem implements PIDOutput {
   private TalonSRX leftMaster;
   private TalonSRX leftSlaveZero;
 //   private TalonSRX leftSlaveOne;
+  private int encoderCounter = 0;
+  public boolean countsmeet;
 
 
   private DecimalFormat df = new DecimalFormat("#.##");
@@ -155,6 +157,9 @@ public class DriveSubsystem extends Subsystem implements PIDOutput {
 		rightSlaveZero.setInverted(true);
 		// rightSlaveOne.setInverted(true);
 
+		rightMaster.configSelectedFeedbackSensor(com.ctre.phoenix.motorcontrol.FeedbackDevice.QuadEncoder, 0, 0);
+		leftMaster.configSelectedFeedbackSensor(com.ctre.phoenix.motorcontrol.FeedbackDevice.QuadEncoder, 0, 0);
+
 		pidController = new PIDController(Robot.m_constraintsProperties.getkP(), 
 										  Robot.m_constraintsProperties.getkI(), 
 										  Robot.m_constraintsProperties.getkD(), 
@@ -242,6 +247,47 @@ public class DriveSubsystem extends Subsystem implements PIDOutput {
 		  return false;
 	  }
   }
+
+  public double getLeftEncoder() {
+	  return -leftMaster.getSensorCollection().getQuadraturePosition();
+  }
+
+  public double getRightEncoder() {
+	  return rightMaster.getSensorCollection().getQuadraturePosition();
+  }
+
+  public boolean zeroEncoders() {
+	  leftMaster.getSensorCollection().setQuadraturePosition(0, 0);
+	  rightMaster.getSensorCollection().setQuadraturePosition(0, 0);
+	  if(encoderCounter > 10) {
+		  encoderCounter = 0;
+		  return true;
+	  } else {
+		  encoderCounter++;
+		  return false;
+	  }
+  }
+
+  public boolean driveDistance(double count){
+	countsmeet = false;
+	if(count > 0) {
+		if((getLeftEncoder() + getRightEncoder())/2 > count){
+			countsmeet = true;
+			return true;
+		}
+		else {
+			return false;
+		}
+	} else {
+		if((getLeftEncoder() + getRightEncoder())/2 < count){
+			countsmeet = true;
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+}
 
   @Override
   public void initDefaultCommand() {
