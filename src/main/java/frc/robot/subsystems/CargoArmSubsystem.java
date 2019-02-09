@@ -12,12 +12,12 @@ import frc.robot.commands.*;
  * CargoSubsystem is the subsystem for controlling the Cargo while it is in the robot 
  * That includes taking in the cargo and despensing the cargo
  */
-public class CargoSubsystem extends Subsystem {
+public class CargoArmSubsystem extends Subsystem {
   private TalonSRX left_side;
   private TalonSRX right_side;
   // private TalonSRX intake_roller;
 
-  public CargoSubsystem() {
+  public CargoArmSubsystem() {
     left_side = new TalonSRX(Robot.m_robotMapProperties.getLeftSide());
     right_side = new TalonSRX(Robot.m_robotMapProperties.getRightSide());
     // intake_roller = new TalonSRX(Robot.m_robotMapProperties.getIntakeRoller());

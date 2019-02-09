@@ -15,6 +15,9 @@ import frc.robot.commands.drivesubsystem.GyroPIDChangeState;
 import frc.robot.commands.drivesubsystem.GyroPIDTurnToAngle;
 import frc.robot.commands.hatchpanelintakesubsystem.OpenGrabber;
 import frc.robot.commands.navigation.ResetYaw;
+import frc.robot.commands.GrabberArmDown;
+import frc.robot.commands.GrabberArmUp;
+
 
 
 /**

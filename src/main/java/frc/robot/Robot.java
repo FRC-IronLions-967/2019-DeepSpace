@@ -1,12 +1,5 @@
 package frc.robot;
 
-import org.opencv.core.Mat;
-import org.opencv.imgproc.Imgproc;
-
-import edu.wpi.cscore.CvSink;
-import edu.wpi.cscore.CvSource;
-import edu.wpi.cscore.UsbCamera;
-import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.lib.log.Logging;
@@ -16,11 +9,9 @@ import frc.robot.networktables.*;
 import frc.robot.properties.ConstraintsProperties;
 import frc.robot.properties.RobotMapProperties;
 import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.CargoArmSubsystem;
 import frc.robot.subsystems.HatchPanelIntakeSubsystem;
 import frc.robot.subsystems.CargoIntakeSubsystem;
-import frc.robot.subsystems.CargoSubsystem;
-import frc.robot.subsystems.HatchPanelSubsystem;
+import frc.robot.subsystems.CargoArmSubsystem;
 import frc.robot.subsystems.NavigationSubsystem;
 
 /**
@@ -34,11 +25,9 @@ public class Robot extends TimedRobot {
   public static Logging logger;
 
   public static NavigationSubsystem m_navigationSubsystem;
-  public static CargoArmSubsystem m_cargoArmSubsystem;
   public static HatchPanelIntakeSubsystem m_hatchPanelIntakeSubsystem;
-  public static CargoSubsystem m_cargoSubsystem;
+  public static CargoArmSubsystem m_cargoArmSubsystem;
   public static CargoIntakeSubsystem m_cargoIntakeSubsystem;
-  public static HatchPanelSubsystem m_hatchPanelSubsystem;
   //always declare properties objects before subsystems or else it will fail to instantiate
   public static MACAddress m_macaddress = new MACAddress();
   public static MACConfigChooser m_macconfigchooser;
@@ -80,35 +69,14 @@ public class Robot extends TimedRobot {
     System.out.println(vision.getTA());
     m_navigationSubsystem = new NavigationSubsystem();
     m_driveSubsystem = new DriveSubsystem();
-    m_cargoArmSubsystem = new CargoArmSubsystem();
     m_hatchPanelIntakeSubsystem = new HatchPanelIntakeSubsystem();
-    m_cargoSubsystem = new CargoSubsystem();
+    m_cargoArmSubsystem = new CargoArmSubsystem();
     m_cargoIntakeSubsystem = new CargoIntakeSubsystem();
-    m_hatchPanelSubsystem = new HatchPanelSubsystem();
     
     
     m_oi = new OI();
-
-    new Thread(() -> {
-      UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-      camera.setResolution(192, 144);
-      
-      CvSink cvSink = CameraServer.getInstance().getVideo();
-      CvSource outputStream = CameraServer.getInstance().putVideo("Blur", 192, 144);
-      
-      Mat source = new Mat();
-      Mat output = new Mat();
-      
-      while(!Thread.interrupted()) {
-          cvSink.grabFrame(source);
-          Imgproc.cvtColor(source, output, Imgproc.COLOR_BGR2GRAY);
-          outputStream.putFrame(output);
-      }
-  }).start();
-    // m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
-    // // chooser.addOption("My Auto", new MyAutoCommand());
-    // SmartDashboard.putData("Auto mode", m_chooser);
   }
+
 
   /**
    * This function is called every robot packet, no matter the mode. Use this for
@@ -130,7 +98,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void disabledInit() {
-    m_cargoArmSubsystem.disabledInit();
     m_hatchPanelIntakeSubsystem.disabledInit();
     m_navigationSubsystem.disabledinit();
 

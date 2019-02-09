@@ -12,7 +12,7 @@ import frc.robot.Robot;
 
 public class MoveArm extends Command {
   public MoveArm() {
-    requires(Robot.m_cargoSubsystem);
+    requires(Robot.m_cargoArmSubsystem);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
@@ -25,7 +25,7 @@ public class MoveArm extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_cargoSubsystem.moveArm(Robot.m_oi.xbox1.getRawAxis(1));
+    Robot.m_cargoArmSubsystem.moveArm(Robot.m_oi.xbox1.getRawAxis(1));
   }
 
   // Make this return true when this Command no longer needs to run execute()
