@@ -17,6 +17,7 @@ import frc.robot.commands.hatchpanelintakesubsystem.OpenGrabber;
 import frc.robot.commands.navigation.ResetYaw;
 import frc.robot.commands.GrabberArmDown;
 import frc.robot.commands.GrabberArmUp;
+import frc.robot.commands.MoveCargoArm;
 
 
 
@@ -53,7 +54,7 @@ public class OI {
     
     JoystickButton xbox0_a = new JoystickButton(xbox0, 1);
     JoystickButton xbox0_b = new JoystickButton(xbox0, 2);
-    // JoystickButton xbox0_x = new JoystickButton(xbox0, 3);
+    JoystickButton xbox0_x = new JoystickButton(xbox0, 3);
     // JoystickButton xbox0_y = new JoystickButton(xbox0, 4);
     // JoystickButton xbox0_lb = new JoystickButton(xbox0, 5);
     // JoystickButton xbox0_rb = new JoystickButton(xbox0, 6);
@@ -85,8 +86,8 @@ public class OI {
     // xbox0_rT.whenPressed(new ExampleCommand());
     xbox0_a.whenPressed(new GyroPIDChangeState("Disable"));
     xbox0_b.whenPressed(new ResetYaw());
-    // xbox0_x.whenPressed(new OpenGrabber());
-    // xbox0_y.whenPressed(new CloseGrabber());
+    xbox0_x.whenPressed(new MoveCargoArm());
+    // xbox0_y.whenPressed(new moveArm());
     // xbox0_lb.whenPressed(new ExampleCommand());
     // xbox0_rb.whenPressed(new ExampleCommand());
     // xbox0_back.whenPressed(new ExampleCommand());

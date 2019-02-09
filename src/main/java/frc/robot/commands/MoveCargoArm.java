@@ -10,8 +10,8 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class MoveArm extends Command {
-  public MoveArm() {
+public class MoveCargoArm extends Command {
+  public MoveCargoArm() {
     requires(Robot.m_cargoArmSubsystem);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -26,6 +26,7 @@ public class MoveArm extends Command {
   @Override
   protected void execute() {
     Robot.m_cargoArmSubsystem.moveArm(Robot.m_oi.xbox1.getRawAxis(1));
+    System.out.println("Running");
   }
 
   // Make this return true when this Command no longer needs to run execute()

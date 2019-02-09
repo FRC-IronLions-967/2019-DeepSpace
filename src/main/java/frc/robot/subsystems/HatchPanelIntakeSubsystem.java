@@ -15,8 +15,8 @@ public class HatchPanelIntakeSubsystem extends Subsystem {
 
   // Constructor 
   public HatchPanelIntakeSubsystem() {
-    grabber = new DoubleSolenoid(1, 7, 0);
-    arm = new DoubleSolenoid(2, 7, 0);
+    grabber = new DoubleSolenoid(0, 4, 3);
+    arm = new DoubleSolenoid(0, 5, 2);
   }
 
 

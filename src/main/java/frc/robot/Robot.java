@@ -2,10 +2,10 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import frc.lib.log.Logging;
+// import frc.lib.log.Logging;
 import frc.lib.util.MACAddress;
 import frc.lib.util.MACConfigChooser;
-import frc.robot.networktables.*;
+// import frc.robot.networktables.*;
 import frc.robot.properties.ConstraintsProperties;
 import frc.robot.properties.RobotMapProperties;
 import frc.robot.subsystems.DriveSubsystem;
@@ -22,14 +22,14 @@ import frc.robot.subsystems.NavigationSubsystem;
  * project.
  */
 public class Robot extends TimedRobot {
-  public static Logging logger;
+  // public static Logging logger;
 
   public static NavigationSubsystem m_navigationSubsystem;
   public static HatchPanelIntakeSubsystem m_hatchPanelIntakeSubsystem;
   public static CargoArmSubsystem m_cargoArmSubsystem;
   public static CargoIntakeSubsystem m_cargoIntakeSubsystem;
   //always declare properties objects before subsystems or else it will fail to instantiate
-  public static MACAddress m_macaddress = new MACAddress();
+  public static MACAddress m_macaddress;
   public static MACConfigChooser m_macconfigchooser;
   //  = new MACConfigChooser(m_macaddress.getMACAddress(), macArray, constraintsPaths, mapPaths);
   public static ConstraintsProperties m_constraintsProperties;
@@ -63,10 +63,10 @@ public class Robot extends TimedRobot {
     m_constraintsProperties = new ConstraintsProperties(m_macconfigchooser.getConstraintsPath());
     m_robotMapProperties = new RobotMapProperties(m_macconfigchooser.getRobotmapPath());
 
-    limelight vision = new limelight();
-    System.out.println(vision.getTX());
-    System.out.println(vision.getTY());
-    System.out.println(vision.getTA());
+    // limelight vision = new limelight();
+    // System.out.println(vision.getTX());
+    // System.out.println(vision.getTY());
+    // System.out.println(vision.getTA());
     m_navigationSubsystem = new NavigationSubsystem();
     m_driveSubsystem = new DriveSubsystem();
     m_hatchPanelIntakeSubsystem = new HatchPanelIntakeSubsystem();
@@ -101,12 +101,12 @@ public class Robot extends TimedRobot {
     m_hatchPanelIntakeSubsystem.disabledInit();
     m_navigationSubsystem.disabledinit();
 
-    try {
-      logger.close();
-      System.out.println("logger closed");
-    } catch (Exception e) {
-      System.out.println("logger not started");
-    }
+    // try {
+    //   logger.close();
+    //   System.out.println("logger closed");
+    // } catch (Exception e) {
+    //   System.out.println("logger not started");
+    // }
     
   }
 
@@ -142,8 +142,8 @@ public class Robot extends TimedRobot {
     // if (m_autonomousCommand != null) {
     //   m_autonomousCommand.start();
     // }
-    logger = Logging.getInstance("Autolog");
-    logger.log("Auto Init");
+    // logger = Logging.getInstance("Autolog");
+    // logger.log("Auto Init");
   }
 
   /**
@@ -163,7 +163,7 @@ public class Robot extends TimedRobot {
     // if (m_autonomousCommand != null) {
     //   m_autonomousCommand.cancel();
     // }
-    logger = Logging.getInstance("TeleopLog");
+    // logger = Logging.getInstance("TeleopLog");
 
   }
 

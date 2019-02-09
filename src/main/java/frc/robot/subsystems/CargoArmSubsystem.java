@@ -45,7 +45,7 @@ public class CargoArmSubsystem extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new MoveArm());
+    setDefaultCommand(new MoveCargoArm());
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
   }
