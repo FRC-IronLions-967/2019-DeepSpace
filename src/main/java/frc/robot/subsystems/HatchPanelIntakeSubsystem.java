@@ -11,10 +11,12 @@ public class HatchPanelIntakeSubsystem extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   private DoubleSolenoid grabber;
+  private DoubleSolenoid arm;
 
   // Constructor 
   public HatchPanelIntakeSubsystem() {
     grabber = new DoubleSolenoid(1, 7, 0);
+    arm = new DoubleSolenoid(2, 7, 0);
   }
 
 
@@ -32,6 +34,14 @@ public class HatchPanelIntakeSubsystem extends Subsystem {
 
   public void grabberClose() {
     grabber.set(DoubleSolenoid.Value.kReverse);
+  }
+
+  public void armUp() {
+    arm.set(DoubleSolenoid.Value.kForward);
+  }
+
+  public void armDown() {
+    arm.set(DoubleSolenoid.Value.kReverse);
   }
 
   @Override

@@ -23,11 +23,13 @@ public class DriveSubsystem extends Subsystem implements PIDOutput {
 
   private TalonSRX rightMaster;
   private TalonSRX rightSlaveZero;
-  private TalonSRX rightSlaveOne;
+//   private TalonSRX rightSlaveOne;
 
   private TalonSRX leftMaster;
   private TalonSRX leftSlaveZero;
-  private TalonSRX leftSlaveOne;
+//   private TalonSRX leftSlaveOne;
+  private int encoderCounter = 0;
+  public boolean countsmeet;
 
 
   private DecimalFormat df = new DecimalFormat("#.##");
@@ -138,22 +140,25 @@ public class DriveSubsystem extends Subsystem implements PIDOutput {
   public DriveSubsystem() {
     	rightMaster = new TalonSRX(Robot.m_robotMapProperties.getDriveRightMaster());
     	rightSlaveZero = new TalonSRX(Robot.m_robotMapProperties.getDriveRightSlaveZero());
-    	rightSlaveOne = new TalonSRX(Robot.m_robotMapProperties.getDriveRightSlaveOne());
+    	// rightSlaveOne = new TalonSRX(Robot.m_robotMapProperties.getDriveRightSlaveOne());
 
     	leftMaster = new TalonSRX(Robot.m_robotMapProperties.getDriveLeftMaster());
     	leftSlaveZero = new TalonSRX(Robot.m_robotMapProperties.getDriveLeftSlaveZero());
-		leftSlaveOne = new TalonSRX(Robot.m_robotMapProperties.getDriveLeftSlaveOne());
+		// leftSlaveOne = new TalonSRX(Robot.m_robotMapProperties.getDriveLeftSlaveOne());
 		
 
 		rightSlaveZero.follow(rightMaster);
-		rightSlaveOne.follow(rightMaster);
+		// rightSlaveOne.follow(rightMaster);
 
 		leftSlaveZero.follow(leftMaster);
-		leftSlaveOne.follow(leftMaster);
+		// leftSlaveOne.follow(leftMaster);
 
 		rightMaster.setInverted(true);
 		rightSlaveZero.setInverted(true);
-		rightSlaveOne.setInverted(true);
+		// rightSlaveOne.setInverted(true);
+
+		rightMaster.configSelectedFeedbackSensor(com.ctre.phoenix.motorcontrol.FeedbackDevice.QuadEncoder, 0, 0);
+		leftMaster.configSelectedFeedbackSensor(com.ctre.phoenix.motorcontrol.FeedbackDevice.QuadEncoder, 0, 0);
 
 		pidController = new PIDController(Robot.m_constraintsProperties.getkP(), 
 										  Robot.m_constraintsProperties.getkI(), 
@@ -242,6 +247,47 @@ public class DriveSubsystem extends Subsystem implements PIDOutput {
 		  return false;
 	  }
   }
+
+  public double getLeftEncoder() {
+	  return -leftMaster.getSensorCollection().getQuadraturePosition();
+  }
+
+  public double getRightEncoder() {
+	  return rightMaster.getSensorCollection().getQuadraturePosition();
+  }
+
+  public boolean zeroEncoders() {
+	  leftMaster.getSensorCollection().setQuadraturePosition(0, 0);
+	  rightMaster.getSensorCollection().setQuadraturePosition(0, 0);
+	  if(encoderCounter > 10) {
+		  encoderCounter = 0;
+		  return true;
+	  } else {
+		  encoderCounter++;
+		  return false;
+	  }
+  }
+
+  public boolean driveDistance(double count){
+	countsmeet = false;
+	if(count > 0) {
+		if((getLeftEncoder() + getRightEncoder())/2 > count){
+			countsmeet = true;
+			return true;
+		}
+		else {
+			return false;
+		}
+	} else {
+		if((getLeftEncoder() + getRightEncoder())/2 < count){
+			countsmeet = true;
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+}
 
   @Override
   public void initDefaultCommand() {
