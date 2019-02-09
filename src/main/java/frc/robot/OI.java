@@ -10,11 +10,11 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.lib.oi.POVButton;
-import frc.robot.commands.CloseGrabber;
-import frc.robot.commands.GyroPIDChangeState;
-import frc.robot.commands.GyroPIDTurnToAngle;
-import frc.robot.commands.OpenGrabber;
-import frc.robot.commands.ResetYaw;
+import frc.robot.commands.hatchpanelintakesubsystem.CloseGrabber;
+import frc.robot.commands.drivesubsystem.GyroPIDChangeState;
+import frc.robot.commands.drivesubsystem.GyroPIDTurnToAngle;
+import frc.robot.commands.hatchpanelintakesubsystem.OpenGrabber;
+import frc.robot.commands.navigation.ResetYaw;
 
 
 /**

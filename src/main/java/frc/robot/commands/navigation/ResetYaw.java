@@ -1,11 +1,10 @@
-package frc.robot.commands;
+package frc.robot.commands.navigation;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-// import frc.robot.subsystems.DriveSubsystem;
 
-public class TankDriveCommand extends Command {
-  public TankDriveCommand() {
+public class ResetYaw extends Command {
+  public ResetYaw() {
     requires(Robot.m_driveSubsystem);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -14,18 +13,18 @@ public class TankDriveCommand extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Robot.m_navigationSubsystem.resetYaw();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_driveSubsystem.tankDrive(Robot.m_oi.getXbox0().getRawAxis(1), -Robot.m_oi.getXbox0().getRawAxis(5));
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return true;
   }
 
   // Called once after isFinished returns true

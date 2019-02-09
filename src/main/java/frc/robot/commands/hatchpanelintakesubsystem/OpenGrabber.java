@@ -1,13 +1,18 @@
-package frc.robot.commands;
+/*----------------------------------------------------------------------------*/
+/* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
+/* Open Source Software - may be modified and shared by FRC teams. The code   */
+/* must be accompanied by the FIRST BSD license file in the root directory of */
+/* the project.                                                               */
+/*----------------------------------------------------------------------------*/
+
+package frc.robot.commands.hatchpanelintakesubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class GyroPIDTurnToAngle extends Command {
-  double angle;
-  public GyroPIDTurnToAngle(double Angle) {
-    requires(Robot.m_driveSubsystem);
-    angle = Angle;
+public class OpenGrabber extends Command {
+  public OpenGrabber() {
+    requires(Robot.m_hatchPanelIntakeSubsystem);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
@@ -15,20 +20,18 @@ public class GyroPIDTurnToAngle extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.m_driveSubsystem.pidSetPoint(angle);
-    Robot.m_driveSubsystem.pidSetState("Enable");
+    Robot.m_hatchPanelIntakeSubsystem.grabberOpen();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_driveSubsystem.move(Robot.m_driveSubsystem.PIDOutput, -Robot.m_driveSubsystem.PIDOutput);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return Robot.m_driveSubsystem.pidDone();
+    return false;
   }
 
   // Called once after isFinished returns true
@@ -40,6 +43,5 @@ public class GyroPIDTurnToAngle extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    Robot.m_driveSubsystem.pidSetState("Disable");
   }
 }
