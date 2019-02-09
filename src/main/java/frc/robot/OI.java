@@ -54,7 +54,7 @@ public class OI {
     
     JoystickButton xbox0_a = new JoystickButton(xbox0, 1);
     JoystickButton xbox0_b = new JoystickButton(xbox0, 2);
-    JoystickButton xbox0_x = new JoystickButton(xbox0, 3);
+    // JoystickButton xbox0_x = new JoystickButton(xbox0, 3);
     // JoystickButton xbox0_y = new JoystickButton(xbox0, 4);
     // JoystickButton xbox0_lb = new JoystickButton(xbox0, 5);
     // JoystickButton xbox0_rb = new JoystickButton(xbox0, 6);
@@ -86,8 +86,8 @@ public class OI {
     // xbox0_rT.whenPressed(new ExampleCommand());
     xbox0_a.whenPressed(new GyroPIDChangeState("Disable"));
     xbox0_b.whenPressed(new ResetYaw());
-    xbox0_x.whenPressed(new MoveCargoArm());
-    // xbox0_y.whenPressed(new moveArm());
+    // xbox0_x.whenPressed(new MoveCargoArm(.3));
+    // xbox0_y.whenPressed(new MoveCargoArm(-.3));
     // xbox0_lb.whenPressed(new ExampleCommand());
     // xbox0_rb.whenPressed(new ExampleCommand());
     // xbox0_back.whenPressed(new ExampleCommand());
@@ -95,11 +95,12 @@ public class OI {
     // xbox0_leftStickButton.whenPressed(new ExampleCommand());
     // xbox0_rightStickButton.whenPressed(new ExampleCommand());
   
-    // xbox1povN.whenPressed(new ExampleCommand());
+    xbox1povC.whenActive(new MoveCargoArm(0));
+    xbox1povN.whenPressed(new MoveCargoArm(-.8));
     // xbox1povNE.whenPressed(new ExampleCommand());
     // xbox1povE.whenPressed(new ExampleCommand());
     // xbox1povSE.whenPressed(new ExampleCommand());
-    // xbox1povS.whenPressed(new ExampleCommand());
+    xbox1povS.whenPressed(new MoveCargoArm(.8));
     // xbox1povSW.whenPressed(new ExampleCommand());
     // xbox1povW.whenPressed(new ExampleCommand());
     // xbox1povNW.whenPressed(new ExampleCommand());

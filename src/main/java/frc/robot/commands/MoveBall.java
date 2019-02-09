@@ -12,7 +12,6 @@ import frc.robot.Robot;
 
 public class MoveBall extends Command {
   public MoveBall() {
-    requires(Robot.m_cargoArmSubsystem);
     requires(Robot.m_cargoIntakeSubsystem);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);

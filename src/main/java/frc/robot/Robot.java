@@ -2,7 +2,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
-// import frc.lib.log.Logging;
+import frc.lib.log.Logging;
 import frc.lib.util.MACAddress;
 import frc.lib.util.MACConfigChooser;
 // import frc.robot.networktables.*;
@@ -11,7 +11,7 @@ import frc.robot.properties.RobotMapProperties;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.HatchPanelIntakeSubsystem;
 import frc.robot.subsystems.CargoIntakeSubsystem;
-import frc.robot.subsystems.CargoArmSubsystem;
+import frc.robot.subsystems.CargoSubsystem;
 import frc.robot.subsystems.NavigationSubsystem;
 
 /**
@@ -22,11 +22,11 @@ import frc.robot.subsystems.NavigationSubsystem;
  * project.
  */
 public class Robot extends TimedRobot {
-  // public static Logging logger;
+  public static Logging logger;
 
   public static NavigationSubsystem m_navigationSubsystem;
   public static HatchPanelIntakeSubsystem m_hatchPanelIntakeSubsystem;
-  public static CargoArmSubsystem m_cargoArmSubsystem;
+  public static CargoSubsystem m_cargoSubsystem;
   public static CargoIntakeSubsystem m_cargoIntakeSubsystem;
   //always declare properties objects before subsystems or else it will fail to instantiate
   public static MACAddress m_macaddress;
@@ -70,7 +70,7 @@ public class Robot extends TimedRobot {
     m_navigationSubsystem = new NavigationSubsystem();
     m_driveSubsystem = new DriveSubsystem();
     m_hatchPanelIntakeSubsystem = new HatchPanelIntakeSubsystem();
-    m_cargoArmSubsystem = new CargoArmSubsystem();
+    m_cargoSubsystem = new CargoSubsystem();
     m_cargoIntakeSubsystem = new CargoIntakeSubsystem();
     
     
@@ -101,12 +101,12 @@ public class Robot extends TimedRobot {
     m_hatchPanelIntakeSubsystem.disabledInit();
     m_navigationSubsystem.disabledinit();
 
-    // try {
-    //   logger.close();
-    //   System.out.println("logger closed");
-    // } catch (Exception e) {
-    //   System.out.println("logger not started");
-    // }
+    try {
+      logger.close();
+      System.out.println("logger closed");
+    } catch (Exception e) {
+      System.out.println("logger not started");
+    }
     
   }
 
@@ -142,8 +142,8 @@ public class Robot extends TimedRobot {
     // if (m_autonomousCommand != null) {
     //   m_autonomousCommand.start();
     // }
-    // logger = Logging.getInstance("Autolog");
-    // logger.log("Auto Init");
+    logger = Logging.getInstance("Autolog");
+    logger.log("Auto Init");
   }
 
   /**
@@ -163,7 +163,7 @@ public class Robot extends TimedRobot {
     // if (m_autonomousCommand != null) {
     //   m_autonomousCommand.cancel();
     // }
-    // logger = Logging.getInstance("TeleopLog");
+    logger = Logging.getInstance("TeleopLog");
 
   }
 

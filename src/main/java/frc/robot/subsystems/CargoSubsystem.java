@@ -6,23 +6,24 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.lib.util.Utils;
 import frc.robot.Robot;
-import frc.robot.commands.*;
-
 /**
  * CargoSubsystem is the subsystem for controlling the Cargo while it is in the robot 
  * That includes taking in the cargo and despensing the cargo
  */
-public class CargoArmSubsystem extends Subsystem {
-  private TalonSRX left_side;
-  private TalonSRX right_side;
+public class CargoSubsystem extends Subsystem {
+  private TalonSRX leftArm;
+  private TalonSRX rightArm;
   // private TalonSRX intake_roller;
 
-  public CargoArmSubsystem() {
-    left_side = new TalonSRX(Robot.m_robotMapProperties.getLeftSide());
-    right_side = new TalonSRX(Robot.m_robotMapProperties.getRightSide());
+  public CargoSubsystem() {
+    leftArm= new TalonSRX(Robot.m_robotMapProperties.getLeftSide());
+    rightArm = new TalonSRX(Robot.m_robotMapProperties.getRightSide());
+
+    leftArm.setInverted(true);
+    rightArm.setInverted(false);
     // intake_roller = new TalonSRX(Robot.m_robotMapProperties.getIntakeRoller());
 
-    left_side.setInverted(true);
+    
   }
   
   // public void moveBall(double power) {
@@ -31,9 +32,10 @@ public class CargoArmSubsystem extends Subsystem {
   // }
 
   public void moveArm(double power) {
-    power = Utils.Deadband(power, 0.05);
-    left_side.set(ControlMode.PercentOutput, power);
-    right_side.set(ControlMode.PercentOutput, power);
+    power = Utils.Deadband(power, 0.1);
+    leftArm.set(ControlMode.PercentOutput, power);
+    rightArm.set(ControlMode.PercentOutput, power);
+    Robot.logger.log(Double.toString(power));
   }
   /** 
    * Put code here for when a varble needs reset when the robot get 
@@ -45,7 +47,6 @@ public class CargoArmSubsystem extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new MoveCargoArm());
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
   }
