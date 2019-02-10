@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.lib.util.Utils;
 import frc.robot.Robot;
@@ -13,29 +14,52 @@ import frc.robot.Robot;
 public class CargoSubsystem extends Subsystem {
   private TalonSRX leftArm;
   private TalonSRX rightArm;
+
+  private DigitalInput limitSwitchBottom;
   // private TalonSRX intake_roller;
 
   public CargoSubsystem() {
-    leftArm= new TalonSRX(Robot.m_robotMapProperties.getLeftSide());
+    leftArm = new TalonSRX(Robot.m_robotMapProperties.getLeftSide());
     rightArm = new TalonSRX(Robot.m_robotMapProperties.getRightSide());
 
-    leftArm.setInverted(true);
-    rightArm.setInverted(false);
+    limitSwitchBottom = new DigitalInput(9);
+
+    // leftArm.setInverted(true);
+    // rightArm.setInverted(false);
     // intake_roller = new TalonSRX(Robot.m_robotMapProperties.getIntakeRoller());
 
     
+  }
+
+  public boolean isBottom() {
+    return limitSwitchBottom.get();
+  }
+
+  public double leftArmCurrent() {
+    return leftArm.getOutputCurrent();
+  }
+
+  public double rightArmCurrent() {
+    return rightArm.getOutputCurrent();
   }
   
   // public void moveBall(double power) {
   //   power = Utils.Deadband(power, 0.1);
   //   intake_roller.set(ControlMode.PercentOutput, power);
   // }
+  // private double negPower;
 
   public void moveArm(double power) {
+    System.out.println(isBottom());
     power = Utils.Deadband(power, 0.1);
-    leftArm.set(ControlMode.PercentOutput, power);
-    rightArm.set(ControlMode.PercentOutput, power);
-    Robot.logger.log(Double.toString(power));
+    // if (!isBottom()) {
+      leftArm.set(ControlMode.PercentOutput, power);
+      rightArm.set(ControlMode.PercentOutput, power);
+    // } else {
+    //   power = Math.abs(power);
+    //   leftArm.set(ControlMode.PercentOutput, power);
+    //   rightArm.set(ControlMode.PercentOutput, power);
+    // }
   }
   /** 
    * Put code here for when a varble needs reset when the robot get 
