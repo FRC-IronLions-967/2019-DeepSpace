@@ -164,6 +164,11 @@ public class Robot extends TimedRobot {
     //   m_autonomousCommand.cancel();
     // }
     logger = Logging.getInstance("TeleopLog");
+    StringBuilder builder = new StringBuilder();
+    builder.append("LeftArmCurrent").append(",")
+           .append("RightArmCurent").append(",");
+    logger.log(builder.toString());
+    
 
   }
 
@@ -173,6 +178,9 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+    StringBuilder builder = new StringBuilder();
+    builder.append(Double.toString(Robot.m_cargoSubsystem.leftArmCurrent())).append(",")
+           .append(Double.toString(Robot.m_cargoSubsystem.rightArmCurrent())).append(",");
   }
 
   /**
