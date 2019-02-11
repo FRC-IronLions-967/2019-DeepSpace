@@ -12,10 +12,10 @@ import frc.robot.Robot;
  * That includes taking in the cargo and despensing the cargo
  */
 public class CargoSubsystem extends Subsystem {
-  private TalonSRX leftArm;
-  private TalonSRX rightArm;
+  public TalonSRX leftArm;
+  public TalonSRX rightArm;
 
-  private DigitalInput limitSwitchBottom;
+  public DigitalInput limitSwitchBottom;
 
   public CargoSubsystem() {
     leftArm = new TalonSRX(Robot.m_robotMapProperties.getLeftSide());
@@ -25,20 +25,7 @@ public class CargoSubsystem extends Subsystem {
     
   }
 
-  public boolean isBottom() {
-    return limitSwitchBottom.get();
-  }
-
-  public double leftArmCurrent() {
-    return leftArm.getOutputCurrent();
-  }
-
-  public double rightArmCurrent() {
-    return rightArm.getOutputCurrent();
-  }
-
   public void moveArm(double power) {
-    // System.out.println(isBottom());
     power = Utils.Deadband(power, 0.1);
     // if (!isBottom()) {
       leftArm.set(ControlMode.PercentOutput, power);

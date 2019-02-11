@@ -182,8 +182,8 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
     StringBuilder builder = new StringBuilder();
-    builder.append(Double.toString(Robot.m_cargoSubsystem.leftArmCurrent())).append(",")
-           .append(Double.toString(Robot.m_cargoSubsystem.rightArmCurrent())).append(",")
+    builder.append(Double.toString(Robot.m_cargoSubsystem.leftArm.getOutputCurrent())).append(",")
+           .append(Double.toString(Robot.m_cargoSubsystem.rightArm.getOutputCurrent())).append(",")
            .append(Double.toString(Robot.m_driveSubsystem.getLeft0Current())).append(",")
            .append(Double.toString(Robot.m_driveSubsystem.getLeft1Current())).append(",")
            .append(Double.toString(0)).append(",")

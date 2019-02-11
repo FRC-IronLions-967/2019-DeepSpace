@@ -27,8 +27,6 @@ public class Logging {
 			e.printStackTrace();
 		}
 		
-		
-		//"/home/lvuser/Output6.txt"
 	}
 	
 	public void log(String whatToWrite) {
