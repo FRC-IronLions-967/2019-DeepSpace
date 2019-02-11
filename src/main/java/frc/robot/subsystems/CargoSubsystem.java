@@ -16,18 +16,12 @@ public class CargoSubsystem extends Subsystem {
   private TalonSRX rightArm;
 
   private DigitalInput limitSwitchBottom;
-  // private TalonSRX intake_roller;
 
   public CargoSubsystem() {
     leftArm = new TalonSRX(Robot.m_robotMapProperties.getLeftSide());
     rightArm = new TalonSRX(Robot.m_robotMapProperties.getRightSide());
 
     limitSwitchBottom = new DigitalInput(9);
-
-    // leftArm.setInverted(true);
-    // rightArm.setInverted(false);
-    // intake_roller = new TalonSRX(Robot.m_robotMapProperties.getIntakeRoller());
-
     
   }
 
@@ -42,15 +36,9 @@ public class CargoSubsystem extends Subsystem {
   public double rightArmCurrent() {
     return rightArm.getOutputCurrent();
   }
-  
-  // public void moveBall(double power) {
-  //   power = Utils.Deadband(power, 0.1);
-  //   intake_roller.set(ControlMode.PercentOutput, power);
-  // }
-  // private double negPower;
 
   public void moveArm(double power) {
-    System.out.println(isBottom());
+    // System.out.println(isBottom());
     power = Utils.Deadband(power, 0.1);
     // if (!isBottom()) {
       leftArm.set(ControlMode.PercentOutput, power);
@@ -61,6 +49,8 @@ public class CargoSubsystem extends Subsystem {
     //   rightArm.set(ControlMode.PercentOutput, power);
     // }
   }
+
+
   /** 
    * Put code here for when a varble needs reset when the robot get 
    * disabled or something similar

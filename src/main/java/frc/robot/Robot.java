@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.lib.log.Logging;
 import frc.lib.util.MACAddress;
 import frc.lib.util.MACConfigChooser;
-// import frc.robot.networktables.*;
+import frc.robot.networktables.*;
 import frc.robot.properties.ConstraintsProperties;
 import frc.robot.properties.RobotMapProperties;
 import frc.robot.subsystems.DriveSubsystem;
@@ -31,13 +31,9 @@ public class Robot extends TimedRobot {
   //always declare properties objects before subsystems or else it will fail to instantiate
   public static MACAddress m_macaddress;
   public static MACConfigChooser m_macconfigchooser;
-  //  = new MACConfigChooser(m_macaddress.getMACAddress(), macArray, constraintsPaths, mapPaths);
   public static ConstraintsProperties m_constraintsProperties;
-  //  = new ConstraintsProperties(m_macconfigchooser.getConstraintsPath());
   public static RobotMapProperties m_robotMapProperties;
-  //  = new RobotMapProperties(m_macconfigchooser.getRobotmapPath());
   public static DriveSubsystem m_driveSubsystem;
-  //  = new DriveSubsystem();
   public static OI m_oi;
 
   // Command m_autonomousCommand;
@@ -63,7 +59,7 @@ public class Robot extends TimedRobot {
     m_constraintsProperties = new ConstraintsProperties(m_macconfigchooser.getConstraintsPath());
     m_robotMapProperties = new RobotMapProperties(m_macconfigchooser.getRobotmapPath());
 
-    // limelight vision = new limelight();
+    limelight vision = new limelight();
     // System.out.println(vision.getTX());
     // System.out.println(vision.getTY());
     // System.out.println(vision.getTA());
@@ -72,7 +68,6 @@ public class Robot extends TimedRobot {
     m_hatchPanelIntakeSubsystem = new HatchPanelIntakeSubsystem();
     m_cargoSubsystem = new CargoSubsystem();
     m_cargoIntakeSubsystem = new CargoIntakeSubsystem();
-    
     
     m_oi = new OI();
   }
@@ -83,7 +78,6 @@ public class Robot extends TimedRobot {
    * items like diagnostics that you want ran during disabled, autonomous,
    * teleoperated and test.
    *
-   * <p>
    * This runs after the mode specific periodic functions, but before LiveWindow
    * and SmartDashboard integrated updating.
    */
@@ -129,6 +123,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
+    m_hatchPanelIntakeSubsystem.grabberClose();
+    m_hatchPanelIntakeSubsystem.armDown();
+    
     // m_autonomousCommand = m_chooser.getSelected();
 
     /*
@@ -165,8 +162,14 @@ public class Robot extends TimedRobot {
     // }
     logger = Logging.getInstance("TeleopLog");
     StringBuilder builder = new StringBuilder();
-    builder.append("LeftArmCurrent").append(",")
-           .append("RightArmCurent").append(",");
+    builder.append("ArmLeftCuremt").append(",")
+           .append("ArmRightCurent").append(",")
+           .append("DriveLeft0Curent").append(",")
+           .append("DriveLeft1Curent").append(",")
+           .append("DriveLeft2Curent").append(",")
+           .append("DriveRight0Curent").append(",")
+           .append("DriveRight1Curent").append(",")
+           .append("DriveRight2Curent").append(",");
     logger.log(builder.toString());
     
 
@@ -180,7 +183,14 @@ public class Robot extends TimedRobot {
     Scheduler.getInstance().run();
     StringBuilder builder = new StringBuilder();
     builder.append(Double.toString(Robot.m_cargoSubsystem.leftArmCurrent())).append(",")
-           .append(Double.toString(Robot.m_cargoSubsystem.rightArmCurrent())).append(",");
+           .append(Double.toString(Robot.m_cargoSubsystem.rightArmCurrent())).append(",")
+           .append(Double.toString(Robot.m_driveSubsystem.getLeft0Current())).append(",")
+           .append(Double.toString(Robot.m_driveSubsystem.getLeft1Current())).append(",")
+           .append(Double.toString(0)).append(",")
+           .append(Double.toString(Robot.m_driveSubsystem.getRight0Current())).append(",")
+           .append(Double.toString(Robot.m_driveSubsystem.getRight1Current())).append(",")
+           .append(Double.toString(0)).append(",");
+    logger.log(builder.toString());
   }
 
   /**
