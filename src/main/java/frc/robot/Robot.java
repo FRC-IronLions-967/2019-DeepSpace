@@ -184,11 +184,11 @@ public class Robot extends TimedRobot {
     StringBuilder builder = new StringBuilder();
     builder.append(Double.toString(Robot.m_cargoSubsystem.leftArm.getOutputCurrent())).append(",")
            .append(Double.toString(Robot.m_cargoSubsystem.rightArm.getOutputCurrent())).append(",")
-           .append(Double.toString(Robot.m_driveSubsystem.getLeft0Current())).append(",")
-           .append(Double.toString(Robot.m_driveSubsystem.getLeft1Current())).append(",")
+           .append(Double.toString(Robot.m_driveSubsystem.leftMaster.getOutputCurrent())).append(",")
+           .append(Double.toString(Robot.m_driveSubsystem.leftSlaveZero.getOutputCurrent())).append(",")
            .append(Double.toString(0)).append(",")
-           .append(Double.toString(Robot.m_driveSubsystem.getRight0Current())).append(",")
-           .append(Double.toString(Robot.m_driveSubsystem.getRight1Current())).append(",")
+           .append(Double.toString(Robot.m_driveSubsystem.rightMaster.getOutputCurrent())).append(",")
+           .append(Double.toString(Robot.m_driveSubsystem.rightSlaveZero.getOutputCurrent())).append(",")
            .append(Double.toString(0)).append(",");
     logger.log(builder.toString());
   }

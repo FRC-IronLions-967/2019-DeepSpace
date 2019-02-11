@@ -21,12 +21,12 @@ public class DriveSubsystem extends Subsystem implements PIDOutput {
 
   public double PIDOutput;
 
-  private TalonSRX rightMaster;
-  private TalonSRX rightSlaveZero;
+  public TalonSRX rightMaster;
+  public TalonSRX rightSlaveZero;
 //   private TalonSRX rightSlaveOne;
 
-  private TalonSRX leftMaster;
-  private TalonSRX leftSlaveZero;
+  public TalonSRX leftMaster;
+  public TalonSRX leftSlaveZero;
 //   private TalonSRX leftSlaveOne;
   private int encoderCounter = 0;
   public boolean countsmeet;
@@ -220,22 +220,6 @@ public class DriveSubsystem extends Subsystem implements PIDOutput {
 		// System.out.println("Drive Powers(L,R): " + Double.toString(leftPower) + " : " + Double.toString(rightPower));
 		rightMaster.set(ControlMode.PercentOutput, rightPower);
 		leftMaster.set(ControlMode.PercentOutput, leftPower);
-  }
-
-  public double getLeft0Current() {
-    return leftMaster.getOutputCurrent();
-  } 
-
-  public double getLeft1Current() {
-	  return leftSlaveZero.getOutputCurrent();
-  }
-
-  public double getRight0Current() {
-    return rightMaster.getOutputCurrent();
-  } 
-
-  public double getRight1Current() {
-	  return rightSlaveZero.getOutputCurrent();
   }
 
   public void pidSetState(String state) {
