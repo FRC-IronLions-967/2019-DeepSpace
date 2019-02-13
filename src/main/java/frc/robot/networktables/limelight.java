@@ -1,6 +1,5 @@
 package frc.robot.networktables;
 
-import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 
 public class limelight {
