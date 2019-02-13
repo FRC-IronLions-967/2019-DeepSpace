@@ -34,23 +34,21 @@ public class CargoSubsystem extends Subsystem {
 
   }
 
-  
   public void moveBall(double power) {
     power = Utils.Deadband(power, 0.1);
     intake_roller.set(ControlMode.PercentOutput, power);
   }
 
-
   public void moveArm(double power) {
     power = Utils.Deadband(power, 0.1);
-    // if (!isBottom()) {
+    if (limitSwitchBottom.get()) {
     leftArm.set(ControlMode.PercentOutput, power);
     rightArm.set(ControlMode.PercentOutput, power);
-    // } else {
-    // power = Math.abs(power);
-    // leftArm.set(ControlMode.PercentOutput, power);
-    // rightArm.set(ControlMode.PercentOutput, power);
-    // }
+    } else {
+    power = Math.abs(power);
+    leftArm.set(ControlMode.PercentOutput, power);
+    rightArm.set(ControlMode.PercentOutput, power);
+    }
   }
 
   /**
