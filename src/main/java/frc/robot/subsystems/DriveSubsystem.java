@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import java.awt.image.LookupTable;
 import java.text.DecimalFormat;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -30,7 +31,7 @@ public class DriveSubsystem extends Subsystem implements PIDOutput {
   public boolean countsmeet;
 
 
-  private DecimalFormat df = new DecimalFormat("#.##");
+//   private DecimalFormat df = new DecimalFormat("#.##");
 	//follows (x*.9)^2
 	private double[] turnLookUp = new double[]{	 0
 												,0.000081
@@ -175,8 +176,6 @@ public class DriveSubsystem extends Subsystem implements PIDOutput {
 		pidController.setContinuous(true);
   }
 
-  
-
   public void tankDrive(double leftYAxis, double rightYAxis) {
 		TankDrive tankDrive = new TankDrive(leftYAxis, rightYAxis, Robot.m_constraintsProperties.getDeadband());
 		move(tankDrive.getLeftOutput(), tankDrive.getRightOutput());
@@ -187,49 +186,23 @@ public class DriveSubsystem extends Subsystem implements PIDOutput {
 		move(arcadeDrive.getL(), arcadeDrive.getR());
   }
 
-//   public void arcadeDriveLookup(double yAxis, double xAxis) {
-//     yAxis = yAxis*Math.abs(yAxis);
-//     double xAxisConverted = turnLookUp[(int)(Double.valueOf(df.format(Math.abs(xAxis)))*100)];
-//     if(xAxis > 0) {
-//       xAxisConverted = -xAxisConverted;
-//     }
-//     yAxis = Deadband(yAxis);
-//     xAxisConverted = Deadband(xAxisConverted);
-
-//     double L = yAxis - xAxisConverted;
-//     double R = yAxis + xAxisConverted;
-//     double max = Math.abs(L);
-//     if(Math.abs(R) > max) max = Math.abs(R);
-//     if((Math.abs(yAxis) <= 1) && (Math.abs(xAxis) <= 1) && (max < 1)){
-//     	move(L,R);
-//     } else
-//     	move(L/max, R/max);
-//   }
-//   public double Deadband(double input) {
-//     // upper deadband
-//     if(input >= +0.1) {
-//       return input;
-//     } 
-//     // lower deadband
-//     else if(input <= -0.1) {
-//       return input;
-//     }
-//     // outside deadband
-//     return 0;
-//   }
+  public void arcadeDriveLookup(double yAxis, double xAxis) {
+		ArcadeDrive arcadeDrive = new ArcadeDrive(xAxis, yAxis, Robot.m_constraintsProperties.getDeadband(), turnLookUp);
+		move(arcadeDrive.getL(), arcadeDrive.getR());
+  }
 
   public void move(double leftPower, double rightPower) {
 		rightMaster.set(ControlMode.PercentOutput, rightPower);
 		leftMaster.set(ControlMode.PercentOutput, leftPower);
   }
 
-  public void pidSetState(String state) {
-	  if(state == "Enable") {
-		  pidController.enable();
-	  } else if(state == "Disable") {
-		  pidController.disable();
-	  }
+  public void enablePid() {
+	  pidController.enable();
   }
+
+  public void disablePid() {
+	pidController.disable();
+}
   
   public void pidSetPoint(double input) {
 	  pidController.setSetpoint(input);

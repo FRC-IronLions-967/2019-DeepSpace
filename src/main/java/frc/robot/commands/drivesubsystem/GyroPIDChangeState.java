@@ -15,7 +15,11 @@ public class GyroPIDChangeState extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.m_driveSubsystem.pidSetState(state);
+    if (state.equalsIgnoreCase("true")) {
+      Robot.m_driveSubsystem.enablePid(); 
+    } else if (state.equalsIgnoreCase("false")) {
+      Robot.m_driveSubsystem.disablePid();
+    }
   }
 
   // Called repeatedly when this Command is scheduled to run

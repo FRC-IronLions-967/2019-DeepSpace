@@ -7,18 +7,25 @@
 
 package frc.lib.util;
 
+import java.text.DecimalFormat;
+
 /**
  * Add your docs here.
  */
 public class ArcadeDrive {
-    double xAxis;
-    double yAxis;
-    double R;
-    double L;
-    double max;
-    double[] lookupTable;
-    double driveDeadband;
+    private double xAxis;
+    private double yAxis;
+    private double R;
+    private double L;
+    private double max;
+    private double[] lookupTable;
+    private double driveDeadband;
+    private boolean isLookUp = false; 
+
+    private DecimalFormat df = new DecimalFormat("#.##");
+
     public ArcadeDrive(double xAxis, double yAxis) {
+        this.isLookUp = false;
         this.xAxis = xAxis;
         this.yAxis = yAxis;
         this.driveDeadband = 0.0;
@@ -26,13 +33,15 @@ public class ArcadeDrive {
     }
 
     public ArcadeDrive(double xAxis, double yAxis, double deadband) {
+        this.isLookUp = false;
         this.xAxis = xAxis;
         this.yAxis = yAxis;
         this.driveDeadband = deadband;
         findMax();
     }
 
-    /*public ArcadeDrive(double xAxis, double yAxis, double[] lookupTable) {
+    public ArcadeDrive(double xAxis, double yAxis, double[] lookupTable) {
+        this.isLookUp = true;
         this.xAxis = xAxis;
         this.yAxis = yAxis;
         this.lookupTable = lookupTable;
@@ -41,14 +50,23 @@ public class ArcadeDrive {
     }
 
     public ArcadeDrive(double xAxis, double yAxis, double deadband, double[] lookupTable) {
+        this.isLookUp = true;
         this.xAxis = xAxis;
         this.yAxis = yAxis;
         this.driveDeadband = deadband;
         this.lookupTable = lookupTable;
         findMax();
-    }*/
+    }
+
+    public double lookUpConverted() {
+        return lookupTable[(int)(Double.valueOf(df.format(Math.abs(xAxis)))*100)];
+    }
 
     public void findMax() {
+        if (isLookUp) {
+            xAxis = lookUpConverted();
+        }
+
         xAxis = Utils.Deadband(xAxis, driveDeadband);
         yAxis = Utils.Deadband(yAxis, driveDeadband);
         L = yAxis + xAxis;

@@ -16,7 +16,7 @@ public class GyroPIDTurnToAngle extends Command {
   @Override
   protected void initialize() {
     Robot.m_driveSubsystem.pidSetPoint(angle);
-    Robot.m_driveSubsystem.pidSetState("Enable");
+    Robot.m_driveSubsystem.enablePid();
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -40,6 +40,6 @@ public class GyroPIDTurnToAngle extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    Robot.m_driveSubsystem.pidSetState("Disable");
+    Robot.m_driveSubsystem.disablePid();
   }
 }
