@@ -11,11 +11,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.lib.drive.ArcadeDrive;
 import frc.lib.drive.TankDrive;
 import frc.robot.Robot;
-import frc.robot.commands.drivesubsystem.*;
+import frc.robot.commands.drivesubsystem.SplitArcadeCommand;
 
-/**
- * Add your docs here.
- */
 public class DriveSubsystem extends Subsystem implements PIDOutput {
   private PIDController pidController;
 
@@ -23,11 +20,12 @@ public class DriveSubsystem extends Subsystem implements PIDOutput {
 
   public TalonSRX rightMaster;
   public TalonSRX rightSlaveZero;
-//   private TalonSRX rightSlaveOne;
+  public TalonSRX rightSlaveOne;
 
   public TalonSRX leftMaster;
   public TalonSRX leftSlaveZero;
-//   private TalonSRX leftSlaveOne;
+  public TalonSRX leftSlaveOne;
+
   private int encoderCounter = 0;
   public boolean countsmeet;
 
@@ -140,22 +138,26 @@ public class DriveSubsystem extends Subsystem implements PIDOutput {
   public DriveSubsystem() {
     	rightMaster = new TalonSRX(Robot.m_robotMapProperties.getDriveRightMaster());
     	rightSlaveZero = new TalonSRX(Robot.m_robotMapProperties.getDriveRightSlaveZero());
-    	// rightSlaveOne = new TalonSRX(Robot.m_robotMapProperties.getDriveRightSlaveOne());
+    	rightSlaveOne = new TalonSRX(Robot.m_robotMapProperties.getDriveRightSlaveOne());
 
     	leftMaster = new TalonSRX(Robot.m_robotMapProperties.getDriveLeftMaster());
     	leftSlaveZero = new TalonSRX(Robot.m_robotMapProperties.getDriveLeftSlaveZero());
-		// leftSlaveOne = new TalonSRX(Robot.m_robotMapProperties.getDriveLeftSlaveOne());
+		leftSlaveOne = new TalonSRX(Robot.m_robotMapProperties.getDriveLeftSlaveOne());
 		
 
 		rightSlaveZero.follow(rightMaster);
-		// rightSlaveOne.follow(rightMaster);
+		rightSlaveOne.follow(rightMaster);
 
 		leftSlaveZero.follow(leftMaster);
-		// leftSlaveOne.follow(leftMaster);
+		leftSlaveOne.follow(leftMaster);
 
 		rightMaster.setInverted(true);
 		rightSlaveZero.setInverted(true);
-		// rightSlaveOne.setInverted(true);
+		rightSlaveOne.setInverted(true);
+
+		leftMaster.setInverted(false);
+		leftSlaveZero.setInverted(false);
+		leftSlaveOne.setInverted(false);
 
 		rightMaster.configSelectedFeedbackSensor(com.ctre.phoenix.motorcontrol.FeedbackDevice.QuadEncoder, 0, 0);
 		leftMaster.configSelectedFeedbackSensor(com.ctre.phoenix.motorcontrol.FeedbackDevice.QuadEncoder, 0, 0);
@@ -217,7 +219,6 @@ public class DriveSubsystem extends Subsystem implements PIDOutput {
 //   }
 
   public void move(double leftPower, double rightPower) {
-		// System.out.println("Drive Powers(L,R): " + Double.toString(leftPower) + " : " + Double.toString(rightPower));
 		rightMaster.set(ControlMode.PercentOutput, rightPower);
 		leftMaster.set(ControlMode.PercentOutput, leftPower);
   }
