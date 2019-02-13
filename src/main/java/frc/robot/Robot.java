@@ -10,7 +10,6 @@ import frc.robot.properties.ConstraintsProperties;
 import frc.robot.properties.RobotMapProperties;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.HatchPanelSubsystem;
-import frc.robot.subsystems.CargoIntakeSubsystem;
 import frc.robot.subsystems.CargoSubsystem;
 import frc.robot.subsystems.NavigationSubsystem;
 
@@ -27,7 +26,6 @@ public class Robot extends TimedRobot {
   public static NavigationSubsystem m_navigationSubsystem;
   public static HatchPanelSubsystem m_hatchPanelSubsystem;
   public static CargoSubsystem m_cargoSubsystem;
-  public static CargoIntakeSubsystem m_cargoIntakeSubsystem;
   // always declare properties objects before subsystems or else it will fail to
   // instantiate
   public static MACAddress m_macaddress;
@@ -67,8 +65,6 @@ public class Robot extends TimedRobot {
     m_driveSubsystem = new DriveSubsystem();
     m_hatchPanelSubsystem = new HatchPanelSubsystem();
     m_cargoSubsystem = new CargoSubsystem();
-    m_cargoIntakeSubsystem = new CargoIntakeSubsystem();
-
     m_oi = new OI();
   }
 

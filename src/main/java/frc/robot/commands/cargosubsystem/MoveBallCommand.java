@@ -12,7 +12,7 @@ import frc.robot.Robot;
 
 public class MoveBallCommand extends Command {
   public MoveBallCommand() {
-    requires(Robot.m_cargoIntakeSubsystem);
+    requires(Robot.m_cargoSubsystem);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
@@ -25,7 +25,7 @@ public class MoveBallCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_cargoIntakeSubsystem.moveBall(Robot.m_oi.xbox1.getRawAxis(5));
+    Robot.m_cargoSubsystem.moveBall(Robot.m_oi.xbox1.getRawAxis(5));
   }
 
   // Make this return true when this Command no longer needs to run execute()
