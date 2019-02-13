@@ -25,6 +25,7 @@ public class RobotMapProperties {
     private int intake_roller;
     Properties properties = new Properties();
     InputStream input = null;
+
     public RobotMapProperties(String path) {
         try {
             input = new FileInputStream(path);
@@ -45,7 +46,7 @@ public class RobotMapProperties {
             e.printStackTrace();
             DriverStation.reportError(e.getMessage(), true);
         }
-        
+
     }
 
     public int getDriveRightMaster() {

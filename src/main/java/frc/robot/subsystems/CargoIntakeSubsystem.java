@@ -13,7 +13,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.lib.util.Utils;
 import frc.robot.Robot;
-import frc.robot.commands.MoveBall;
+import frc.robot.commands.cargosubsystem.MoveBall;
 
 /**
  * Add your docs here.

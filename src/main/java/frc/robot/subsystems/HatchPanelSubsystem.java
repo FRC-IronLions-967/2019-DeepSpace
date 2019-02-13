@@ -4,8 +4,8 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- * HatchPanelSubsystem is the subsystem for manipulating the hatch panel when it is in the robot
- * This includes taking in the panel and scoring the panel
+ * HatchPanelSubsystem is the subsystem for manipulating the hatch panel when it
+ * is in the robot This includes taking in the panel and scoring the panel
  */
 public class HatchPanelSubsystem extends Subsystem {
   // Put methods for controlling this subsystem
@@ -13,16 +13,15 @@ public class HatchPanelSubsystem extends Subsystem {
   private DoubleSolenoid grabber;
   private DoubleSolenoid arm;
 
-  // Constructor 
+  // Constructor
   public HatchPanelSubsystem() {
     grabber = new DoubleSolenoid(0, 4, 3);
     arm = new DoubleSolenoid(0, 5, 2);
   }
 
-
-  /** 
-   * Put code here for when a varble needs reset when the robot get 
-   * disabled or something similar
+  /**
+   * Put code here for when a varble needs reset when the robot get disabled or
+   * something similar
    */
   public void disabledInit() {
 
@@ -46,9 +45,8 @@ public class HatchPanelSubsystem extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
-    
+
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
   }
 }
-

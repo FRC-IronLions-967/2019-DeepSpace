@@ -16,39 +16,37 @@ import frc.robot.commands.hatchpanelsubsystem.GrabberArmDown;
 import frc.robot.commands.hatchpanelsubsystem.GrabberArmUp;
 import frc.robot.commands.cargosubsystem.MoveCargoArm;
 
-
-
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-  
+
   public Joystick xbox0 = new Joystick(0);
   public Joystick xbox1 = new Joystick(1);
 
-  public POVButton xbox0povC 	= new POVButton(xbox0, 0, -1);
-  public POVButton xbox0povN 	= new POVButton(xbox0, 0, 0);
+  public POVButton xbox0povC = new POVButton(xbox0, 0, -1);
+  public POVButton xbox0povN = new POVButton(xbox0, 0, 0);
   public POVButton xbox0povNE = new POVButton(xbox0, 0, 45);
-  public POVButton xbox0povE 	= new POVButton(xbox0, 0, 90);
+  public POVButton xbox0povE = new POVButton(xbox0, 0, 90);
   public POVButton xbox0povSE = new POVButton(xbox0, 0, 135);
-  public POVButton xbox0povS 	= new POVButton(xbox0, 0, 180);
+  public POVButton xbox0povS = new POVButton(xbox0, 0, 180);
   public POVButton xbox0povSW = new POVButton(xbox0, 0, 225);
-  public POVButton xbox0povW 	= new POVButton(xbox0, 0, 270);
+  public POVButton xbox0povW = new POVButton(xbox0, 0, 270);
   public POVButton xbox0povNW = new POVButton(xbox0, 0, 315);
 
-  public POVButton xbox1povC 	= new POVButton(xbox1, 0, -1);
-  public POVButton xbox1povN 	= new POVButton(xbox1, 0, 0);
+  public POVButton xbox1povC = new POVButton(xbox1, 0, -1);
+  public POVButton xbox1povN = new POVButton(xbox1, 0, 0);
   public POVButton xbox1povNE = new POVButton(xbox1, 0, 45);
-  public POVButton xbox1povE 	= new POVButton(xbox1, 0, 90);
+  public POVButton xbox1povE = new POVButton(xbox1, 0, 90);
   public POVButton xbox1povSE = new POVButton(xbox1, 0, 135);
-  public POVButton xbox1povS 	= new POVButton(xbox1, 0, 180);
+  public POVButton xbox1povS = new POVButton(xbox1, 0, 180);
   public POVButton xbox1povSW = new POVButton(xbox1, 0, 225);
-  public POVButton xbox1povW 	= new POVButton(xbox1, 0, 270);
+  public POVButton xbox1povW = new POVButton(xbox1, 0, 270);
   public POVButton xbox1povNW = new POVButton(xbox1, 0, 315);
 
   public OI() {
-    
+
     // JoystickButton xbox0_a = new JoystickButton(xbox0, 1);
     // JoystickButton xbox0_b = new JoystickButton(xbox0, 2);
     // JoystickButton xbox0_x = new JoystickButton(xbox0, 3);
@@ -91,7 +89,7 @@ public class OI {
     // xbox0_start.whenPressed(new ExampleCommand());
     // xbox0_leftStickButton.whenPressed(new ExampleCommand());
     // xbox0_rightStickButton.whenPressed(new ExampleCommand());
-  
+
     xbox1povC.whenActive(new MoveCargoArm(0));
     xbox1povN.whenPressed(new MoveCargoArm(-1));
     // xbox1povNE.whenPressed(new ExampleCommand());
@@ -113,7 +111,7 @@ public class OI {
     // xbox1_start.whenPressed(new ExampleCommand());
     // xbox1_leftStickButton.whenPressed(new ExampleCommand());
     // xbox1_rightStickButton.whenPressed(new ExampleCommand());
-   
+
     xbox1_a.close();
     xbox1_b.close();
     xbox1_x.close();

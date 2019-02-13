@@ -5,6 +5,7 @@ import frc.robot.Robot;
 
 public class GyroPIDChangeState extends Command {
   String state;
+
   public GyroPIDChangeState(String State) {
     requires(Robot.m_driveSubsystem);
     // Use requires() here to declare subsystem dependencies
@@ -16,7 +17,7 @@ public class GyroPIDChangeState extends Command {
   @Override
   protected void initialize() {
     if (state.equalsIgnoreCase("true")) {
-      Robot.m_driveSubsystem.enablePid(); 
+      Robot.m_driveSubsystem.enablePid();
     } else if (state.equalsIgnoreCase("false")) {
       Robot.m_driveSubsystem.disablePid();
     }

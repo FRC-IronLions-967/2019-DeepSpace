@@ -8,6 +8,7 @@ import java.net.NetworkInterface;
  */
 public class MACAddress {
     private byte[] mac;
+
     public MACAddress() {
         try {
             InetAddress address = InetAddress.getLocalHost();
@@ -15,7 +16,7 @@ public class MACAddress {
             mac = nwi.getHardwareAddress();
         } catch (Exception e) {
             e.printStackTrace();
-		} 
+        }
     }
 
     public byte[] getMACAddress() {

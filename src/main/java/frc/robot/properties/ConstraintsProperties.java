@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 
 import java.io.InputStream;
 import java.io.FileInputStream;
+
 /**
  * Add your docs here.
  */
@@ -19,6 +20,7 @@ public class ConstraintsProperties {
 
     Properties properties = new Properties();
     InputStream input = null;
+
     public ConstraintsProperties(String path) {
         try {
             input = new FileInputStream(path);
@@ -28,7 +30,7 @@ public class ConstraintsProperties {
             kI = Double.parseDouble(properties.getProperty("drive_subsystem_kI"));
             kD = Double.parseDouble(properties.getProperty("drive_subsystem_kD"));
             PIDTolerance = Double.parseDouble(properties.getProperty("drive_subsystem_PIDTolerance"));
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             DriverStation.reportError(e.getMessage(), true);
         }

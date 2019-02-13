@@ -28,7 +28,8 @@ public class Robot extends TimedRobot {
   public static HatchPanelSubsystem m_hatchPanelSubsystem;
   public static CargoSubsystem m_cargoSubsystem;
   public static CargoIntakeSubsystem m_cargoIntakeSubsystem;
-  //always declare properties objects before subsystems or else it will fail to instantiate
+  // always declare properties objects before subsystems or else it will fail to
+  // instantiate
   public static MACAddress m_macaddress;
   public static MACConfigChooser m_macconfigchooser;
   public static ConstraintsProperties m_constraintsProperties;
@@ -67,10 +68,9 @@ public class Robot extends TimedRobot {
     m_hatchPanelSubsystem = new HatchPanelSubsystem();
     m_cargoSubsystem = new CargoSubsystem();
     m_cargoIntakeSubsystem = new CargoIntakeSubsystem();
-    
+
     m_oi = new OI();
   }
-
 
   /**
    * This function is called every robot packet, no matter the mode. Use this for
@@ -100,7 +100,7 @@ public class Robot extends TimedRobot {
     } catch (Exception e) {
       System.out.println("logger not started");
     }
-    
+
   }
 
   @Override
@@ -124,7 +124,7 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     m_hatchPanelSubsystem.grabberClose();
     m_hatchPanelSubsystem.armDown();
-    
+
     // m_autonomousCommand = m_chooser.getSelected();
 
     /*
@@ -136,7 +136,7 @@ public class Robot extends TimedRobot {
 
     // schedule the autonomous command (example)
     // if (m_autonomousCommand != null) {
-    //   m_autonomousCommand.start();
+    // m_autonomousCommand.start();
     // }
     logger = Logging.getInstance("Autolog");
     logger.log("Auto Init");
@@ -157,7 +157,7 @@ public class Robot extends TimedRobot {
     // continue until interrupted by another command, remove
     // this line or comment it out.
     // if (m_autonomousCommand != null) {
-    //   m_autonomousCommand.cancel();
+    // m_autonomousCommand.cancel();
     // }
     logger = Logging.getInstance("TeleopLog");
     teleopLoggerInit();
