@@ -3,11 +3,11 @@ package frc.robot.networktables;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 
-public class Limelight {
+public class limelight {
 
     private NetworkTable table;
 
-    public Limelight() {
+    public limelight() {
         table = NetworkTableInstance.getDefault().getTable("limelight");
     }
 

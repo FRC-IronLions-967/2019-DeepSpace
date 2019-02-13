@@ -35,7 +35,7 @@ public class Robot extends TimedRobot {
   public static ConstraintsProperties m_constraintsProperties;
   public static RobotMapProperties m_robotMapProperties;
   public static DriveSubsystem m_driveSubsystem;
-  public Limelight m_lLimelight;
+  public limelight m_lLimelight;
   public static OI m_oi;
 
   // Command m_autonomousCommand;
@@ -61,7 +61,7 @@ public class Robot extends TimedRobot {
     m_constraintsProperties = new ConstraintsProperties(m_macconfigchooser.getConstraintsPath());
     m_robotMapProperties = new RobotMapProperties(m_macconfigchooser.getRobotmapPath());
 
-    m_lLimelight = new Limelight();
+    m_lLimelight = new limelight();
 
     m_navigationSubsystem = new NavigationSubsystem();
     m_driveSubsystem = new DriveSubsystem();
