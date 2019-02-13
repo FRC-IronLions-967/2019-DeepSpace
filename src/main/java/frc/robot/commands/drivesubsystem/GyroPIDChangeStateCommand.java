@@ -8,8 +8,6 @@ public class GyroPIDChangeStateCommand extends Command {
 
   public GyroPIDChangeStateCommand(String State) {
     requires(Robot.m_driveSubsystem);
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
     state = State;
   }
 

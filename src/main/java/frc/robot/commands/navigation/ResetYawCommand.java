@@ -6,8 +6,7 @@ import frc.robot.Robot;
 public class ResetYawCommand extends Command {
   public ResetYawCommand() {
     requires(Robot.m_driveSubsystem);
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
+
   }
 
   // Called just before this Command runs the first time

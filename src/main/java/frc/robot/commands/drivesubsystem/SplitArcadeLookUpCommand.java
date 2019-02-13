@@ -5,8 +5,6 @@ import frc.robot.Robot;
 
 public class SplitArcadeLookUpCommand extends Command {
   public SplitArcadeLookUpCommand() {
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
     requires(Robot.m_driveSubsystem);
   }
 

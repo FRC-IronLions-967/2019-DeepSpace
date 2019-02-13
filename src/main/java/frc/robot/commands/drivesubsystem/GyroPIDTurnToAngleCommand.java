@@ -9,8 +9,6 @@ public class GyroPIDTurnToAngleCommand extends Command {
   public GyroPIDTurnToAngleCommand(double Angle) {
     requires(Robot.m_driveSubsystem);
     angle = Angle;
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
   }
 
   // Called just before this Command runs the first time
