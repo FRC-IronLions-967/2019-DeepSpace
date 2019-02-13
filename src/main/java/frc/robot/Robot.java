@@ -34,6 +34,7 @@ public class Robot extends TimedRobot {
   public static ConstraintsProperties m_constraintsProperties;
   public static RobotMapProperties m_robotMapProperties;
   public static DriveSubsystem m_driveSubsystem;
+  public Limelight m_lLimelight;
   public static OI m_oi;
 
   // Command m_autonomousCommand;
@@ -59,10 +60,8 @@ public class Robot extends TimedRobot {
     m_constraintsProperties = new ConstraintsProperties(m_macconfigchooser.getConstraintsPath());
     m_robotMapProperties = new RobotMapProperties(m_macconfigchooser.getRobotmapPath());
 
-    limelight vision = new limelight();
-    // System.out.println(vision.getTX());
-    // System.out.println(vision.getTY());
-    // System.out.println(vision.getTA());
+    m_lLimelight = new Limelight();
+
     m_navigationSubsystem = new NavigationSubsystem();
     m_driveSubsystem = new DriveSubsystem();
     m_hatchPanelSubsystem = new HatchPanelSubsystem();
@@ -182,7 +181,10 @@ public class Robot extends TimedRobot {
 
   private void teleopLoggerInit() {
     StringBuilder builder = new StringBuilder();
-    builder.append("ArmLeftCuremt").append(",")
+    builder.append("limeLightTX").append(",")
+           .append("limeLightTY").append(",")
+           .append("limeLightTA").append(",")
+           .append("ArmLeftCuremt").append(",")
            .append("ArmRightCurent").append(",")
            .append("DriveLeft0Curent").append(",")
            .append("DriveLeft1Curent").append(",")
@@ -195,7 +197,10 @@ public class Robot extends TimedRobot {
 
   private void teleopLogerPeriodic() {
     StringBuilder builder = new StringBuilder();
-    builder.append(Double.toString(m_cargoSubsystem.leftArm.getOutputCurrent())).append(",")
+    builder.append(Double.toString(m_lLimelight.getTX())).append(",")
+           .append(Double.toString(m_lLimelight.getTY())).append(",")
+           .append(Double.toString(m_lLimelight.getTA())).append(",")
+           .append(Double.toString(m_cargoSubsystem.leftArm.getOutputCurrent())).append(",")
            .append(Double.toString(m_cargoSubsystem.rightArm.getOutputCurrent())).append(",")
            .append(Double.toString(m_driveSubsystem.leftMaster.getOutputCurrent())).append(",")
            .append(Double.toString(m_driveSubsystem.leftSlaveZero.getOutputCurrent())).append(",")
