@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.hatchpanelintakesubsystem;
+package frc.robot.commands.hatchpanelsubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;

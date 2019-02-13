@@ -210,5 +210,4 @@ public class Robot extends TimedRobot {
            .append(Double.toString(m_driveSubsystem.rightSlaveOne.getOutputCurrent())).append(",");
     logger.log(builder.toString());
   }
-
 }
