@@ -12,7 +12,7 @@ import frc.robot.Robot;
 
 public class GrabberArmDown extends Command {
   public GrabberArmDown() {
-    requires(Robot.m_hatchPanelIntakeSubsystem);
+    requires(Robot.m_hatchPanelSubsystem);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
@@ -20,7 +20,7 @@ public class GrabberArmDown extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.m_hatchPanelIntakeSubsystem.armDown();
+    Robot.m_hatchPanelSubsystem.armDown();
   }
 
   // Called repeatedly when this Command is scheduled to run

@@ -7,14 +7,14 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * HatchPanelSubsystem is the subsystem for manipulating the hatch panel when it is in the robot
  * This includes taking in the panel and scoring the panel
  */
-public class HatchPanelIntakeSubsystem extends Subsystem {
+public class HatchPanelSubsystem extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   private DoubleSolenoid grabber;
   private DoubleSolenoid arm;
 
   // Constructor 
-  public HatchPanelIntakeSubsystem() {
+  public HatchPanelSubsystem() {
     grabber = new DoubleSolenoid(0, 4, 3);
     arm = new DoubleSolenoid(0, 5, 2);
   }
