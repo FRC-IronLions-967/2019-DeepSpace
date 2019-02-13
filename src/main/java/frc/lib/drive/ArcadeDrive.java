@@ -5,17 +5,17 @@ import java.text.DecimalFormat;
 import frc.lib.util.Utils;
 
 /**
- * Add your docs here.
+ * Class for easy creation of arcade drive methods in the subsystems
  */
 public class ArcadeDrive {
-    double xAxis;
-    double yAxis;
-    double R;
-    double L;
-    double max;
-    double[] lookupTable;
-    double driveDeadband;
-    DecimalFormat df = new DecimalFormat("#.##");
+    public double[] lookupTable;
+    private double xAxis;
+    private double yAxis;
+    private double R;
+    private double L;
+    private double max;
+    private double driveDeadband;
+    private DecimalFormat df = new DecimalFormat("#.##");
 
     public ArcadeDrive(double xAxis, double yAxis) {
         this.xAxis = xAxis;

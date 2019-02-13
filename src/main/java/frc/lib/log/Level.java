@@ -75,10 +75,10 @@ public final class Level {
      * {@link Object#hashCode()}.
      * 
      * @return A hash code value for this Level.
-     */
-    public int hashCode() {
-        return new Byte(getValue()).hashCode();
-    }
+    //  */
+    // public int hashCode() {
+    //     return new Byte(getValue()).hashCode();
+    // }
 
     /**
      * Retrieves the human-readable name of this logging Level.
