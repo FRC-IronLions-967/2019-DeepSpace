@@ -23,6 +23,14 @@ public class RobotMapProperties {
     private int right_side;
 
     private int intake_roller;
+
+    private int pcm;
+
+    private int hatchPanelGrabberForward;
+    private int hatchPanelGrabberReverse;
+    private int hatchPanelArmForward;
+    private int hatchPanelArmReverse;
+
     Properties properties = new Properties();
     InputStream input = null;
 
@@ -41,6 +49,12 @@ public class RobotMapProperties {
             right_side = Integer.parseInt(properties.getProperty("right_side"));
 
             intake_roller = Integer.parseInt(properties.getProperty("intake_roller"));
+
+            pcm = Integer.parseInt(properties.getProperty("pcm"));
+            hatchPanelGrabberForward = Integer.parseInt(properties.getProperty("hatchPanelGrabberForward"));
+            hatchPanelGrabberReverse = Integer.parseInt(properties.getProperty("hatchPanelGrabberReverse"));
+            hatchPanelArmForward = Integer.parseInt(properties.getProperty("hatchPanelArmForward"));
+            hatchPanelArmReverse = Integer.parseInt(properties.getProperty("hatchPanelArmReverse"));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -83,5 +97,25 @@ public class RobotMapProperties {
 
     public int getIntakeRoller() {
         return intake_roller;
+    }
+
+    public int getPcm() {
+        return pcm;
+    }
+
+    public int getHatchPanelGrabberForward() {
+        return hatchPanelGrabberForward;
+    }
+
+    public int getHatchPanelGrabberReverse() {
+        return hatchPanelGrabberReverse;
+    }
+
+    public int getHatchPanelArmForward() {
+        return hatchPanelArmForward;
+    }
+
+    public int getHatchPanelArmReverse() {
+        return hatchPanelArmReverse;
     }
 }

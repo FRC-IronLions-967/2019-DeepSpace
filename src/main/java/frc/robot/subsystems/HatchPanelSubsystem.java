@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.Robot;
 
 /**
  * HatchPanelSubsystem is the subsystem for manipulating the hatch panel when it
@@ -15,8 +16,8 @@ public class HatchPanelSubsystem extends Subsystem {
 
   // Constructor
   public HatchPanelSubsystem() {
-    grabber = new DoubleSolenoid(0, 4, 3);
-    arm = new DoubleSolenoid(0, 5, 2);
+    grabber = new DoubleSolenoid(Robot.m_robotMapProperties.getPcm(), Robot.m_robotMapProperties.getHatchPanelGrabberForward(), Robot.m_robotMapProperties.getHatchPanelGrabberReverse());
+    arm = new DoubleSolenoid(Robot.m_robotMapProperties.getPcm(), Robot.m_robotMapProperties.getHatchPanelArmForward(), Robot.m_robotMapProperties.getHatchPanelArmReverse());
   }
 
   /**
