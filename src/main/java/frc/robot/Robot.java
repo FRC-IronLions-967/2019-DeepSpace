@@ -161,6 +161,26 @@ public class Robot extends TimedRobot {
     //   m_autonomousCommand.cancel();
     // }
     logger = Logging.getInstance("TeleopLog");
+    teleopLoggerInit();
+  }
+
+  /**
+   * This function is called periodically during operator control.
+   */
+  @Override
+  public void teleopPeriodic() {
+    Scheduler.getInstance().run();
+    teleopLogerPeriodic();
+  }
+
+  /**
+   * This function is called periodically during test mode.
+   */
+  @Override
+  public void testPeriodic() {
+  }
+
+  private void teleopLoggerInit() {
     StringBuilder builder = new StringBuilder();
     builder.append("ArmLeftCuremt").append(",")
            .append("ArmRightCurent").append(",")
@@ -171,16 +191,9 @@ public class Robot extends TimedRobot {
            .append("DriveRight1Curent").append(",")
            .append("DriveRight2Curent").append(",");
     logger.log(builder.toString());
-    
-
   }
 
-  /**
-   * This function is called periodically during operator control.
-   */
-  @Override
-  public void teleopPeriodic() {
-    Scheduler.getInstance().run();
+  private void teleopLogerPeriodic() {
     StringBuilder builder = new StringBuilder();
     builder.append(Double.toString(Robot.m_cargoSubsystem.leftArm.getOutputCurrent())).append(",")
            .append(Double.toString(Robot.m_cargoSubsystem.rightArm.getOutputCurrent())).append(",")
@@ -193,10 +206,4 @@ public class Robot extends TimedRobot {
     logger.log(builder.toString());
   }
 
-  /**
-   * This function is called periodically during test mode.
-   */
-  @Override
-  public void testPeriodic() {
-  }
 }
