@@ -5,19 +5,16 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.cargosubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class MoveCargoArm extends Command {
-  private double power;
-
-  public MoveCargoArm(double Power) {
-    requires(Robot.m_cargoSubsystem);
+public class MoveBall extends Command {
+  public MoveBall() {
+    requires(Robot.m_cargoIntakeSubsystem);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    power = Power;
   }
 
   // Called just before this Command runs the first time
@@ -28,7 +25,7 @@ public class MoveCargoArm extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_cargoSubsystem.moveArm(power);
+    Robot.m_cargoIntakeSubsystem.moveBall(Robot.m_oi.xbox1.getRawAxis(5));
   }
 
   // Make this return true when this Command no longer needs to run execute()

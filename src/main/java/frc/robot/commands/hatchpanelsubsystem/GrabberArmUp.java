@@ -5,14 +5,14 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.hatchpanelsubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class MoveBall extends Command {
-  public MoveBall() {
-    requires(Robot.m_cargoIntakeSubsystem);
+public class GrabberArmUp extends Command {
+  public GrabberArmUp() {
+    requires(Robot.m_hatchPanelSubsystem);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
@@ -20,12 +20,12 @@ public class MoveBall extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Robot.m_hatchPanelSubsystem.armUp();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_cargoIntakeSubsystem.moveBall(Robot.m_oi.xbox1.getRawAxis(5));
   }
 
   // Make this return true when this Command no longer needs to run execute()

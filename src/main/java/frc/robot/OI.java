@@ -12,9 +12,9 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.lib.oi.POVButton;
 import frc.robot.commands.hatchpanelsubsystem.CloseGrabber;
 import frc.robot.commands.hatchpanelsubsystem.OpenGrabber;
-import frc.robot.commands.GrabberArmDown;
-import frc.robot.commands.GrabberArmUp;
-import frc.robot.commands.MoveCargoArm;
+import frc.robot.commands.hatchpanelsubsystem.GrabberArmDown;
+import frc.robot.commands.hatchpanelsubsystem.GrabberArmUp;
+import frc.robot.commands.cargosubsystem.MoveCargoArm;
 
 
 

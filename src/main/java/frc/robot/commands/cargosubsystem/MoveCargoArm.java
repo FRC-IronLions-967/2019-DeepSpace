@@ -5,27 +5,30 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.cargosubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class GrabberArmUp extends Command {
-  public GrabberArmUp() {
-    requires(Robot.m_hatchPanelSubsystem);
+public class MoveCargoArm extends Command {
+  private double power;
+
+  public MoveCargoArm(double Power) {
+    requires(Robot.m_cargoSubsystem);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
+    power = Power;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.m_hatchPanelSubsystem.armUp();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    Robot.m_cargoSubsystem.moveArm(power);
   }
 
   // Make this return true when this Command no longer needs to run execute()
