@@ -3,9 +3,12 @@ package frc.robot.commands.drivesubsystem;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class SplitArcadeCommand extends Command {
-  public SplitArcadeCommand() {
+public class GyroPIDTurnToAngleCommand extends Command {
+  double angle;
+
+  public GyroPIDTurnToAngleCommand(double Angle) {
     requires(Robot.m_driveSubsystem);
+    angle = Angle;
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
@@ -13,18 +16,20 @@ public class SplitArcadeCommand extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Robot.m_driveSubsystem.pidSetPoint(angle);
+    Robot.m_driveSubsystem.enablePid();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_driveSubsystem.arcadeDrive(Robot.m_oi.xbox0.getRawAxis(1), -Robot.m_oi.xbox0.getRawAxis(4));
+    Robot.m_driveSubsystem.move(Robot.m_driveSubsystem.PIDOutput, -Robot.m_driveSubsystem.PIDOutput);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return Robot.m_driveSubsystem.pidDone();
   }
 
   // Called once after isFinished returns true
@@ -36,5 +41,6 @@ public class SplitArcadeCommand extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    Robot.m_driveSubsystem.disablePid();
   }
 }

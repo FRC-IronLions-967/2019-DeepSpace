@@ -1,18 +1,11 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
-package frc.robot.commands.hatchpanelsubsystem;
+package frc.robot.commands.navigation;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class CloseGrabber extends Command {
-  public CloseGrabber() {
-    requires(Robot.m_hatchPanelSubsystem);
+public class ResetYawCommand extends Command {
+  public ResetYawCommand() {
+    requires(Robot.m_driveSubsystem);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
@@ -20,7 +13,7 @@ public class CloseGrabber extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.m_hatchPanelSubsystem.grabberClose();
+    Robot.m_navigationSubsystem.resetYaw();
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -31,7 +24,7 @@ public class CloseGrabber extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return true;
   }
 
   // Called once after isFinished returns true

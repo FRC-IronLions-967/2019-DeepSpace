@@ -10,8 +10,8 @@ package frc.robot.commands.hatchpanelsubsystem;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class OpenGrabber extends Command {
-  public OpenGrabber() {
+public class GrabberArmUpCommand extends Command {
+  public GrabberArmUpCommand() {
     requires(Robot.m_hatchPanelSubsystem);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -20,7 +20,7 @@ public class OpenGrabber extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.m_hatchPanelSubsystem.grabberOpen();
+    Robot.m_hatchPanelSubsystem.armUp();
   }
 
   // Called repeatedly when this Command is scheduled to run

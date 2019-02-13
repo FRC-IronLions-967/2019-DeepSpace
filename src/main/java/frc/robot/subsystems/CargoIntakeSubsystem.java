@@ -13,7 +13,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.lib.util.Utils;
 import frc.robot.Robot;
-import frc.robot.commands.cargosubsystem.MoveBall;
+import frc.robot.commands.cargosubsystem.MoveBallCommand;
 
 /**
  * Add your docs here.
@@ -34,7 +34,7 @@ public class CargoIntakeSubsystem extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new MoveBall());
+    setDefaultCommand(new MoveBallCommand());
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
   }

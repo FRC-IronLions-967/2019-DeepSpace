@@ -10,11 +10,11 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.lib.oi.POVButton;
-import frc.robot.commands.hatchpanelsubsystem.CloseGrabber;
-import frc.robot.commands.hatchpanelsubsystem.OpenGrabber;
-import frc.robot.commands.hatchpanelsubsystem.GrabberArmDown;
-import frc.robot.commands.hatchpanelsubsystem.GrabberArmUp;
-import frc.robot.commands.cargosubsystem.MoveCargoArm;
+import frc.robot.commands.hatchpanelsubsystem.CloseGrabberCommand;
+import frc.robot.commands.hatchpanelsubsystem.OpenGrabberCommand;
+import frc.robot.commands.hatchpanelsubsystem.GrabberArmDownCommand;
+import frc.robot.commands.hatchpanelsubsystem.GrabberArmUpCommand;
+import frc.robot.commands.cargosubsystem.MoveCargoArmCommand;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -90,21 +90,21 @@ public class OI {
     // xbox0_leftStickButton.whenPressed(new ExampleCommand());
     // xbox0_rightStickButton.whenPressed(new ExampleCommand());
 
-    xbox1povC.whenActive(new MoveCargoArm(0));
-    xbox1povN.whenPressed(new MoveCargoArm(-1));
+    xbox1povC.whenActive(new MoveCargoArmCommand(0));
+    xbox1povN.whenPressed(new MoveCargoArmCommand(-1));
     // xbox1povNE.whenPressed(new ExampleCommand());
     // xbox1povE.whenPressed(new ExampleCommand());
     // xbox1povSE.whenPressed(new ExampleCommand());
-    xbox1povS.whenPressed(new MoveCargoArm(1));
+    xbox1povS.whenPressed(new MoveCargoArmCommand(1));
     // xbox1povSW.whenPressed(new ExampleCommand());
     // xbox1povW.whenPressed(new ExampleCommand());
     // xbox1povNW.whenPressed(new ExampleCommand());
     // xbox1_lT.whenPressed(new ExampleCommand());
     // xbox1_rT.whenPressed(new ExampleCommand());
-    xbox1_a.whenPressed(new GrabberArmUp());
-    xbox1_b.whenPressed(new GrabberArmDown());
-    xbox1_x.whenPressed(new OpenGrabber());
-    xbox1_y.whenPressed(new CloseGrabber());
+    xbox1_a.whenPressed(new GrabberArmUpCommand());
+    xbox1_b.whenPressed(new GrabberArmDownCommand());
+    xbox1_x.whenPressed(new OpenGrabberCommand());
+    xbox1_y.whenPressed(new CloseGrabberCommand());
     // xbox1_lb.whenPressed(new ExampleCommand());
     // xbox1_rb.whenPressed(new ExampleCommand());
     // xbox1_back.whenPressed(new ExampleCommand());

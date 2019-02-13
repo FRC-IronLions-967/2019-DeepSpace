@@ -1,26 +1,26 @@
-package frc.robot.commands.drivesubsystem;
+/*----------------------------------------------------------------------------*/
+/* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
+/* Open Source Software - may be modified and shared by FRC teams. The code   */
+/* must be accompanied by the FIRST BSD license file in the root directory of */
+/* the project.                                                               */
+/*----------------------------------------------------------------------------*/
+
+package frc.robot.commands.hatchpanelsubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class GyroPIDChangeState extends Command {
-  String state;
-
-  public GyroPIDChangeState(String State) {
-    requires(Robot.m_driveSubsystem);
+public class GrabberArmDownCommand extends Command {
+  public GrabberArmDownCommand() {
+    requires(Robot.m_hatchPanelSubsystem);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    state = State;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    if (state.equalsIgnoreCase("true")) {
-      Robot.m_driveSubsystem.enablePid();
-    } else if (state.equalsIgnoreCase("false")) {
-      Robot.m_driveSubsystem.disablePid();
-    }
+    Robot.m_hatchPanelSubsystem.armDown();
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -31,7 +31,7 @@ public class GyroPIDChangeState extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return true;
+    return false;
   }
 
   // Called once after isFinished returns true

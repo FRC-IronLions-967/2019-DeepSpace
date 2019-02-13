@@ -3,33 +3,35 @@ package frc.robot.commands.drivesubsystem;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class GyroPIDTurnToAngle extends Command {
-  double angle;
+public class GyroPIDChangeStateCommand extends Command {
+  String state;
 
-  public GyroPIDTurnToAngle(double Angle) {
+  public GyroPIDChangeStateCommand(String State) {
     requires(Robot.m_driveSubsystem);
-    angle = Angle;
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
+    state = State;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.m_driveSubsystem.pidSetPoint(angle);
-    Robot.m_driveSubsystem.enablePid();
+    if (state.equalsIgnoreCase("true")) {
+      Robot.m_driveSubsystem.enablePid();
+    } else if (state.equalsIgnoreCase("false")) {
+      Robot.m_driveSubsystem.disablePid();
+    }
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_driveSubsystem.move(Robot.m_driveSubsystem.PIDOutput, -Robot.m_driveSubsystem.PIDOutput);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return Robot.m_driveSubsystem.pidDone();
+    return true;
   }
 
   // Called once after isFinished returns true
@@ -41,6 +43,5 @@ public class GyroPIDTurnToAngle extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    Robot.m_driveSubsystem.disablePid();
   }
 }
