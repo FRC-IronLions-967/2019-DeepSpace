@@ -114,6 +114,10 @@ public class OI {
     // xbox1_leftStickButton.whenPressed(new ExampleCommand());
     // xbox1_rightStickButton.whenPressed(new ExampleCommand());
    
+    xbox1_a.close();
+    xbox1_b.close();
+    xbox1_x.close();
+    xbox1_y.close();
   }
 
   public Joystick getXbox0() {
