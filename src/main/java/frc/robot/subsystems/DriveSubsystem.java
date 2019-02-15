@@ -96,9 +96,7 @@ public class DriveSubsystem extends Subsystem implements PIDOutput {
 
 	public void move(double leftPower, double rightPower) {
 		rightMaster.set(ControlMode.PercentOutput, rightPower);
-		// rightSlaveOne.set(ControlMode.PercentOutput, rightPower);
 		leftMaster.set(ControlMode.PercentOutput, leftPower);
-		// leftSlaveZero.set(ControlMode.PercentOutput, leftPower);
 	}
 
 	public void enablePid() {
