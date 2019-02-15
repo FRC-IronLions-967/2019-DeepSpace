@@ -79,7 +79,7 @@ public class DriveSubsystem extends Subsystem implements PIDOutput {
 	}
 
 	public void tankDrive(double leftYAxis, double rightYAxis) {
-		TankDrive tankDrive = new TankDrive(leftYAxis, rightYAxis, Robot.m_constraintsProperties.getDeadband());
+		TankDrive tankDrive = new TankDrive(Math.sqrt(leftYAxis), Math.sqrt(rightYAxis), Robot.m_constraintsProperties.getDeadband());
 		move(tankDrive.getLeftOutput(), tankDrive.getRightOutput());
 	}
 

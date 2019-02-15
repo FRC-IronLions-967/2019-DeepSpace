@@ -36,18 +36,25 @@ public class CargoSubsystem extends Subsystem {
 
   public void moveBall(double power) {
     power = Utils.Deadband(power, 0.1);
+    if (power >= 0) {
+      power = -power * power;
+    } else {
+      power = power * power;
+    }
     intake_roller.set(ControlMode.PercentOutput, power);
   }
 
   public void moveArm(double power) {
     power = Utils.Deadband(power, 0.1);
-    if (!limitSwitchBottom.get()) {
-    leftArm.set(ControlMode.PercentOutput, power);
-    rightArm.set(ControlMode.PercentOutput, power);
+    if (limitSwitchBottom.get()) {
+      leftArm.set(ControlMode.PercentOutput, power);
+      rightArm.set(ControlMode.PercentOutput, power); 
+    } else if (power <= 0) {
+      leftArm.set(ControlMode.PercentOutput, power);
+      rightArm.set(ControlMode.PercentOutput, power);
     } else {
-    power = Math.abs(power);
-    leftArm.set(ControlMode.PercentOutput, power);
-    rightArm.set(ControlMode.PercentOutput, power);
+      leftArm.set(ControlMode.PercentOutput, 0);
+      rightArm.set(ControlMode.PercentOutput, 0);
     }
   }
 
