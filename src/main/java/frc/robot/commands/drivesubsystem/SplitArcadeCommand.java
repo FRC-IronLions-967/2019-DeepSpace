@@ -3,8 +3,8 @@ package frc.robot.commands.drivesubsystem;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class SplitArcadeCommandCommand extends Command {
-  public SplitArcadeCommandCommand() {
+public class SplitArcadeCommand extends Command {
+  public SplitArcadeCommand() {
     requires(Robot.m_driveSubsystem);
   }
 

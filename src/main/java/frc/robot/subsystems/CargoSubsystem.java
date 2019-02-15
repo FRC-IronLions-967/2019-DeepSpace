@@ -41,7 +41,7 @@ public class CargoSubsystem extends Subsystem {
 
   public void moveArm(double power) {
     power = Utils.Deadband(power, 0.1);
-    if (limitSwitchBottom.get()) {
+    if (!limitSwitchBottom.get()) {
     leftArm.set(ControlMode.PercentOutput, power);
     rightArm.set(ControlMode.PercentOutput, power);
     } else {

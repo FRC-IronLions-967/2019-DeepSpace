@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.lib.drive.ArcadeDrive;
 import frc.lib.drive.TankDrive;
 import frc.robot.Robot;
-import frc.robot.commands.drivesubsystem.SplitArcadeLookUpCommand;
+import frc.robot.commands.drivesubsystem.SplitArcadeCommand;
 
 public class DriveSubsystem extends Subsystem implements PIDOutput {
 	private PIDController pidController;
@@ -52,10 +52,10 @@ public class DriveSubsystem extends Subsystem implements PIDOutput {
 		leftSlaveOne = new TalonSRX(Robot.m_robotMapProperties.getDriveLeftSlaveOne());
 
 		rightSlaveZero.follow(rightMaster);
-		rightSlaveOne.follow(rightMaster);
+		rightSlaveOne.follow(rightSlaveZero);
 
 		leftSlaveZero.follow(leftMaster);
-		leftSlaveOne.follow(leftMaster);
+		leftSlaveOne.follow(leftSlaveZero);
 
 		rightMaster.setInverted(true);
 		rightSlaveZero.setInverted(true);
@@ -96,7 +96,9 @@ public class DriveSubsystem extends Subsystem implements PIDOutput {
 
 	public void move(double leftPower, double rightPower) {
 		rightMaster.set(ControlMode.PercentOutput, rightPower);
+		// rightSlaveOne.set(ControlMode.PercentOutput, rightPower);
 		leftMaster.set(ControlMode.PercentOutput, leftPower);
+		// leftSlaveZero.set(ControlMode.PercentOutput, leftPower);
 	}
 
 	public void enablePid() {
@@ -170,6 +172,6 @@ public class DriveSubsystem extends Subsystem implements PIDOutput {
 
 	@Override
 	public void initDefaultCommand() {
-		setDefaultCommand(new SplitArcadeLookUpCommand());
+		setDefaultCommand(new SplitArcadeCommand());
 	}
 }
