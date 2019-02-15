@@ -6,11 +6,11 @@ package frc.lib.util;
 public class Utils {
     public static double Deadband(double input, double deadband) {
         // upper deadband
-        if(input >= +deadband) {
+        if (input >= +deadband) {
             return input;
-        } 
+        }
         // lower deadband
-        else if(input <= -deadband) {
+        else if (input <= -deadband) {
             return input;
         }
         // outside deadband

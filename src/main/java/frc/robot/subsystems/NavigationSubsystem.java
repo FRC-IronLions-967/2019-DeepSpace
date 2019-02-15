@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- * This is the place for all navigation code to go 
+ * This is the place for all navigation code to go
  */
 public class NavigationSubsystem extends Subsystem {
   public AHRS gyro;
@@ -20,21 +20,21 @@ public class NavigationSubsystem extends Subsystem {
     rightEncoder.setDistancePerPulse(25.1327);
     try {
       gyro = new AHRS(SPI.Port.kMXP);
-		} catch(RuntimeException ex) {
-			DriverStation.reportError("Error instantiating navX MXP: " + ex.getMessage(), true);
-		}
+    } catch (RuntimeException ex) {
+      DriverStation.reportError("Error instantiating navX MXP: " + ex.getMessage(), true);
+    }
 
-		gyro.zeroYaw();
+    gyro.zeroYaw();
 
   }
 
   public boolean resetYaw() {
-	  gyro.zeroYaw();
-	  return true;
+    gyro.zeroYaw();
+    return true;
   }
-  
+
   public double getYaw() {
-	  return gyro.getYaw();
+    return gyro.getYaw();
   }
 
   public double getVelocityX() {
@@ -45,9 +45,9 @@ public class NavigationSubsystem extends Subsystem {
   public double getVelocityY() {
     return gyro.getVelocityY();
   }
-  
+
   public double getVelocityZ() {
-    return gyro.getVelocityZ();  
+    return gyro.getVelocityZ();
   }
 
   public void disabledinit() {

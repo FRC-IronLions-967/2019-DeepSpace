@@ -1,19 +1,24 @@
-package frc.robot.commands.navigation;
+package frc.robot.commands.drivesubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class ResetYaw extends Command {
-  public ResetYaw() {
+public class GyroPIDChangeStateCommand extends Command {
+  String state;
+
+  public GyroPIDChangeStateCommand(String State) {
     requires(Robot.m_driveSubsystem);
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
+    state = State;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.m_navigationSubsystem.resetYaw();
+    if (state.equalsIgnoreCase("true")) {
+      Robot.m_driveSubsystem.enablePid();
+    } else if (state.equalsIgnoreCase("false")) {
+      Robot.m_driveSubsystem.disablePid();
+    }
   }
 
   // Called repeatedly when this Command is scheduled to run

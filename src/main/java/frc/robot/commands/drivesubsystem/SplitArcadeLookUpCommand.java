@@ -3,8 +3,8 @@ package frc.robot.commands.drivesubsystem;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class SplitArcadeCommand extends Command {
-  public SplitArcadeCommand() {
+public class SplitArcadeLookUpCommand extends Command {
+  public SplitArcadeLookUpCommand() {
     requires(Robot.m_driveSubsystem);
   }
 
@@ -16,7 +16,7 @@ public class SplitArcadeCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_driveSubsystem.arcadeDrive(Robot.m_oi.xbox0.getRawAxis(1), -Robot.m_oi.xbox0.getRawAxis(4));
+    Robot.m_driveSubsystem.arcadeDriveLookup(Robot.m_oi.xbox0.getRawAxis(1), -Robot.m_oi.xbox0.getRawAxis(4));
   }
 
   // Make this return true when this Command no longer needs to run execute()

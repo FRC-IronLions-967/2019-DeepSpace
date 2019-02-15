@@ -5,12 +5,11 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.lib.log.Logging;
 import frc.lib.util.MACAddress;
 import frc.lib.util.MACConfigChooser;
-import frc.robot.networktables.*;
+import frc.robot.networktables.limelight;
 import frc.robot.properties.ConstraintsProperties;
 import frc.robot.properties.RobotMapProperties;
 import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.HatchPanelIntakeSubsystem;
-import frc.robot.subsystems.CargoIntakeSubsystem;
+import frc.robot.subsystems.HatchPanelSubsystem;
 import frc.robot.subsystems.CargoSubsystem;
 import frc.robot.subsystems.NavigationSubsystem;
 
@@ -25,15 +24,16 @@ public class Robot extends TimedRobot {
   public static Logging logger;
 
   public static NavigationSubsystem m_navigationSubsystem;
-  public static HatchPanelIntakeSubsystem m_hatchPanelIntakeSubsystem;
+  public static HatchPanelSubsystem m_hatchPanelSubsystem;
   public static CargoSubsystem m_cargoSubsystem;
-  public static CargoIntakeSubsystem m_cargoIntakeSubsystem;
-  //always declare properties objects before subsystems or else it will fail to instantiate
+  // always declare properties objects before subsystems or else it will fail to
+  // instantiate
   public static MACAddress m_macaddress;
   public static MACConfigChooser m_macconfigchooser;
   public static ConstraintsProperties m_constraintsProperties;
   public static RobotMapProperties m_robotMapProperties;
   public static DriveSubsystem m_driveSubsystem;
+  public limelight m_lLimelight;
   public static OI m_oi;
 
   // Command m_autonomousCommand;
@@ -59,19 +59,14 @@ public class Robot extends TimedRobot {
     m_constraintsProperties = new ConstraintsProperties(m_macconfigchooser.getConstraintsPath());
     m_robotMapProperties = new RobotMapProperties(m_macconfigchooser.getRobotmapPath());
 
-    limelight vision = new limelight();
-    // System.out.println(vision.getTX());
-    // System.out.println(vision.getTY());
-    // System.out.println(vision.getTA());
+    m_lLimelight = new limelight();
+
     m_navigationSubsystem = new NavigationSubsystem();
     m_driveSubsystem = new DriveSubsystem();
-    m_hatchPanelIntakeSubsystem = new HatchPanelIntakeSubsystem();
+    m_hatchPanelSubsystem = new HatchPanelSubsystem();
     m_cargoSubsystem = new CargoSubsystem();
-    m_cargoIntakeSubsystem = new CargoIntakeSubsystem();
-    
     m_oi = new OI();
   }
-
 
   /**
    * This function is called every robot packet, no matter the mode. Use this for
@@ -92,7 +87,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void disabledInit() {
-    m_hatchPanelIntakeSubsystem.disabledInit();
+    m_hatchPanelSubsystem.disabledInit();
     m_navigationSubsystem.disabledinit();
 
     try {
@@ -101,7 +96,7 @@ public class Robot extends TimedRobot {
     } catch (Exception e) {
       System.out.println("logger not started");
     }
-    
+
   }
 
   @Override
@@ -123,9 +118,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_hatchPanelIntakeSubsystem.grabberClose();
-    m_hatchPanelIntakeSubsystem.armDown();
-    
+    m_hatchPanelSubsystem.grabberClose();
+    m_hatchPanelSubsystem.armDown();
+
     // m_autonomousCommand = m_chooser.getSelected();
 
     /*
@@ -137,7 +132,7 @@ public class Robot extends TimedRobot {
 
     // schedule the autonomous command (example)
     // if (m_autonomousCommand != null) {
-    //   m_autonomousCommand.start();
+    // m_autonomousCommand.start();
     // }
     logger = Logging.getInstance("Autolog");
     logger.log("Auto Init");
@@ -158,7 +153,7 @@ public class Robot extends TimedRobot {
     // continue until interrupted by another command, remove
     // this line or comment it out.
     // if (m_autonomousCommand != null) {
-    //   m_autonomousCommand.cancel();
+    // m_autonomousCommand.cancel();
     // }
     logger = Logging.getInstance("TeleopLog");
     teleopLoggerInit();
@@ -182,7 +177,10 @@ public class Robot extends TimedRobot {
 
   private void teleopLoggerInit() {
     StringBuilder builder = new StringBuilder();
-    builder.append("ArmLeftCuremt").append(",")
+    builder.append("limeLightTX").append(",")
+           .append("limeLightTY").append(",")
+           .append("limeLightTA").append(",")
+           .append("ArmLeftCuremt").append(",")
            .append("ArmRightCurent").append(",")
            .append("DriveLeft0Curent").append(",")
            .append("DriveLeft1Curent").append(",")
@@ -195,15 +193,17 @@ public class Robot extends TimedRobot {
 
   private void teleopLogerPeriodic() {
     StringBuilder builder = new StringBuilder();
-    builder.append(Double.toString(Robot.m_cargoSubsystem.leftArm.getOutputCurrent())).append(",")
-           .append(Double.toString(Robot.m_cargoSubsystem.rightArm.getOutputCurrent())).append(",")
-           .append(Double.toString(Robot.m_driveSubsystem.leftMaster.getOutputCurrent())).append(",")
-           .append(Double.toString(Robot.m_driveSubsystem.leftSlaveZero.getOutputCurrent())).append(",")
-           .append(Double.toString(0)).append(",")
-           .append(Double.toString(Robot.m_driveSubsystem.rightMaster.getOutputCurrent())).append(",")
-           .append(Double.toString(Robot.m_driveSubsystem.rightSlaveZero.getOutputCurrent())).append(",")
-           .append(Double.toString(0)).append(",");
+    builder.append(Double.toString(m_lLimelight.getTX())).append(",")
+           .append(Double.toString(m_lLimelight.getTY())).append(",")
+           .append(Double.toString(m_lLimelight.getTA())).append(",")
+           .append(Double.toString(m_cargoSubsystem.leftArm.getOutputCurrent())).append(",")
+           .append(Double.toString(m_cargoSubsystem.rightArm.getOutputCurrent())).append(",")
+           .append(Double.toString(m_driveSubsystem.leftMaster.getOutputCurrent())).append(",")
+           .append(Double.toString(m_driveSubsystem.leftSlaveZero.getOutputCurrent())).append(",")
+           .append(Double.toString(m_driveSubsystem.leftSlaveOne.getOutputCurrent())).append(",")
+           .append(Double.toString(m_driveSubsystem.rightMaster.getOutputCurrent())).append(",")
+           .append(Double.toString(m_driveSubsystem.rightSlaveZero.getOutputCurrent())).append(",")
+           .append(Double.toString(m_driveSubsystem.rightSlaveOne.getOutputCurrent())).append(",");
     logger.log(builder.toString());
   }
-
 }

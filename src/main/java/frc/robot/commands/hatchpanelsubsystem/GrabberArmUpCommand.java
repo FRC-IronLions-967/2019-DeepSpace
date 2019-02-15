@@ -1,22 +1,22 @@
-package frc.robot.commands.drivesubsystem;
+package frc.robot.commands.hatchpanelsubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class SplitArcadeCommand extends Command {
-  public SplitArcadeCommand() {
-    requires(Robot.m_driveSubsystem);
+public class GrabberArmUpCommand extends Command {
+  public GrabberArmUpCommand() {
+    requires(Robot.m_hatchPanelSubsystem);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Robot.m_hatchPanelSubsystem.armUp();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_driveSubsystem.arcadeDrive(Robot.m_oi.xbox0.getRawAxis(1), -Robot.m_oi.xbox0.getRawAxis(4));
   }
 
   // Make this return true when this Command no longer needs to run execute()

@@ -1,6 +1,5 @@
 package frc.lib.log;
 
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -12,33 +11,34 @@ public class Logging {
 	private String filename;
 
 	public static Logging instance;
-	
+
 	private Logging(String name) {
 
 		filename = name;
-		
+
 		try {
 			File file = new File("/home/lvuser" + filename + ".csv");
-			if (file.exists()) file.delete();
+			if (file.exists())
+				file.delete();
 			writer = new PrintWriter(new FileWriter("/home/lvuser/" + filename + ".csv", false), true);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
 	public void log(String whatToWrite) {
-		
+
 		try {
 			writer.println(whatToWrite);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
 	public void close() {
 		try {
 			writer.close();
@@ -47,15 +47,14 @@ public class Logging {
 		}
 	}
 
-    public static Logging getInstance(String name){
-        if (instance == null){
-            instance = new Logging(name);
-        }
-        else {
-            instance.close();
-            instance = new Logging(name);
-        }
-        return instance;
-    }
-	
+	public static Logging getInstance(String name) {
+		if (instance == null) {
+			instance = new Logging(name);
+		} else {
+			instance.close();
+			instance = new Logging(name);
+		}
+		return instance;
+	}
+
 }
