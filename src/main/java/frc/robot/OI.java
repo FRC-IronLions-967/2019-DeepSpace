@@ -14,6 +14,7 @@ import frc.robot.commands.hatchpanelsubsystem.CloseGrabberCommand;
 import frc.robot.commands.hatchpanelsubsystem.OpenGrabberCommand;
 import frc.robot.commands.hatchpanelsubsystem.GrabberArmDownCommand;
 import frc.robot.commands.hatchpanelsubsystem.GrabberArmUpCommand;
+import frc.robot.commands.cargosubsystem.MoveBallCommand;
 import frc.robot.commands.cargosubsystem.MoveCargoArmCommand;
 
 /**
@@ -67,7 +68,7 @@ public class OI {
     // JoystickButton xbox1_back = new JoystickButton(xbox1, 7);
     // JoystickButton xbox1_start = new JoystickButton(xbox1, 8);
     // JoystickButton xbox1_leftStickButton = new JoystickButton(xbox1, 9);
-    // JoystickButton xbox1_rightStickButton = new JoystickButton(xbox1, 10);
+    JoystickButton xbox1_rightStickButton = new JoystickButton(xbox1, 10);
 
     // xbox0povN.whenPressed(new GyroPIDTurnToAngle(0));
     // xbox0povNE.whenPressed(new ExampleCommand());
@@ -90,12 +91,12 @@ public class OI {
     // xbox0_leftStickButton.whenPressed(new ExampleCommand());
     // xbox0_rightStickButton.whenPressed(new ExampleCommand());
 
-    xbox1povC.whenActive(new MoveCargoArmCommand(0));
-    xbox1povN.whenPressed(new MoveCargoArmCommand(-1));
+    // xbox1povC.whenActive(new MoveCargoArmCommand(0));
+    // xbox1povN.whenPressed(new MoveCargoArmCommand(-1));
     // xbox1povNE.whenPressed(new ExampleCommand());
     // xbox1povE.whenPressed(new ExampleCommand());
     // xbox1povSE.whenPressed(new ExampleCommand());
-    xbox1povS.whenPressed(new MoveCargoArmCommand(1));
+    // xbox1povS.whenPressed(new MoveCargoArmCommand(1));
     // xbox1povSW.whenPressed(new ExampleCommand());
     // xbox1povW.whenPressed(new ExampleCommand());
     // xbox1povNW.whenPressed(new ExampleCommand());
@@ -110,12 +111,14 @@ public class OI {
     // xbox1_back.whenPressed(new ExampleCommand());
     // xbox1_start.whenPressed(new ExampleCommand());
     // xbox1_leftStickButton.whenPressed(new ExampleCommand());
-    // xbox1_rightStickButton.whenPressed(new ExampleCommand());
+    xbox1_rightStickButton.whenPressed(new MoveBallCommand());
 
     xbox1_a.close();
     xbox1_b.close();
     xbox1_x.close();
     xbox1_y.close();
+    xbox1_rightStickButton.close();
+
   }
 
   public Joystick getXbox0() {
