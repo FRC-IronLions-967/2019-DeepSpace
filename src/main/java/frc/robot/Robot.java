@@ -1,4 +1,5 @@
 package frc.robot;
+import java.util.Date;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -10,6 +11,7 @@ import frc.robot.properties.ConstraintsProperties;
 import frc.robot.properties.RobotMapProperties;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.HatchPanelSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.CargoSubsystem;
 import frc.robot.subsystems.NavigationSubsystem;
 
@@ -26,6 +28,7 @@ public class Robot extends TimedRobot {
   public static NavigationSubsystem m_navigationSubsystem;
   public static HatchPanelSubsystem m_hatchPanelSubsystem;
   public static CargoSubsystem m_cargoSubsystem;
+  public static IntakeSubsystem m_intakeSubsystem;
   // always declare properties objects before subsystems or else it will fail to
   // instantiate
   public static MACAddress m_macaddress;
@@ -65,7 +68,10 @@ public class Robot extends TimedRobot {
     m_driveSubsystem = new DriveSubsystem();
     m_hatchPanelSubsystem = new HatchPanelSubsystem();
     m_cargoSubsystem = new CargoSubsystem();
+    m_intakeSubsystem = new IntakeSubsystem();
     m_oi = new OI();
+
+    // CameraServer.getInstance().startAutomaticCapture();
   }
 
   /**
@@ -155,7 +161,9 @@ public class Robot extends TimedRobot {
     // if (m_autonomousCommand != null) {
     // m_autonomousCommand.cancel();
     // }
-    logger = Logging.getInstance("TeleopLog");
+    Date date = new Date();
+
+    logger = Logging.getInstance("TeleOp:"+ date);
     teleopLoggerInit();
   }
 

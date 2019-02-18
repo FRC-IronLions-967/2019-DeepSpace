@@ -4,11 +4,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class MoveCargoArmCommand extends Command {
-  private double power;
-
-  public MoveCargoArmCommand(double Power) {
+  
+  public MoveCargoArmCommand() {
     requires(Robot.m_cargoSubsystem);
-    power = Power;
   }
 
   // Called just before this Command runs the first time
@@ -19,7 +17,7 @@ public class MoveCargoArmCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_cargoSubsystem.moveArm(power);
+    Robot.m_cargoSubsystem.moveArm(Robot.m_oi.xbox1.getRawAxis(1));
   }
 
   // Make this return true when this Command no longer needs to run execute()

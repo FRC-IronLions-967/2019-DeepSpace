@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.lib.util.Utils;
 import frc.robot.Robot;
-import frc.robot.commands.cargosubsystem.MoveBallCommand;
+import frc.robot.commands.cargosubsystem.MoveCargoArmCommand;
 
 
 /**
@@ -18,7 +18,7 @@ public class CargoSubsystem extends Subsystem {
   public TalonSRX leftArm;
   public TalonSRX rightArm;
 
-  public TalonSRX intake_roller;
+  // public TalonSRX intake_roller;
 
 
   public DigitalInput limitSwitchBottom;
@@ -27,22 +27,22 @@ public class CargoSubsystem extends Subsystem {
     leftArm = new TalonSRX(Robot.m_robotMapProperties.getLeftSide());
     rightArm = new TalonSRX(Robot.m_robotMapProperties.getRightSide());
 
-    intake_roller = new TalonSRX(Robot.m_robotMapProperties.getIntakeRoller());
+    // intake_roller = new TalonSRX(Robot.m_robotMapProperties.getIntakeRoller());
 
 
     limitSwitchBottom = new DigitalInput(9);
 
   }
 
-  public void moveBall(double power) {
-    power = Utils.Deadband(power, 0.1);
-    if (power >= 0) {
-      power = -power * power;
-    } else {
-      power = power * power;
-    }
-    intake_roller.set(ControlMode.PercentOutput, power);
-  }
+  // public void moveBall(double power) {
+  //   power = Utils.Deadband(power, 0.1);
+  //   if (power >= 0) {
+  //     power = -power * power;
+  //   } else {
+  //     power = power * power;
+  //   }
+  //   intake_roller.set(ControlMode.PercentOutput, power);
+  // }
 
   public void moveArm(double power) {
     power = Utils.Deadband(power, 0.1);
@@ -68,7 +68,8 @@ public class CargoSubsystem extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new MoveBallCommand());
+    setDefaultCommand(new MoveCargoArmCommand());
+    // setDefaultCommand(new MoveBallCommand());
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
   }

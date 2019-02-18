@@ -5,7 +5,7 @@ import frc.robot.Robot;
 
 public class MoveBallCommand extends Command {
   public MoveBallCommand() {
-    requires(Robot.m_cargoSubsystem);
+    requires(Robot.m_intakeSubsystem);
   }
 
   // Called just before this Command runs the first time
@@ -16,7 +16,7 @@ public class MoveBallCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_cargoSubsystem.moveBall(Robot.m_oi.xbox1.getRawAxis(5));
+    Robot.m_intakeSubsystem.moveBall(Robot.m_oi.xbox1.getRawAxis(5));
   }
 
   // Make this return true when this Command no longer needs to run execute()
