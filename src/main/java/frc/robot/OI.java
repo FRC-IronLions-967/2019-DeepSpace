@@ -67,7 +67,7 @@ public class OI {
     // JoystickButton xbox1_rb = new JoystickButton(xbox1, 6);
     // JoystickButton xbox1_back = new JoystickButton(xbox1, 7);
     // JoystickButton xbox1_start = new JoystickButton(xbox1, 8);
-    // JoystickButton xbox1_leftStickButton = new JoystickButton(xbox1, 9);
+    JoystickButton xbox1_leftStickButton = new JoystickButton(xbox1, 9);
     JoystickButton xbox1_rightStickButton = new JoystickButton(xbox1, 10);
 
     // xbox0povN.whenPressed(new GyroPIDTurnToAngle(0));
@@ -110,7 +110,7 @@ public class OI {
     // xbox1_rb.whenPressed(new ExampleCommand());
     // xbox1_back.whenPressed(new ExampleCommand());
     // xbox1_start.whenPressed(new ExampleCommand());
-    // xbox1_leftStickButton.whenPressed(new ExampleCommand());
+    xbox1_leftStickButton.whenPressed(new MoveCargoArmCommand());
     xbox1_rightStickButton.whenPressed(new MoveBallCommand());
 
     xbox1_a.close();
@@ -118,6 +118,7 @@ public class OI {
     xbox1_x.close();
     xbox1_y.close();
     xbox1_rightStickButton.close();
+    xbox1_leftStickButton.close();
 
   }
 
