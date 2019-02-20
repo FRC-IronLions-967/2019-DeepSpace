@@ -16,8 +16,12 @@ public class HatchPanelSubsystem extends Subsystem {
 
   // Constructor
   public HatchPanelSubsystem() {
+    try {
     grabber = new DoubleSolenoid(Robot.m_robotMapProperties.getPcm(), Robot.m_robotMapProperties.getHatchPanelGrabberForward(), Robot.m_robotMapProperties.getHatchPanelGrabberReverse());
     arm = new DoubleSolenoid(Robot.m_robotMapProperties.getPcm(), Robot.m_robotMapProperties.getHatchPanelArmForward(), Robot.m_robotMapProperties.getHatchPanelArmReverse());
+    } catch(Exception e) {
+      System.out.println("Unable to created DoubleSolenoid");
+    }
   }
 
   /**

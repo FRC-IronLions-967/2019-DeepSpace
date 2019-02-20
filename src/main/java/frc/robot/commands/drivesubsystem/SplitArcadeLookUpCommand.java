@@ -17,6 +17,8 @@ public class SplitArcadeLookUpCommand extends Command {
   @Override
   protected void execute() {
     Robot.m_driveSubsystem.arcadeDriveLookup(Robot.m_oi.xbox0.getRawAxis(1), -Robot.m_oi.xbox0.getRawAxis(4));
+    // System.out.println(Robot.m_oi.xbox0.getRawAxis(1));
+    // System.out.println(Robot.m_oi.xbox0.getRawAxis(4));
   }
 
   // Make this return true when this Command no longer needs to run execute()
