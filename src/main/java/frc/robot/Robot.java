@@ -208,10 +208,10 @@ public class Robot extends TimedRobot {
            .append(Double.toString(m_cargoSubsystem.rightArm.getOutputCurrent())).append(",")
            .append(Double.toString(m_driveSubsystem.leftMaster.getOutputCurrent())).append(",")
            .append(Double.toString(m_driveSubsystem.leftSlaveZero.getOutputCurrent())).append(",")
-           .append(Double.toString(m_driveSubsystem.leftSlaveOne.getOutputCurrent())).append(",")
+           .append(Double.toString(0)).append(",")
            .append(Double.toString(m_driveSubsystem.rightMaster.getOutputCurrent())).append(",")
            .append(Double.toString(m_driveSubsystem.rightSlaveZero.getOutputCurrent())).append(",")
-           .append(Double.toString(m_driveSubsystem.rightSlaveOne.getOutputCurrent())).append(",");
+           .append(Double.toString(0)).append(",");
     logger.log(builder.toString());
   }
 }
