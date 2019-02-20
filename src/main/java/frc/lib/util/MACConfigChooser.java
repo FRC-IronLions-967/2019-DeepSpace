@@ -4,8 +4,8 @@ package frc.lib.util;
  * Add your docs here.
  */
 public class MACConfigChooser {
-    private String constraintsPath;
-    private String robotmapPath;
+    private String constraintsPath = "";
+    private String robotmapPath = "";
 
     public MACConfigChooser(byte[] mac, String[] macs, String[] constraintsPaths, String[] mapPaths) {
         StringBuilder builder = new StringBuilder();
@@ -20,11 +20,11 @@ public class MACConfigChooser {
                 break;
             }
         }
-        if (constraintsPath == null) {
+        if (constraintsPath == "") {
             constraintsPath = "/home/lvuser/deploy/greenBox/greenBoxConstraints.properties";
         }
 
-        if (robotmapPath == null) {
+        if (robotmapPath == "") {
             robotmapPath = "/home/lvuser/deploy/greenBox/greenBoxRobotmap.properties";
         }
     }

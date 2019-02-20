@@ -49,13 +49,14 @@ public class ArcadeDrive {
         this.yAxis = yAxis;
         this.lookupTable = lookupTable;
         this.driveDeadband = 0.0;
-        this.lookupTable = lookupTable;
+        this.xAxis = Utils.Deadband(xAxis, 0.1);
+        this.yAxis = Utils.Deadband(yAxis, 0.1);
         this.xAxis = lookupTable[(int) (Double.valueOf(df.format(Math.abs(this.xAxis))) * 100)];
         if (this.xAxis > 0) {
             this.xAxis = -this.xAxis;
         }
-        this.xAxis = Utils.Deadband(this.xAxis, driveDeadband);
-        this.yAxis = Utils.Deadband(this.yAxis, driveDeadband);
+        L = yAxis + xAxis;
+        R = yAxis - xAxis;
     }
 
     public ArcadeDrive(double xAxis, double yAxis, double deadband, double[] lookupTable) {
@@ -63,26 +64,37 @@ public class ArcadeDrive {
         this.yAxis = yAxis;
         this.driveDeadband = deadband;
         this.lookupTable = lookupTable;
-        this.xAxis = lookupTable[(int) (Double.valueOf(df.format(Math.abs(this.xAxis))) * 100)];
+        this.xAxis = Utils.Deadband(xAxis, this.driveDeadband);
+        System.out.println(this.xAxis);
+        this.yAxis = Utils.Deadband(yAxis, this.driveDeadband);
+        System.out.println(this.yAxis);
+        this.xAxis = this.lookupTable[(int) (Double.valueOf(df.format(Math.abs(this.xAxis))) * 100)];
         if (this.xAxis > 0) {
             this.xAxis = -this.xAxis;
         }
-        this.xAxis = Utils.Deadband(this.xAxis, deadband);
-        this.yAxis = Utils.Deadband(this.yAxis, deadband);
+        L = yAxis + xAxis;
+        R = yAxis - xAxis;
+        
+        // System.out.println(this.xAxis);
+        // System.out.println(this.yAxis);
     }
 
     public double getR() {
         if ((Math.abs(yAxis) <= 1) && (Math.abs(xAxis) <= 1) && (max < 1)) {
+            // System.out.println(R);
             return R;
         } else {
+            // System.out.println(R/max);
             return (R / max);
         }
     }
 
     public double getL() {
         if ((Math.abs(yAxis) <= 1) && (Math.abs(xAxis) <= 1) && (max < 1)) {
+            // System.out.println(L);
             return L;
         } else {
+            // System.out.println(L/max);
             return (L / max);
         }
     }
