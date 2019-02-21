@@ -27,6 +27,8 @@ public class CargoSubsystem extends Subsystem {
     leftArm = new TalonSRX(Robot.m_robotMapProperties.getLeftSide());
     rightArm = new TalonSRX(Robot.m_robotMapProperties.getRightSide());
 
+
+    rightArm.setInverted(true);
     // intake_roller = new TalonSRX(Robot.m_robotMapProperties.getIntakeRoller());
 
 
