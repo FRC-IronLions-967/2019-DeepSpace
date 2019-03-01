@@ -12,7 +12,6 @@ import frc.lib.drive.ArcadeDrive;
 import frc.lib.drive.TankDrive;
 import frc.robot.Robot;
 import frc.robot.commands.drivesubsystem.SplitArcadeLookUpCommand;
-import frc.robot.commands.drivesubsystem.SplitArcadeCommand;
 
 public class DriveSubsystem extends Subsystem implements PIDOutput {
 	private PIDController pidController;

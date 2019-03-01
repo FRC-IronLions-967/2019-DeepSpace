@@ -50,12 +50,12 @@ public class OI {
 
   public OI() {
 
-    JoystickButton xbox0_a = new JoystickButton(xbox0, 1);
+    // JoystickButton xbox0_a = new JoystickButton(xbox0, 1);
     // JoystickButton xbox0_b = new JoystickButton(xbox0, 2);
     // JoystickButton xbox0_x = new JoystickButton(xbox0, 3);
     // JoystickButton xbox0_y = new JoystickButton(xbox0, 4);
-    // JoystickButton xbox0_lb = new JoystickButton(xbox0, 5);
-    // JoystickButton xbox0_rb = new JoystickButton(xbox0, 6);
+    JoystickButton xbox0_lb = new JoystickButton(xbox0, 5);
+    JoystickButton xbox0_rb = new JoystickButton(xbox0, 6);
     // JoystickButton xbox0_back = new JoystickButton(xbox0, 7);
     // JoystickButton xbox0_start = new JoystickButton(xbox0, 8);
     // JoystickButton xbox0_leftStickButton = new JoystickButton(xbox0, 9);
@@ -80,9 +80,9 @@ public class OI {
     // xbox0povSW.whenPressed(new ExampleCommand());
     xbox0povW.whenPressed(new GyroPIDTurnToAngleCommand(-90));
     // xbox0povNW.whenPressed(new ExampleCommand());
-    // xbox0_lT.whenPressed(new ExampleCommand());
-    // xbox0_rT.whenPressed(new ExampleCommand());
-    xbox0_a.whileHeld(new limelightAutoScore());
+    xbox0_lb.whileHeld(new limelightAutoScore(true));
+    xbox0_rb.whileHeld(new limelightAutoScore(false));
+    // xbox0_a.whileHeld(new limelightAutoScore());
     // xbox0_b.whenPressed(new ResetYaw());
     // xbox0_x.whenPressed(new MoveCargoArm(.3));
     // xbox0_y.whenPressed(new MoveCargoArm(-.3));
@@ -115,7 +115,8 @@ public class OI {
     xbox1_leftStickButton.whenPressed(new MoveCargoArmCommand());
     xbox1_rightStickButton.whenPressed(new MoveBallCommand());
 
-    xbox0_a.close();
+    xbox0_lb.close();
+    xbox0_rb.close();
 
     xbox1_a.close();
     xbox1_b.close();

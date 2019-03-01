@@ -1,6 +1,7 @@
 package frc.robot.commands.navigation;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import frc.robot.commands.drivesubsystem.moveTimeCommand;
 import frc.robot.commands.hatchpanelsubsystem.CloseGrabberCommand;
 import frc.robot.commands.hatchpanelsubsystem.OpenGrabberCommand;
 
@@ -8,29 +9,24 @@ public class limelightAutoScore extends CommandGroup {
   /**
    * Add your docs here.
    */
-  public limelightAutoScore() {
-
-    addSequential(new CloseGrabberCommand());
+  public limelightAutoScore(boolean isDepo) {
+    // open or close depending on if we are tring to get or deposit the hatch
+    if (isDepo) {
+      addSequential(new CloseGrabberCommand());
+    } else {
+      addSequential(new OpenGrabberCommand());  
+    }
+  
+    // get to the target
     addSequential(new limelightGetToTarget());
-    addSequential(new OpenGrabberCommand());
 
-    // addSequential(new );
-
-    // Add Commands here:
-    // e.g. addSequential(new Command1());
-    // addSequential(new Command2());
-    // these will run in order.
-
-    // To run multiple commands at the same time,
-    // use addParallel()
-    // e.g. addParallel(new Command1());
-    // addSequential(new Command2());
-    // Command1 and Command2 will run in parallel.
-
-    // A command group will require all of the subsystems that each member
-    // would require.
-    // e.g. if Command1 requires chassis, and Command2 requires arm,
-    // a CommandGroup containing them would require both the chassis and the
-    // arm.
+    // grab or deposit the hatch
+    if (isDepo) {
+      addSequential(new OpenGrabberCommand());  
+    } else {
+      addSequential(new CloseGrabberCommand());
+    }
+    // move away from the target to let the drivers know that we are deposited
+    addSequential(new moveTimeCommand(.5, -.5));
   }
 }
