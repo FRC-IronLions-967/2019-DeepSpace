@@ -10,10 +10,10 @@ public class limelightGetToTarget extends Command {
   private double m_limelightSteerCommand = 0.0;
 
   private boolean m_isPlaced = false;
+  private boolean m_isDepo = false;
 
-  public limelightGetToTarget() {
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
+  public limelightGetToTarget(boolean isDepo) {
+    this.m_isDepo = isDepo;
     requires(Robot.m_driveSubsystem);
   }
 
@@ -28,7 +28,7 @@ public class limelightGetToTarget extends Command {
     Update_Limelight_Tracking();
 
     if (m_limelightHasValidTarget) {
-      Robot.m_driveSubsystem.arcadeDrive(m_limelightDriveCommand, -m_limelightSteerCommand);
+      Robot.m_driveSubsystem.arcadeDrive(-m_limelightDriveCommand ,m_limelightSteerCommand);
     } else {
       Robot.m_driveSubsystem.arcadeDrive(0.0, 0.0);
     }
@@ -61,10 +61,10 @@ public class limelightGetToTarget extends Command {
   public void Update_Limelight_Tracking()
   {
         // These numbers must be tuned for your Robot!  Be careful!
-        final double STEER_K = 0.2;                    // how hard to turn toward the target
-        final double DRIVE_K = 0.1;                    // how hard to drive fwd toward the target
-        final double DESIRED_TARGET_AREA = 35.0;        // Area of the target when the robot reaches the wall
-        final double MAX_DRIVE = 0.2;                   // Simple speed limit so we don't drive too fast
+        final double STEER_K = 0.04;                    // how hard to turn toward the target
+        final double DRIVE_K = 0.015;                    // how hard to drive fwd toward the target
+        final double DESIRED_TARGET_AREA = 46.0;       // Area of the target when the robot reaches the wall
+        final double MAX_DRIVE = 1;                    // Simple speed limit so we don't drive too fast
     
         double tv = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0);
         double tx = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
@@ -87,10 +87,13 @@ public class limelightGetToTarget extends Command {
 
         // try to drive forward until the target area reaches our desired area
         double drive_cmd = (DESIRED_TARGET_AREA - ta) * DRIVE_K;
-        System.out.println(drive_cmd);
 
         if (drive_cmd < .5) {
-          System.out.println("In position");
+          if (m_isDepo) {
+            // Robot.m_hatchPanelSubsystem.grabberOpen();
+          } else {
+            Robot.m_hatchPanelSubsystem.grabberClose();
+          }
           m_isPlaced = true;
         } else {
           m_isPlaced = false;

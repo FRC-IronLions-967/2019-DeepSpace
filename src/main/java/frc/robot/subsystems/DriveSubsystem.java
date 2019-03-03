@@ -72,13 +72,13 @@ public class DriveSubsystem extends Subsystem implements PIDOutput {
 		leftSlaveZero.follow(leftMaster);
 		leftSlaveOne.follow(leftSlaveZero);
 
-		rightMaster.setInverted(true);
-		rightSlaveZero.setInverted(true);
-		rightSlaveOne.setInverted(true);
+		rightMaster.setInverted(false);
+		rightSlaveZero.setInverted(false);
+		rightSlaveOne.setInverted(false);
 
-		leftMaster.setInverted(false);
-		leftSlaveZero.setInverted(false);
-		leftSlaveOne.setInverted(false);
+		leftMaster.setInverted(true);
+		leftSlaveZero.setInverted(true);
+		leftSlaveOne.setInverted(true);
 
 		rightMaster.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 		leftMaster.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
