@@ -62,8 +62,6 @@ public class Robot extends TimedRobot {
     m_constraintsProperties = new ConstraintsProperties(m_macconfigchooser.getConstraintsPath());
     m_robotMapProperties = new RobotMapProperties(m_macconfigchooser.getRobotmapPath());
 
-    m_lLimelight = new limelight();
-
     m_navigationSubsystem = new NavigationSubsystem();
     m_driveSubsystem = new DriveSubsystem();
     m_hatchPanelSubsystem = new HatchPanelSubsystem();
@@ -124,8 +122,14 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
+    m_hatchPanelSubsystem.armUp();
+    try {
+      Thread.sleep(500);
+    } catch (InterruptedException e) {
+
+      e.printStackTrace();
+    }
     m_hatchPanelSubsystem.grabberClose();
-    m_hatchPanelSubsystem.armDown();
 
     // m_autonomousCommand = m_chooser.getSelected();
 
@@ -184,34 +188,42 @@ public class Robot extends TimedRobot {
   }
 
   private void teleopLoggerInit() {
-    StringBuilder builder = new StringBuilder();
-    builder.append("limeLightTX").append(",")
-           .append("limeLightTY").append(",")
-           .append("limeLightTA").append(",")
-           .append("ArmLeftCuremt").append(",")
-           .append("ArmRightCurent").append(",")
-           .append("DriveLeft0Curent").append(",")
-           .append("DriveLeft1Curent").append(",")
-           .append("DriveLeft2Curent").append(",")
-           .append("DriveRight0Curent").append(",")
-           .append("DriveRight1Curent").append(",")
-           .append("DriveRight2Curent").append(",");
-    logger.log(builder.toString());
+    // StringBuilder builder = new StringBuilder();
+    // builder.append("limeLightTX").append(",")
+    //        .append("limeLightTY").append(",")
+    //        .append("limeLightTA").append(",")
+    //        .append("ArmLeftCuremt").append(",")
+    //        .append("ArmRightCurent").append(",")
+    //        .append("DriveLeft0Curent").append(",")
+    //        .append("DriveLeft1Curent").append(",")
+    //        .append("DriveLeft2Curent").append(",")
+    //        .append("DriveRight0Curent").append(",")
+    //        .append("DriveRight1Curent").append(",")
+    //        .append("DriveRight2Curent").append(",");
+    //       //  .append("IMU_Calabrated").append(",")
+    //       //  .append("IMU_Yaw").append(",")
+    //       //  .append("IMU_Pitch").append(",")
+    //       //  .append("IMU_Roll").append(",");
+    // logger.log(builder.toString());
   }
 
   private void teleopLogerPeriodic() {
-    StringBuilder builder = new StringBuilder();
-    builder.append(Double.toString(m_lLimelight.getTX())).append(",")
-           .append(Double.toString(m_lLimelight.getTY())).append(",")
-           .append(Double.toString(m_lLimelight.getTA())).append(",")
-           .append(Double.toString(m_cargoSubsystem.leftArm.getOutputCurrent())).append(",")
-           .append(Double.toString(m_cargoSubsystem.rightArm.getOutputCurrent())).append(",")
-           .append(Double.toString(m_driveSubsystem.leftMaster.getOutputCurrent())).append(",")
-           .append(Double.toString(m_driveSubsystem.leftSlaveZero.getOutputCurrent())).append(",")
-           .append(Double.toString(m_driveSubsystem.leftSlaveOne.getOutputCurrent())).append(",")
-           .append(Double.toString(m_driveSubsystem.rightMaster.getOutputCurrent())).append(",")
-           .append(Double.toString(m_driveSubsystem.rightSlaveZero.getOutputCurrent())).append(",")
-           .append(Double.toString(m_driveSubsystem.rightSlaveOne.getOutputCurrent())).append(",");
-    logger.log(builder.toString());
+    // StringBuilder builder = new StringBuilder();
+    // builder.append(Double.toString(m_lLimelight.getTX())).append(",")
+    //        .append(Double.toString(m_lLimelight.getTY())).append(",")
+    //        .append(Double.toString(m_lLimelight.getTA())).append(",")
+    //        .append(Double.toString(m_cargoSubsystem.leftArm.getOutputCurrent())).append(",")
+    //        .append(Double.toString(m_cargoSubsystem.rightArm.getOutputCurrent())).append(",")
+    //        .append(Double.toString(m_driveSubsystem.leftMaster.getOutputCurrent())).append(",")
+    //        .append(Double.toString(m_driveSubsystem.leftSlaveZero.getOutputCurrent())).append(",")
+    //        .append(Double.toString(0)).append(",")
+    //        .append(Double.toString(m_driveSubsystem.rightMaster.getOutputCurrent())).append(",")
+    //        .append(Double.toString(m_driveSubsystem.rightSlaveZero.getOutputCurrent())).append(",")
+    //        .append(Double.toString(0)).append(",");
+    //       //  .append(Boolean.toString(m_navigationSubsystem.gyro.isCalibrating())).append(",")
+          //  .append(Double.toString(m_navigationSubsystem.gyro.getYaw())).append(",")
+          //  .append(Double.toString(m_navigationSubsystem.gyro.getPitch())).append(",")
+          //  .append(Double.toString(m_navigationSubsystem.gyro.getRoll())).append(",");
+    // logger.log(builder.toString());
   }
 }

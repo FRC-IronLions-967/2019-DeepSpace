@@ -65,9 +65,9 @@ public class ArcadeDrive {
         this.driveDeadband = deadband;
         this.lookupTable = lookupTable;
         this.xAxis = Utils.Deadband(xAxis, this.driveDeadband);
-        System.out.println(this.xAxis);
+        // System.out.println(this.xAxis);
         this.yAxis = Utils.Deadband(yAxis, this.driveDeadband);
-        System.out.println(this.yAxis);
+        // System.out.println(this.yAxis);
         this.xAxis = this.lookupTable[(int) (Double.valueOf(df.format(Math.abs(this.xAxis))) * 100)];
         if (this.xAxis > 0) {
             this.xAxis = -this.xAxis;

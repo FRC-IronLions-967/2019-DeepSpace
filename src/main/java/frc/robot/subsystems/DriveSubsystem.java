@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 
 import edu.wpi.first.wpilibj.PIDController;
@@ -11,7 +12,6 @@ import frc.lib.drive.ArcadeDrive;
 import frc.lib.drive.TankDrive;
 import frc.robot.Robot;
 import frc.robot.commands.drivesubsystem.SplitArcadeLookUpCommand;
-import frc.robot.commands.drivesubsystem.SplitArcadeCommand;
 
 public class DriveSubsystem extends Subsystem implements PIDOutput {
 	private PIDController pidController;
@@ -20,11 +20,11 @@ public class DriveSubsystem extends Subsystem implements PIDOutput {
 
 	public TalonSRX rightMaster;
 	public TalonSRX rightSlaveZero;
-	public TalonSRX rightSlaveOne;
+	public VictorSPX rightSlaveOne;
 
 	public TalonSRX leftMaster;
 	public TalonSRX leftSlaveZero;
-	public TalonSRX leftSlaveOne;
+	public VictorSPX leftSlaveOne;
 
 	private int encoderCounter = 0;
 	public boolean countsmeet;
@@ -60,11 +60,11 @@ public class DriveSubsystem extends Subsystem implements PIDOutput {
 	public DriveSubsystem() {
 		rightMaster = new TalonSRX(Robot.m_robotMapProperties.getDriveRightMaster());
 		rightSlaveZero = new TalonSRX(Robot.m_robotMapProperties.getDriveRightSlaveZero());
-		rightSlaveOne = new TalonSRX(Robot.m_robotMapProperties.getDriveRightSlaveOne());
+		rightSlaveOne = new VictorSPX(Robot.m_robotMapProperties.getDriveRightSlaveOne());
 
 		leftMaster = new TalonSRX(Robot.m_robotMapProperties.getDriveLeftMaster());
 		leftSlaveZero = new TalonSRX(Robot.m_robotMapProperties.getDriveLeftSlaveZero());
-		leftSlaveOne = new TalonSRX(Robot.m_robotMapProperties.getDriveLeftSlaveOne());
+		leftSlaveOne = new VictorSPX(Robot.m_robotMapProperties.getDriveLeftSlaveOne());
 
 		rightSlaveZero.follow(rightMaster);
 		rightSlaveOne.follow(rightSlaveZero);
@@ -72,13 +72,13 @@ public class DriveSubsystem extends Subsystem implements PIDOutput {
 		leftSlaveZero.follow(leftMaster);
 		leftSlaveOne.follow(leftSlaveZero);
 
-		rightMaster.setInverted(true);
-		rightSlaveZero.setInverted(true);
-		rightSlaveOne.setInverted(true);
+		rightMaster.setInverted(false);
+		rightSlaveZero.setInverted(false);
+		rightSlaveOne.setInverted(false);
 
-		leftMaster.setInverted(false);
-		leftSlaveZero.setInverted(false);
-		leftSlaveOne.setInverted(false);
+		leftMaster.setInverted(true);
+		leftSlaveZero.setInverted(true);
+		leftSlaveOne.setInverted(true);
 
 		rightMaster.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 		leftMaster.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
