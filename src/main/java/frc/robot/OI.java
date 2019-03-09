@@ -85,7 +85,8 @@ public class OI {
     // xbox0_a.whileHeld(new limelightAutoScore());
     // xbox0_b.whenPressed(new ResetYaw());
     // xbox0_x.whenPressed(new MoveCargoArm(.3));
-    // xbox0_y.whenPressed(new MoveCargoArm(-.3));
+    // xbox0_y.whileHeld(new limelightStreamModeCommand(1));
+    // xbox0_y.whenInactive(new limelightStreamModeCommand(2));
     // xbox0_lb.whenPressed(new ExampleCommand());
     // xbox0_rb.whenPressed(new ExampleCommand());
     // xbox0_back.whenPressed(new ExampleCommand());
@@ -104,10 +105,10 @@ public class OI {
     // xbox1povNW.whenPressed(new ExampleCommand());
     // xbox1_lT.whenPressed(new ExampleCommand());
     // xbox1_rT.whenPressed(new ExampleCommand());
-    xbox1_a.whenPressed(new GrabberArmUpCommand());
-    xbox1_b.whenPressed(new GrabberArmDownCommand());
-    xbox1_x.whenPressed(new OpenGrabberCommand());
-    xbox1_y.whenPressed(new CloseGrabberCommand());
+    xbox1_a.whenPressed(new CloseGrabberCommand());
+    xbox1_b.whenPressed(new OpenGrabberCommand());
+    xbox1_x.whenPressed(new GrabberArmUpCommand());
+    xbox1_y.whenPressed(new GrabberArmDownCommand());
     // xbox1_lb.whenPressed(new ExampleCommand());
     // xbox1_rb.whenPressed(new ExampleCommand());
     // xbox1_back.whenPressed(new ExampleCommand());

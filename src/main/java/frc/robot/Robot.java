@@ -11,6 +11,7 @@ import frc.robot.properties.RobotMapProperties;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.HatchPanelSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.CargoSubsystem;
 import frc.robot.subsystems.NavigationSubsystem;
 
@@ -25,6 +26,7 @@ public class Robot extends TimedRobot {
   public static Logging logger;
 
   public static NavigationSubsystem m_navigationSubsystem;
+  public static LimelightSubsystem m_LimelightSubsystem;
   public static HatchPanelSubsystem m_hatchPanelSubsystem;
   public static CargoSubsystem m_cargoSubsystem;
   public static IntakeSubsystem m_intakeSubsystem;
@@ -65,6 +67,7 @@ public class Robot extends TimedRobot {
     m_hatchPanelSubsystem = new HatchPanelSubsystem();
     m_cargoSubsystem = new CargoSubsystem();
     m_intakeSubsystem = new IntakeSubsystem();
+    m_LimelightSubsystem = new LimelightSubsystem();
     m_oi = new OI();
 
   }

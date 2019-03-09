@@ -67,16 +67,17 @@ public class limelightGetToTarget extends Command {
         double MAX_DRIVE ;                    // Simple speed limit so we don't drive too fast
         
 
-      if (m_isDepo) {
-        STEER_K = 0.05;                    // how hard to turn toward the target
-        DRIVE_K = 0.026;                    // how hard to drive fwd toward the target
-        DESIRED_TARGET_AREA = 33;       // Area of the target when the robot reaches the wall
+      if (m_isDepo) { // really the depositing 
+        STEER_K = 0.058;                    // how hard to turn toward the target
+        DRIVE_K = 0.024
+        ;                    // how hard to drive fwd toward the target
+        DESIRED_TARGET_AREA = 32.5;       // Area of the target when the robot reaches the wall
         MAX_DRIVE = 1;                    // Simple speed limit so we don't drive too fast
         
       } else { // these are ok for now 
         STEER_K = 0.058;                    // how hard to turn toward the target
-        DRIVE_K = 0.026;                    // how hard to drive fwd toward the target
-        DESIRED_TARGET_AREA = 27;       // Area of the target when the robot reaches the wall
+        DRIVE_K = 0.024;                    // how hard to drive fwd toward the target
+        DESIRED_TARGET_AREA = 29;       // Area of the target when the robot reaches the wall
         MAX_DRIVE = 1;                    // Simple speed limit so we don't drive too fast
         
       }
@@ -107,9 +108,9 @@ public class limelightGetToTarget extends Command {
 
         if (drive_cmd < .5) {
           if (m_isDepo) {
-            Robot.m_hatchPanelSubsystem.grabberOpen();
+            // Robot.m_hatchPanelSubsystem.grabberOpen();
           } else {
-            Robot.m_hatchPanelSubsystem.grabberClose();
+            // Robot.m_hatchPanelSubsystem.grabberClose();
           }
           m_isPlaced = true;
         } else {
@@ -123,6 +124,5 @@ public class limelightGetToTarget extends Command {
         }
         m_limelightDriveCommand = drive_cmd;
 
-        System.out.println(drive_cmd);
   }
 }
