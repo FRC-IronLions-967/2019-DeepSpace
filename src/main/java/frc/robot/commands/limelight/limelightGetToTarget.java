@@ -60,12 +60,27 @@ public class limelightGetToTarget extends Command {
 
   public void Update_Limelight_Tracking()
   {
-        // These numbers must be tuned for your Robot!  Be careful!
-        final double STEER_K = 0.04;                    // how hard to turn toward the target
-        final double DRIVE_K = 0.015;                    // how hard to drive fwd toward the target
-        final double DESIRED_TARGET_AREA = 46.0;       // Area of the target when the robot reaches the wall
-        final double MAX_DRIVE = 1;                    // Simple speed limit so we don't drive too fast
-    
+
+        double STEER_K;                    // how hard to turn toward the target
+        double DRIVE_K;                // how hard to drive fwd toward the target
+        double DESIRED_TARGET_AREA;       // Area of the target when the robot reaches the wall
+        double MAX_DRIVE ;                    // Simple speed limit so we don't drive too fast
+        
+
+      if (m_isDepo) {
+        STEER_K = 0.05;                    // how hard to turn toward the target
+        DRIVE_K = 0.026;                    // how hard to drive fwd toward the target
+        DESIRED_TARGET_AREA = 33;       // Area of the target when the robot reaches the wall
+        MAX_DRIVE = 1;                    // Simple speed limit so we don't drive too fast
+        
+      } else { // these are ok for now 
+        STEER_K = 0.058;                    // how hard to turn toward the target
+        DRIVE_K = 0.026;                    // how hard to drive fwd toward the target
+        DESIRED_TARGET_AREA = 27;       // Area of the target when the robot reaches the wall
+        MAX_DRIVE = 1;                    // Simple speed limit so we don't drive too fast
+        
+      }
+
         double tv = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0);
         double tx = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
         // double ty = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0);
@@ -92,7 +107,7 @@ public class limelightGetToTarget extends Command {
 
         if (drive_cmd < .5) {
           if (m_isDepo) {
-            // Robot.m_hatchPanelSubsystem.grabberOpen();
+            Robot.m_hatchPanelSubsystem.grabberOpen();
           } else {
             Robot.m_hatchPanelSubsystem.grabberClose();
           }
@@ -107,5 +122,7 @@ public class limelightGetToTarget extends Command {
           drive_cmd = MAX_DRIVE;
         }
         m_limelightDriveCommand = drive_cmd;
+
+        System.out.println(drive_cmd);
   }
 }
