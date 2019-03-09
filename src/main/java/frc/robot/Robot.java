@@ -6,7 +6,6 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.lib.log.Logging;
 import frc.lib.util.MACAddress;
 import frc.lib.util.MACConfigChooser;
-import frc.robot.networktables.limelight;
 import frc.robot.properties.ConstraintsProperties;
 import frc.robot.properties.RobotMapProperties;
 import frc.robot.subsystems.DriveSubsystem;
@@ -36,7 +35,6 @@ public class Robot extends TimedRobot {
   public static ConstraintsProperties m_constraintsProperties;
   public static RobotMapProperties m_robotMapProperties;
   public static DriveSubsystem m_driveSubsystem;
-  public limelight m_lLimelight;
   public static OI m_oi;
 
   // Command m_autonomousCommand;
@@ -69,7 +67,6 @@ public class Robot extends TimedRobot {
     m_intakeSubsystem = new IntakeSubsystem();
     m_oi = new OI();
 
-    // CameraServer.getInstance().startAutomaticCapture();
   }
 
   /**
