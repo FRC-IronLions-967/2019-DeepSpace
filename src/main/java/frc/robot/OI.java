@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.lib.oi.POVButton;
 import frc.robot.commands.hatchpanelsubsystem.CloseGrabberCommand;
 import frc.robot.commands.hatchpanelsubsystem.OpenGrabberCommand;
-import frc.robot.commands.navigation.limelightAutoScore;
+import frc.robot.commands.limelight.limelightAutoScore;
 import frc.robot.commands.hatchpanelsubsystem.GrabberArmDownCommand;
 import frc.robot.commands.hatchpanelsubsystem.GrabberArmUpCommand;
 import frc.robot.commands.cargosubsystem.MoveBallCommand;

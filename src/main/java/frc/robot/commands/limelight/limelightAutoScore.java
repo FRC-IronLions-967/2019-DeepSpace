@@ -1,4 +1,4 @@
-package frc.robot.commands.navigation;
+package frc.robot.commands.limelight;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 

@@ -1,4 +1,4 @@
-package frc.robot.commands.navigation;
+package frc.robot.commands.limelight;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
@@ -81,6 +81,8 @@ public class limelightGetToTarget extends Command {
 
         m_limelightHasValidTarget = true;
 
+
+        
         // Start with proportional steering
         double steer_cmd = tx * STEER_K;
         m_limelightSteerCommand = steer_cmd;
