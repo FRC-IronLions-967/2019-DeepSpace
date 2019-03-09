@@ -11,7 +11,11 @@ public class LimelightSubsystem extends Subsystem {
 
 public double getDistance() {
   
-  return 0.0;
+  return -1.0;
+}
+
+public void setStream(int streamNum) {
+    NetworkTableInstance.getDefault().getTable("limelight").getEntry("stream").setNumber(streamNum);
 }
 
 public double getTX() {
