@@ -10,8 +10,6 @@ import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.lib.drive.ArcadeDrive;
 import frc.lib.drive.TankDrive;
-import frc.lib.util.IronTalonSRX;
-import frc.lib.util.IronVictorSPX;
 import frc.robot.Robot;
 import frc.robot.commands.drivesubsystem.SplitArcadeLookUpCommand;
 
@@ -21,18 +19,18 @@ public class DriveSubsystem extends Subsystem implements PIDOutput {
 	public double PIDOutput;
 
 	// public TalonSRX rightMaster;
-	public IronTalonSRX rightMaster;
+	public TalonSRX rightMaster;
 	// public TalonSRX rightSlaveZero;
-	public IronTalonSRX rightSlaveZero;
+	public TalonSRX rightSlaveZero;
 	// public VictorSPX rightSlaveOne;
-	public IronVictorSPX rightSlaveOne;
+	public VictorSPX rightSlaveOne;
 
 	// public TalonSRX leftMaster;
-	public IronTalonSRX leftMaster;
+	public TalonSRX leftMaster;
 	// public TalonSRX leftSlaveZero;
-	public IronTalonSRX leftSlaveZero;
+	public TalonSRX leftSlaveZero;
 	// public VictorSPX leftSlaveOne;
-	public IronVictorSPX leftSlaveOne;
+	public VictorSPX leftSlaveOne;
 
 	private int encoderCounter = 0;
 	public boolean countsmeet;
@@ -67,18 +65,18 @@ public class DriveSubsystem extends Subsystem implements PIDOutput {
 
 	public DriveSubsystem() {
 		// rightMaster = new TalonSRX(Robot.m_robotMapProperties.getDriveRightMaster());
-		rightMaster = new IronTalonSRX(Robot.m_robotMapProperties.getDriveRightMaster());
+		rightMaster = new TalonSRX(Robot.m_robotMapProperties.getDriveRightMaster());
 		// rightSlaveZero = new TalonSRX(Robot.m_robotMapProperties.getDriveRightSlaveZero());
-		rightSlaveZero = new IronTalonSRX(Robot.m_robotMapProperties.getDriveRightSlaveZero());
+		rightSlaveZero = new TalonSRX(Robot.m_robotMapProperties.getDriveRightSlaveZero());
 		// rightSlaveOne = new VictorSPX(Robot.m_robotMapProperties.getDriveRightSlaveOne());
-		rightSlaveOne = new IronVictorSPX(Robot.m_robotMapProperties.getDriveRightSlaveOne());
+		rightSlaveOne = new VictorSPX(Robot.m_robotMapProperties.getDriveRightSlaveOne());
 
 		// leftMaster = new TalonSRX(Robot.m_robotMapProperties.getDriveLeftMaster());
-		leftMaster = new IronTalonSRX(Robot.m_robotMapProperties.getDriveLeftMaster());
+		leftMaster = new TalonSRX(Robot.m_robotMapProperties.getDriveLeftMaster());
 		// leftSlaveZero = new TalonSRX(Robot.m_robotMapProperties.getDriveLeftSlaveZero());
-		leftSlaveZero = new IronTalonSRX(Robot.m_robotMapProperties.getDriveLeftSlaveZero());
+		leftSlaveZero = new TalonSRX(Robot.m_robotMapProperties.getDriveLeftSlaveZero());
 		// leftSlaveOne = new VictorSPX(Robot.m_robotMapProperties.getDriveLeftSlaveOne());
-		leftSlaveOne = new IronVictorSPX(Robot.m_robotMapProperties.getDriveLeftSlaveOne());
+		leftSlaveOne = new VictorSPX(Robot.m_robotMapProperties.getDriveLeftSlaveOne());
 
 		rightSlaveZero.follow(rightMaster);
 		rightSlaveOne.follow(rightSlaveZero);

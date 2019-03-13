@@ -69,8 +69,7 @@ public class limelightGetToTarget extends Command {
 
       if (m_isDepo) { // really the depositing 
         STEER_K = 0.058;                    // how hard to turn toward the target
-        DRIVE_K = 0.024
-        ;                    // how hard to drive fwd toward the target
+        DRIVE_K = 0.024;                    // how hard to drive fwd toward the target
         DESIRED_TARGET_AREA = 32.5;       // Area of the target when the robot reaches the wall
         MAX_DRIVE = 1;                    // Simple speed limit so we don't drive too fast
         
