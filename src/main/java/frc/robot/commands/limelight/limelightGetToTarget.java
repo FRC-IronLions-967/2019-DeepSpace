@@ -2,17 +2,29 @@ package frc.robot.commands.limelight;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+
 import edu.wpi.first.networktables.NetworkTableInstance;
 
 public class limelightGetToTarget extends Command {
   private boolean m_limelightHasValidTarget = false;
   private double m_limelightDriveCommand = 0.0;
   private double m_limelightSteerCommand = 0.0;
-
   private boolean m_isPlaced = false;
   private boolean m_isDepo = false;
 
-  public limelightGetToTarget(boolean isDepo) {
+  private double[] distanceLookUp = new double[] {   0, .043, .076, .109, .142, .175, .208, .241, .274, .307,
+                                                   .34, .373, .406, .439, .472, .505, .538, .571, .604, .637,
+                                                   .7, .7, .7, .7, .7, .7, .7, .7, .7, .7,
+                                                  //  .67, .703, .736, .769, .802, .835, .868, .901, .934, .967,
+                                                   .8, .8, .8, .8, .8, .8, .8, .8, .8, .8,
+                                                   .8, .8, .8, .8, .8, .8, .8, .8, .8, .8,
+                                                   .8, .8, .8, .8, .8, .8, .8, .8, .8, .8,
+                                                   .8, .8, .8, .8, .8, .8, .8, .8, .8, .8,
+                                                   .8, .8, .8, .8, .8, .8, .8, .8, .8, .8,
+                                                   .8, .8, .8, .8, .8, .8, .8, .8, .8, .8,
+                                                   .8, .8, .8, .8, .8, .8, .8, .8, .8, .8};
+  
+    public limelightGetToTarget(boolean isDepo) {
     this.m_isDepo = isDepo;
     requires(Robot.m_driveSubsystem);
   }
@@ -28,7 +40,9 @@ public class limelightGetToTarget extends Command {
     Update_Limelight_Tracking();
 
     if (m_limelightHasValidTarget) {
-      Robot.m_driveSubsystem.arcadeDrive(-m_limelightDriveCommand ,m_limelightSteerCommand);
+      Robot.m_driveSubsystem.arcadeDrive(-m_limelightDriveCommand
+      ,m_limelightSteerCommand);
+      // Robot.m_driveSubsystem.arcadeDrive(-m_limelightDriveCommand, 0);
     } else {
       Robot.m_driveSubsystem.arcadeDrive(0.0, 0.0);
     }
@@ -58,70 +72,56 @@ public class limelightGetToTarget extends Command {
     Robot.m_driveSubsystem.arcadeDrive(0.0, 0.0);
   }
 
-  public void Update_Limelight_Tracking()
-  {
+  public void Update_Limelight_Tracking() {
 
-        double STEER_K;                    // how hard to turn toward the target
-        double DRIVE_K;                // how hard to drive fwd toward the target
-        double DESIRED_TARGET_AREA;       // Area of the target when the robot reaches the wall
-        double MAX_DRIVE ;                    // Simple speed limit so we don't drive too fast
-        
+    double STEER_K = .0365; //.039; // how hard to turn toward the target
+ 
+    double tv = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0);
+    double tx = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
+    // double ty =
+    // NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0);
+    double ta = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0);
 
-      if (m_isDepo) { // really the depositing 
-        STEER_K = 0.058;                    // how hard to turn toward the target
-        DRIVE_K = 0.024;                    // how hard to drive fwd toward the target
-        DESIRED_TARGET_AREA = 32.5;       // Area of the target when the robot reaches the wall
-        MAX_DRIVE = 1;                    // Simple speed limit so we don't drive too fast
-        
-      } else { // these are ok for now 
-        STEER_K = 0.058;                    // how hard to turn toward the target
-        DRIVE_K = 0.024;                    // how hard to drive fwd toward the target
-        DESIRED_TARGET_AREA = 29;       // Area of the target when the robot reaches the wall
-        MAX_DRIVE = 1;                    // Simple speed limit so we don't drive too fast
-        
-      }
+    if (tv < 1.0) {
+      m_limelightHasValidTarget = false;
+      m_limelightDriveCommand = 0.0;
+      m_limelightSteerCommand = 0.0;
+      return;
+    }
 
-        double tv = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0);
-        double tx = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
-        // double ty = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0);
-        double ta = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0);
+    m_limelightHasValidTarget = true;
 
-        if (tv < 1.0)
-        {
-          m_limelightHasValidTarget = false;
-          m_limelightDriveCommand = 0.0;
-          m_limelightSteerCommand = 0.0;
-          return;
-        }
+    // calculating how to turn to the target
+    double steer_cmd;
+    steer_cmd = tx * STEER_K;
+    m_limelightSteerCommand = steer_cmd;
 
-        m_limelightHasValidTarget = true;
+    double distanceToTarget = (6.1 * (1 / (Math.sqrt(ta))) - .89);
+
+    double distacex10 = (distanceToTarget *10);
+
+    if (distacex10 < 0) {
+      distacex10 = 0;
+    } else if (distacex10 > 100) {
+      distacex10 = 99;
+    }
+
+    double drive_cmd = distanceLookUp[(int) distacex10];
+  
 
 
-        
-        // Start with proportional steering
-        double steer_cmd = tx * STEER_K;
-        m_limelightSteerCommand = steer_cmd;
-
-        // try to drive forward until the target area reaches our desired area
-        double drive_cmd = (DESIRED_TARGET_AREA - ta) * DRIVE_K;
-
-        if (drive_cmd < .5) {
-          if (m_isDepo) {
-            // Robot.m_hatchPanelSubsystem.grabberOpen();
-          } else {
-            // Robot.m_hatchPanelSubsystem.grabberClose();
-          }
-          m_isPlaced = true;
-        } else {
-          m_isPlaced = false;
-        }
-
-        // don't let the robot drive too fast into the goal
-        if (drive_cmd > MAX_DRIVE)
-        {
-          drive_cmd = MAX_DRIVE;
-        }
-        m_limelightDriveCommand = drive_cmd;
-
+    // if (drive_cmd < .5) {
+    //   if (m_isDepo) {
+    //     // Robot.m_hatchPanelSubsystem.grabberOpen();
+    //   } else {
+    //     Robot.m_hatchPanelSubsystem.grabberClose();
+    //   }
+    //   m_isPlaced = true;
+    // } else {
+    //   m_isPlaced = false;
+    // }
+    m_limelightDriveCommand = drive_cmd;
+    // }
   }
+
 }
