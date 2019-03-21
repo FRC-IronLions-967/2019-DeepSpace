@@ -105,8 +105,8 @@ public class OI {
     // xbox1povNW.whenPressed(new ExampleCommand());
     // xbox1_lT.whenPressed(new ExampleCommand());
     // xbox1_rT.whenPressed(new ExampleCommand());
-    xbox1_a.whenPressed(new CloseGrabberCommand());
-    xbox1_b.whenPressed(new OpenGrabberCommand());
+    xbox1_a.whenPressed(new OpenGrabberCommand());
+    xbox1_b.whenPressed(new CloseGrabberCommand());
     xbox1_x.whenPressed(new GrabberArmUpCommand());
     xbox1_y.whenPressed(new GrabberArmDownCommand());
     // xbox1_lb.whenPressed(new ExampleCommand());

@@ -1,5 +1,6 @@
 package frc.robot.commands.drivesubsystem;
 
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
@@ -11,6 +12,8 @@ public class SplitArcadeLookUpCommand extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    // NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1);
+
   }
 
   // Called repeatedly when this Command is scheduled to run

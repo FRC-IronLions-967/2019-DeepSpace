@@ -1,6 +1,7 @@
 package frc.robot;
 import java.util.Date;
 
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.lib.log.Logging;
@@ -70,6 +71,8 @@ public class Robot extends TimedRobot {
     m_LimelightSubsystem = new LimelightSubsystem();
     m_oi = new OI();
 
+    // NetworkTableInstance.getDefault().getTable("limelight").getEntry("stream").setNumber(2);
+    // NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(3); 
   }
 
   /**
@@ -100,12 +103,17 @@ public class Robot extends TimedRobot {
     } catch (Exception e) {
       System.out.println("logger not started");
     }
+    NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1); 
+
+    // NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1);
+
 
   }
 
   @Override
   public void disabledPeriodic() {
     Scheduler.getInstance().run();
+    // NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1);
   }
 
   /**
@@ -129,7 +137,7 @@ public class Robot extends TimedRobot {
 
       e.printStackTrace();
     }
-    m_hatchPanelSubsystem.grabberClose();
+    m_hatchPanelSubsystem.grabberOpen();
 
     // m_autonomousCommand = m_chooser.getSelected();
 
@@ -169,6 +177,8 @@ public class Robot extends TimedRobot {
 
     logger = Logging.getInstance("TeleOp:"+ date);
     teleopLoggerInit();
+    // NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1);
+
   }
 
   /**
@@ -188,42 +198,42 @@ public class Robot extends TimedRobot {
   }
 
   private void teleopLoggerInit() {
-    // StringBuilder builder = new StringBuilder();
+    StringBuilder builder = new StringBuilder();
     // builder.append("limeLightTX").append(",")
-    //        .append("limeLightTY").append(",")
+          //  .append("limeLightTY").append(",")
     //        .append("limeLightTA").append(",")
-    //        .append("ArmLeftCuremt").append(",")
-    //        .append("ArmRightCurent").append(",")
-    //        .append("DriveLeft0Curent").append(",")
-    //        .append("DriveLeft1Curent").append(",")
-    //        .append("DriveLeft2Curent").append(",")
-    //        .append("DriveRight0Curent").append(",")
-    //        .append("DriveRight1Curent").append(",")
-    //        .append("DriveRight2Curent").append(",");
-    //       //  .append("IMU_Calabrated").append(",")
+           builder.append("ArmLeftCuremt").append(",")
+           .append("ArmRightCurent").append(",")
+           .append("DriveLeft0Curent").append(",")
+           .append("DriveLeft1Curent").append(",")
+           .append("DriveLeft2Curent").append(",")
+           .append("DriveRight0Curent").append(",")
+           .append("DriveRight1Curent").append(",")
+           .append("DriveRight2Curent").append(",");
+          //  .append("IMU_Calabrated").append(",")
     //       //  .append("IMU_Yaw").append(",")
     //       //  .append("IMU_Pitch").append(",")
     //       //  .append("IMU_Roll").append(",");
-    // logger.log(builder.toString());
+    logger.log(builder.toString());
   }
 
   private void teleopLogerPeriodic() {
-    // StringBuilder builder = new StringBuilder();
+    StringBuilder builder = new StringBuilder();
     // builder.append(Double.toString(m_lLimelight.getTX())).append(",")
     //        .append(Double.toString(m_lLimelight.getTY())).append(",")
     //        .append(Double.toString(m_lLimelight.getTA())).append(",")
-    //        .append(Double.toString(m_cargoSubsystem.leftArm.getOutputCurrent())).append(",")
-    //        .append(Double.toString(m_cargoSubsystem.rightArm.getOutputCurrent())).append(",")
-    //        .append(Double.toString(m_driveSubsystem.leftMaster.getOutputCurrent())).append(",")
-    //        .append(Double.toString(m_driveSubsystem.leftSlaveZero.getOutputCurrent())).append(",")
-    //        .append(Double.toString(0)).append(",")
-    //        .append(Double.toString(m_driveSubsystem.rightMaster.getOutputCurrent())).append(",")
-    //        .append(Double.toString(m_driveSubsystem.rightSlaveZero.getOutputCurrent())).append(",")
-    //        .append(Double.toString(0)).append(",");
+           builder.append(Double.toString(m_cargoSubsystem.leftArm.getOutputCurrent())).append(",")
+           .append(Double.toString(m_cargoSubsystem.rightArm.getOutputCurrent())).append(",")
+           .append(Double.toString(m_driveSubsystem.leftMaster.getOutputCurrent())).append(",")
+           .append(Double.toString(m_driveSubsystem.leftSlaveZero.getOutputCurrent())).append(",")
+           .append(Double.toString(0)).append(",")
+           .append(Double.toString(m_driveSubsystem.rightMaster.getOutputCurrent())).append(",")
+           .append(Double.toString(m_driveSubsystem.rightSlaveZero.getOutputCurrent())).append(",")
+           .append(Double.toString(0)).append(",");
     //       //  .append(Boolean.toString(m_navigationSubsystem.gyro.isCalibrating())).append(",")
           //  .append(Double.toString(m_navigationSubsystem.gyro.getYaw())).append(",")
           //  .append(Double.toString(m_navigationSubsystem.gyro.getPitch())).append(",")
           //  .append(Double.toString(m_navigationSubsystem.gyro.getRoll())).append(",");
-    // logger.log(builder.toString());
+    logger.log(builder.toString());
   }
 }

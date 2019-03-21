@@ -15,7 +15,9 @@ public class limelightAutoScore extends CommandGroup {
     // }
   
     // get to the target
+    addSequential(new limelightState("Enable"));
     addSequential(new limelightGetToTarget(isDepo));
+    addSequential(new limelightState("disable"));
 
     // // grab or deposit the hatch
     // if (isDepo) {

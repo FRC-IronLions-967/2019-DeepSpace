@@ -32,6 +32,7 @@ public class limelightGetToTarget extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    // NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(3);
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -63,6 +64,7 @@ public class limelightGetToTarget extends Command {
   @Override
   protected void end() {
     Robot.m_driveSubsystem.arcadeDrive(0.0, 0.0);
+    // NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1);
   }
 
   // Called when another command which requires one or more of the same
@@ -70,6 +72,7 @@ public class limelightGetToTarget extends Command {
   @Override
   protected void interrupted() {
     Robot.m_driveSubsystem.arcadeDrive(0.0, 0.0);
+    // NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1);
   }
 
   public void Update_Limelight_Tracking() {
