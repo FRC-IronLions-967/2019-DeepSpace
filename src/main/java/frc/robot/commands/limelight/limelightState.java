@@ -24,8 +24,10 @@ public class limelightState extends Command {
   protected void initialize() {
     if (state.equals("Enable")) {
       NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(3);
+      NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(0);
     } else {
-      NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1); 
+      NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1);
+      NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(1); 
     }
   }
 
