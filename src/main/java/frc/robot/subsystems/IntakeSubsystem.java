@@ -24,9 +24,9 @@ public class IntakeSubsystem extends Subsystem {
   public void moveBall(double power) {
     power = Utils.Deadband(power, 0.1);
     if (power >= 0) {
-      power = -power * power;
-    } else {
       power = power * power;
+    } else {
+      power = -power * power;
     }
     intake_roller.set(ControlMode.PercentOutput, power);
   }

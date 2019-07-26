@@ -1,6 +1,7 @@
 package frc.robot;
 import java.util.Date;
 
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -70,6 +71,7 @@ public class Robot extends TimedRobot {
     m_intakeSubsystem = new IntakeSubsystem();
     m_LimelightSubsystem = new LimelightSubsystem();
     m_oi = new OI();
+    CameraServer.getInstance().startAutomaticCapture();
 
     // NetworkTableInstance.getDefault().getTable("limelight").getEntry("stream").setNumber(2);
     // NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(3); 
@@ -103,7 +105,10 @@ public class Robot extends TimedRobot {
     } catch (Exception e) {
       System.out.println("logger not started");
     }
-    NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1); 
+    NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1);
+    NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(1);
+    // m_LimelightSubsystem.setStream(1);
+
 
     // NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1);
 
